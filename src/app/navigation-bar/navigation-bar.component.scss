@@ -1,3 +1,25 @@
+mat-toolbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
 mat-drawer-container {
     height: 100vh;
+
+    mat-drawer {
+        width: 20%;
+        height: 100%;
+        background-color: #4659c0;
+        padding: 20px;
+
+        .sidenav-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+        }
+    }
 }

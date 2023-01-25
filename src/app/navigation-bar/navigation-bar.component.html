@@ -1,4 +1,40 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+</mat-toolbar>
+
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+
+    <mat-drawer mode="side" opened>
+        <div class="sidenav-container">
+            <div>
+                <div>Thread</div>
+                <div>Entwürfe</div>
+                <div>Gesendet</div>
+            </div>
+            <div>
+                <div># Allgemin</div>
+                <div># Angular</div>
+                <div># JavaScript</div>
+            </div>
+            <div>
+                <div># Patrick</div>
+                <div># Andreas</div>
+                <div># Brett</div>
+            </div>
+        </div>
+    </mat-drawer>
+
+    <!-- Hier routeroutlet einfügen -->
     <mat-drawer-content>Main content</mat-drawer-content>
-  </mat-drawer-container>
+
+</mat-drawer-container>
