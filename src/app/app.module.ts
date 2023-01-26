@@ -8,13 +8,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ChannelComponent } from './channel/channel.component';
+import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChannelComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    RouterModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,7 +17,7 @@
                 <div>Gesendet</div>
             </div>
             <div>
-                <div># Allgemin</div>
+                <div routerLink="/channel"># Allgemein</div>
                 <div># Angular</div>
                 <div># JavaScript</div>
             </div>
@@ -29,7 +29,9 @@
         </div>
     </mat-drawer>
 
-    <!-- Hier routeroutlet einfügen -->
-    <mat-drawer-content>Hier routeroutlet einfügen</mat-drawer-content>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+    
 
 </mat-drawer-container>
