@@ -1,3 +1,18 @@
-<div class="channelhead" onclick="openDialog()"># allgemein <!--this.channelName -->
+<mat-toolbar class="channelhead" onclick="openDialog()">
+    <span># allgemein <!--this.channelName --></span>
     <mat-icon fontIcon="expand_more"></mat-icon>
-</div>
+</mat-toolbar>
+
+<mat-card class="thread-area" *ngFor="let thread of threads; let i = index" >
+    <img class="profile-pic" src="./assets/img/profile/male.png"> 
+    <mat-card-content>
+        <div class="thread-creator">
+            <b>{{ threads[i].userName }}</b> {{ threads[i].timeStamp }} Uhr
+        </div>
+    
+        <div>
+            {{ threads[i].content }}
+        </div>
+    </mat-card-content>
+
+</mat-card>
