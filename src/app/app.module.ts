@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SigninComponent } from './signin/signin.component';
 import { LoginComponent } from './login/login.component';
-
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -34,6 +34,7 @@ import { LoginComponent } from './login/login.component';
     MatFormFieldModule,
     RouterModule,
     MatDialogModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
