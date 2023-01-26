@@ -1,1 +1,23 @@
-<p>signin works!</p>
+<h1 mat-dialog-title>Register</h1>
+<form [formGroup]="signUpForm" (ngSubmit)="register()">
+
+    <div class="input-container">
+
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" type="email" placeholder="Email" autocomplete="off" matInput required>
+        <mat-error *ngIf="this.signUpForm.invalid">*Please enter a valid email address</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" type="password" placeholder="Password" autocomplete="off" matInput required>
+        <mat-error *ngIf="this.signUpForm.invalid">*Please enter a password</mat-error>
+    </mat-form-field>
+
+</div>
+
+
+<button mat-raised-button color="primary" type="submit" title="Sign Up">Sign Up</button>
+
+</form>
