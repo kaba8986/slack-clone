@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChannelComponent } from './channel/channel.component';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SigninComponent } from './signin/signin.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -18,7 +20,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
-    ChannelComponent
+    ChannelComponent,
+    SigninComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
