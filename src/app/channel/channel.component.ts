@@ -30,6 +30,10 @@ export class ChannelComponent implements OnInit{
       "timeStamp": '13:37',
       "content": 'Anruf bei einer Hotline: Anrufer: „Ich benutze Windows …“, Hotline: „Ja …?“, Kunde: „Mein Computer funktioniert nicht richtig.“, Hotline: „Das sagten Sie bereits.“'
     },
+    { "userName": 'Patrick Frantzen',
+    "timeStamp": '14:39',
+    "content": 'Ich hoffe die responsive Arbeit wird am Ende nicht so anstrengend.'
+  },
   ]
   
   constructor() {}
@@ -40,4 +44,7 @@ export class ChannelComponent implements OnInit{
   openDialog() {
   }
 
+  addEmoji($event) {
+    
+  }
 }
