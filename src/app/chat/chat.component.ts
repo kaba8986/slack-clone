@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ChatComponent {
 
+  constructor() {
+
+  }
+
 chatHis: any = [
   {
     userName: 'Max Mustermann',

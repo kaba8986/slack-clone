@@ -12,6 +12,7 @@ import { ChannelComponent } from './channel/channel.component';
 import { ChatComponent } from './chat/chat.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
+import { TextAreaAutosizeDirective } from './directives/text-area-autosize.directive';
 
 
 
@@ -21,7 +22,8 @@ import { SigninComponent } from './signin/signin.component';
     ChannelComponent,
     SigninComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
+    TextAreaAutosizeDirective
   ],
   imports: [
     BrowserModule,
