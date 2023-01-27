@@ -17,6 +17,7 @@
 .chat-room {
     overflow-y: scroll;
     padding: 0 16px;
+    padding-bottom: 200px;
 }
 
 .profile-pic {
@@ -55,7 +56,7 @@ mat-card-content {
 
 .chat-input-container {
     min-height: 120px;
-    background: yellowgreen;
+    background: white;
     position: fixed;
     bottom: 0px;
     left: 0px;
@@ -76,7 +77,8 @@ mat-card-content {
 
 
 
-  .upper-controls {
+  .upper-controls,
+  .lower-controls {
     background: #ececec;
     padding: 4px;
     border-top-left-radius: 8px;
@@ -87,15 +89,27 @@ mat-card-content {
     }
   }
 
-  .text-input {
+  .lower-controls {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #send-btn {
+    background: green;
+    color: white;
+  }
+
+  .input-field {
     box-sizing: border-box;
-    padding: 6px 10px;
-    color: #333;
+    width: 100%;
+    min-height: 36px;
+    padding: 16px;
     border: none;
     outline: none;
-    border-radius: 6px;
-    width: 100%;
-    resize: none; /* hide browser provided resize handles */
-    font-size: 14px;
+    resize: none;
   }
 

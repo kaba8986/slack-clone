@@ -6,7 +6,7 @@
 
     <div class="chat-room">
 
-        <!--
+        
         <mat-card class="thread-area" *ngFor="let chat of chatHis">
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
@@ -20,7 +20,7 @@
             </mat-card-content>
         
         </mat-card>
-        -->
+        
     </div>
 
 
@@ -30,8 +30,8 @@
                 <mat-button-toggle-group name="text-typse" multiple>
                     <mat-button-toggle value="bold"><mat-icon>format_bold</mat-icon></mat-button-toggle>
                     <mat-button-toggle value="italic"><mat-icon>format_italic</mat-icon></mat-button-toggle>
-                    <mat-button-toggle
-                        value="strikethrough"><mat-icon>format_strikethrough</mat-icon></mat-button-toggle>
+                    <mat-button-toggle value="italic"><mat-icon>text_format</mat-icon></mat-button-toggle>
+                    <mat-button-toggle value="strikethrough"><mat-icon>format_strikethrough</mat-icon></mat-button-toggle>
                 </mat-button-toggle-group>
                 <button mat-button (click)="openDialog()"> <mat-icon>link</mat-icon> </button>
                 <mat-button-toggle-group name="list-style">
@@ -40,11 +40,17 @@
                   </mat-button-toggle-group>
             </div>
             <div class="content-input">
-                <textarea appTextareaAutosize rows="2" placeholder="Type your message here..."
-                    class="text-input">
-                </textarea>
+                <textarea class="input-field" placeholder="Nachricht an Max Mustermann"></textarea>
             </div>
-            <div class="lower-controls"></div>
+            <div class="lower-controls">
+                <div class="lower-left-controls">
+                    <button mat-button> <mat-icon>attach_file</mat-icon> </button>
+                    <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
+                    <button mat-button> <mat-icon>alternate_email</mat-icon> </button>
+                    <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
+                </div>
+                <button mat-button id="send-btn"> <mat-icon>send</mat-icon> </button>
+            </div>
         </div>
     </div>
 </div>
