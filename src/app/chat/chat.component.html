@@ -1,19 +1,38 @@
-<mat-toolbar class="channelhead" onclick="openDialog()">
-    <span># Chatpartner <!--this.chatpartnerName --></span>
-    <mat-icon fontIcon="expand_more"></mat-icon>
-</mat-toolbar>
+<div class="chatroom-container">
+    <mat-toolbar class="chatroom-head" onclick="openDialog()">
+        <span># Chatpartner <!--this.chatpartnerName --></span>
+        <mat-icon fontIcon="expand_more"></mat-icon>
+    </mat-toolbar>
 
-<mat-card class="thread-area" *ngFor="let chat of chatHis">
-    <img class="profile-pic" src="./assets/img/profile/male.png"> 
-    <mat-card-content>
-        <div class="thread-creator">
-            <b>{{ chat.userName }}</b> {{ chat.timeStamp }} Uhr
-        </div>
+    <div class="chat-room">
+
+        <!--
+        <mat-card class="thread-area" *ngFor="let chat of chatHis">
+            <img class="profile-pic" src="./assets/img/profile/male.png"> 
+            <mat-card-content>
+                <div class="thread-creator">
+                    <b>{{ chat.userName }}</b> {{ chat.timeStamp }} Uhr
+                </div>
+            
+                <div>
+                   {{chat.content}}
+                </div>
+            </mat-card-content>
+        
+        </mat-card>
+        -->
+    </div>
     
-        <div>
-           {{chat.content}}
-        </div>
-    </mat-card-content>
+    
+    <div class="chat-input-container">
+        <div class="chat-keyboard">
+            <div class="upper-controls">
 
-</mat-card>
+            </div>
+            <div class="content-input"></div>
+            <div class="lower-controls"></div>
+        </div>
+    </div> 
+</div>
+
 
