@@ -44,4 +44,8 @@ chatHis: any = [
   },
 ]
 
+openDialog() {
+  
+}
+
 }
