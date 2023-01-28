@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
-//import { signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { Route, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public router: Router, private fb: FormBuilder) { }
+  constructor(public auth: Auth, public router: Router, private fb: FormBuilder) { }
 
   logInForm: FormGroup;
 
@@ -26,15 +26,15 @@ export class LoginComponent implements OnInit {
   login(){
     //firebase log in
 
-    // signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
-    //   .then((response: any)=>{
-    //     console.log(response.user);
-    //     this.router.navigate(['Main-Slack-xyz']);
+     signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
+       .then((response: any)=>{
+         console.log(response.user);
+         this.router.navigate(['channel']);
 
-    //   })
-    //   .catch((err)=>{
-    //     alert(err.message);
-    //   }); 
+       })
+       .catch((err)=>{
+         alert(err.message);
+       }); 
   }
 
 
