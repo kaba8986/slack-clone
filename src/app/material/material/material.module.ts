@@ -15,11 +15,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip'; 
 
 
-const MaterialComponents = [MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressBarModule, MatSidenavModule, MatToolbarModule, MatTooltipModule];
+const materialComponents = [MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressBarModule, MatSidenavModule, MatToolbarModule, MatTooltipModule];
 
 @NgModule({
   declarations: [],
-  imports: [MaterialComponents],
-  exports: [MaterialComponents]
+  imports: [materialComponents],
+  exports: [materialComponents]
 })
 export class MaterialModule { }
