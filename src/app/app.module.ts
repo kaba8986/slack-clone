@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material/material.module';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -31,6 +32,7 @@ import { TextAreaAutosizeDirective } from './directives/text-area-autosize.direc
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
+    PickerModule,
     ReactiveFormsModule,
     MaterialModule
   ],

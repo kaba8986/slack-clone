@@ -13,14 +13,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { PickerModule } from '@ctrl/ngx-emoji-mart'; 
 
 
-<<<<<<< HEAD
 const materialComponents = [MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressBarModule, MatSidenavModule, MatToolbarModule, MatTooltipModule];
-=======
-const MaterialComponents = [MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressBarModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, PickerModule];
->>>>>>> origin/main
 
 @NgModule({
   declarations: [],
