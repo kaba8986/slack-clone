@@ -17,7 +17,6 @@ mat-drawer-container {
         width: 20%;
         height: 100%;
         background-color: #4659c0;
-        padding: 20px;
 
         .sidenav-container {
             display: flex;
@@ -32,4 +31,36 @@ mat-drawer-container {
 
 ::ng-deep mat-drawer-content {
     padding: unset;
+}
+
+.entry-container{
+    width: 100%;
+}
+
+.sidenav-add-channel{
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #5163c7;
+    }
+}
+
+.sidenav-entry{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #5163c7;
+    }
 }
