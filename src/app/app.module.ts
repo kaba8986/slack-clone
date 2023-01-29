@@ -21,6 +21,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AddChannelComponent } from './add-channel/add-channel.component';
 
 
 
@@ -33,7 +34,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     SigninComponent,
     LoginComponent,
     ChatComponent,
-    TextAreaAutosizeDirective
+    TextAreaAutosizeDirective,
+    AddChannelComponent
   ],
   imports: [
     BrowserModule,

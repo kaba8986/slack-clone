@@ -1,7 +1,7 @@
 export class Channel {
     channelName: string;
     description: string;
-    createdDate: string;
+    createdDate: number;
 
     constructor(obj?:any) {
         this.channelName = obj ? obj.channelName : '';

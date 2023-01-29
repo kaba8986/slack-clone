@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary">
 
     <mat-icon>menu</mat-icon>
@@ -12,12 +13,13 @@
     <mat-drawer mode="side" opened>
         <div class="sidenav-container">
             <div class="entry-container">
-                <div class="sidenav-add-channel">+ add channel</div>
+                <div (click)="openAddChannel()" class="sidenav-add-channel">+ add channel</div>
             </div>
+
             <div class="entry-container">
-                <div class="sidenav-entry" routerLink="/channel"># Allgemein</div>
-                <div class="sidenav-entry"># Angular</div>
-                <div class="sidenav-entry"># JavaScript</div>
+                <tr *ngFor="let channel of allChannels">
+                    <td routerLink="/channel" class="sidenav-entry">{{ channel.channelName }}</td>
+                </tr>
             </div>
             <div class="entry-container">
                 <div class="sidenav-entry"># Patrick</div>
@@ -30,6 +32,6 @@
     <div>
         <router-outlet></router-outlet>
     </div>
-    
+
 
 </mat-drawer-container>

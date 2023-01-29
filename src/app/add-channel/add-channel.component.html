@@ -1,0 +1,21 @@
+<div class="add-channel-container-background">
+    <mat-card class="add-channel-container">
+
+        <h1>Create channel</h1>
+
+        <mat-form-field appearance="outline">
+            <mat-label>channel</mat-label>
+            <input matInput [(ngModel)]="channel.channelName" placeholder="channel name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>description</mat-label>
+            <input matInput [(ngModel)]="channel.description" placeholder="description">
+        </mat-form-field>
+
+        <div class="button-container">
+            <button mat-raised-button [mat-dialog-close]>Close</button>
+            <button mat-raised-button (click)="saveChannel()">Save</button>
+        </div>
+    </mat-card>
+</div>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddChannelComponent } from './add-channel/add-channel.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +11,27 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'slack-clone';
 
+  dataSource: any;
+  treeControl: any;
+  allChannels: any = [];
+
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+
+  ngOnInit(): void {
+    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
+
+      this.allChannels = changes;
+    })
+  }
+
+
+  openAddChannel(): void {
+    const dialogRef = this.dialog.open(AddChannelComponent, {
+      // data: { name: this.name, animal: this.animal },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
 }
