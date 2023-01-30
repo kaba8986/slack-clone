@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +18,7 @@ import { MatTreeModule } from '@angular/material/tree';
 
 
 
-const materialComponents = [MatButtonModule, MatTreeModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressBarModule, MatSidenavModule, MatToolbarModule, MatTooltipModule];
+const materialComponents = [MatButtonModule, MatTreeModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressBarModule, MatSidenavModule, MatToolbarModule, MatTooltipModule];
 
 @NgModule({
   declarations: [],
