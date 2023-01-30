@@ -12,11 +12,13 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class AddChannelComponent {
 
   channel = new Channel();
+  date = new Date();
 
   constructor(public dialogRef: MatDialogRef<AddChannelComponent>, private firestore: AngularFirestore) { }
 
 
   saveChannel() {
+    this.channel.createdDate = this.date.getTime();
 
     this.firestore.collection('channel').add(this.channel.toJSON()).then((result) => {
     });

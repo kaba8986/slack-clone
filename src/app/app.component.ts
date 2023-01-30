@@ -14,13 +14,14 @@ export class AppComponent {
   dataSource: any;
   treeControl: any;
   allChannels: any = [];
+  newarr: any = [];
 
   constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
-
-      this.allChannels = changes;
+    this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {
+        this.allChannels = changes;
+     
     })
   }
 
