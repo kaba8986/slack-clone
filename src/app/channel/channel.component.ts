@@ -1,44 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Thread } from 'src/models/thread.class';
+import { Auth } from '@angular/fire/auth';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CloseScrollStrategy } from '@angular/cdk/overlay';
+import { Observable } from 'rxjs';
+import { QuerySnapshot } from 'firebase/firestore';
 
 @Component({
   selector: 'app-channel',
   templateUrl: './channel.component.html',
-  styleUrls: ['./channel.component.scss']
+  styleUrls: ['./channel.component.scss'],
 })
 export class ChannelComponent implements OnInit{
 
-  //Test-Inhalte für das Design, wird später durch den jeweiligen Datenbankeintrag ersetzt
+  thread = new Thread();
 
-  threads:any = [
-    { "userName": 'Patrick Frantzen',
-      "timeStamp": '18:51',
-      "content": 'Hey Leute, ich habe eine Frage: Was ist noch mal der Unterschied zwischen einem JSON und einem normalen Array?'
-    },
-    {
-      "userName": 'Hagen Struwe',
-      "timeStamp": '09:15',
-      "content": 'Hey Team, ich habe etwas cooles rausgefunden: Man kann Material Design mit ::ng-deep selbst gestalten'
-    },
-    {
-      "userName": 'Brett Scott',
-      "timeStamp": '17:14',
-      "content": 'Ich benötige bitte Feedback zu meinem CV und meinem Anschreiben. Kann mir jemand helfen?'
-    },
-    {
-      "userName": 'Andreas Burghardt',
-      "timeStamp": '13:37',
-      "content": 'Anruf bei einer Hotline: Anrufer: „Ich benutze Windows …“, Hotline: „Ja …?“, Kunde: „Mein Computer funktioniert nicht richtig.“, Hotline: „Das sagten Sie bereits.“'
-    },
-    { "userName": 'Patrick Frantzen',
-    "timeStamp": '14:39',
-    "content": 'Ich hoffe die responsive Arbeit wird am Ende nicht so anstrengend.'
-  },
-  ]
+  allThreads:any = [];  
+  date = new Date().getTime();
+  channelId;
+
   
-  constructor() {}
+  constructor(private firestore: AngularFirestore, private auth: Auth, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe( (params): void => {
+      this.channelId = params['channelName'];
+    })
+    
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges({idField: 'id'}).subscribe( (changes) => {
+      this.allThreads = changes;
+      this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'))
+    })
+  }
+
+  sortThreads(originalDate){
+    return function (a, b) {
+      if (a[originalDate] > b[originalDate]) {
+        return 1;
+      } else if(a[originalDate] < b[originalDate]) {
+        return -1;
+      }
+      return 0;
+    }
   }
 
   openDialog() {
@@ -46,5 +52,33 @@ export class ChannelComponent implements OnInit{
 
   addEmoji($event) {
     
+  }
+
+  sendText() {
+    this.getThreadCreator();
+    this.getText();
+    this.convertDate(this.date);
+    
+    
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').add(this.thread.toJSON()).then( (result) => {
+      console.log(result);
+    })
+  }
+
+  getThreadCreator() {
+    this.thread.creatorName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
+  }
+
+  getText() {
+    let inputValue = (document.getElementById('inputfield') as HTMLInputElement).value;
+    this.thread.threadText = inputValue;
+    inputValue = '';
+  }
+
+  convertDate(timestamp) {
+    let date = new Date(timestamp);
+    this.thread.originalDate = new Date().getTime();
+    this.thread.createdDate = date.toLocaleDateString();
+    this.thread.createdTime = date.toLocaleTimeString();
   }
 }

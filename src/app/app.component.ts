@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +18,17 @@ export class AppComponent {
   allChannels: any = [];
   newarr: any = [];
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+  loadedThreads$:Observable<any>;
+  loadedThreads: any = [];
+  channelId;
+
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {
         this.allChannels = changes;
-     
-    })
+    });
+
   }
 
 
@@ -35,4 +41,6 @@ export class AppComponent {
       console.log('The dialog was closed', result);
     });
   }
+
+
 }

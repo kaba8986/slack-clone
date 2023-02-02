@@ -5,15 +5,15 @@
     </mat-toolbar>
     
     <div class="channel-room">
-        <mat-card class="thread-area" *ngFor="let thread of threads; let i = index" >
+        <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index" >
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
                 <div class="thread-creator">
-                    <b>{{ threads[i].userName }}</b> {{ threads[i].timeStamp }} Uhr
+                    <b>{{ this.allThreads[i].creatorName }}</b> {{ this.allThreads[i].createdTime }} Uhr
                 </div>
             
                 <div>
-                    {{ threads[i].content }}
+                    {{ this.allThreads[i].threadText }}
                 </div>
 
                 <button class="emoji-btn">
@@ -41,7 +41,7 @@
                   </mat-button-toggle-group>
             </div>
             <div class="content-input">
-                <textarea class="input-field" placeholder="Nachricht an Max Mustermann"></textarea>
+                <textarea class="input-field" placeholder="Nachricht an Max Mustermann" id="inputfield"></textarea>
             </div>
             <div class="lower-controls">
                 <div class="lower-left-controls">
@@ -50,7 +50,7 @@
                     <button mat-button> <mat-icon>alternate_email</mat-icon> </button>
                     <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
                 </div>
-                <button mat-button id="send-btn"> <mat-icon>send</mat-icon> </button>
+                <button mat-button id="send-btn" (click)="sendText()"> <mat-icon>send</mat-icon> </button>
             </div>
         </div>
     </div>

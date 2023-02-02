@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
-  {path: 'channel', component:ChannelComponent},
+  {path: 'channel/:channelName', component:ChannelComponent},
   {path: 'signin', component:SigninComponent },
   {path: 'login', component:LoginComponent },
   { path: 'chat', component: ChatComponent },

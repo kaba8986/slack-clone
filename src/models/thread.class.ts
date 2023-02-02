@@ -1,6 +1,8 @@
-export class Channel {
+export class Thread {
     creatorName: string;
-    createdDate: string;
+    originalDate:number;
+    createdDate: any;
+    createdTime: string;
     threadText: string;
     emojiReaction: string[];
     emojiCounter: string[];
@@ -9,7 +11,9 @@ export class Channel {
 
     constructor(obj?:any) {
         this.creatorName = obj ? obj.channelName : '';
+        this.originalDate = obj ? obj.originalDate : '';
         this.createdDate = obj ? obj.createdDate : '';
+        this.createdTime = obj ? obj.createdTime : '';
         this.threadText  = obj ? obj.threadText : '';
         this.emojiReaction = obj ? obj.emojiReaction : '';
         this.emojiCounter = obj ? obj.emojiCounter : '';
@@ -18,8 +22,10 @@ export class Channel {
 
     public toJSON() {
         return {
-            channelName: this.creatorName,
+            creatorName: this.creatorName,
+            originalDate: this.originalDate,
             createdDate: this.createdDate,
+            createdTime: this.createdTime,
             threadText: this.threadText,
             emojiReaction: this.emojiReaction,
             emojiCounter: this.emojiCounter,
