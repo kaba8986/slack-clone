@@ -27,8 +27,15 @@
     <div class="chat-input-container">
         <div class="chat-keyboard">
             <div class="upper-controls">
-                <mat-button-toggle-group name="text-typse" multiple>
-                    <mat-button-toggle value="bold"><mat-icon>format_bold</mat-icon></mat-button-toggle>
+                <button id="format-bold" (click)="formatText('bold')"><mat-icon>format_bold</mat-icon></button>
+                <button id="format-italic" (click)="formatText('italic')"><mat-icon>format_italic</mat-icon></button>
+                <button id="format-strikethrough" (click)="formatText('strikeThrough')"><mat-icon>format_strikethrough</mat-icon></button>
+                <button id="format-link"><mat-icon>link</mat-icon></button>
+                <button id="format-list-numbered" (click)="formatText('InsertOrderedList')"><mat-icon>format_list_numbered</mat-icon></button>
+                <button id="format-list-enumerated" (click)="formatText('InsertUnorderedList')"><mat-icon>format_list_bulleted</mat-icon></button>
+
+                <!-- <mat-button-toggle-group name="text-typse" multiple>
+                    <mat-button-toggle value="bold" (click)="getSelectedText()"><mat-icon>format_bold</mat-icon></mat-button-toggle>
                     <mat-button-toggle value="italic"><mat-icon>format_italic</mat-icon></mat-button-toggle>
                     <mat-button-toggle value="italic"><mat-icon>text_format</mat-icon></mat-button-toggle>
                     <mat-button-toggle value="strikethrough"><mat-icon>format_strikethrough</mat-icon></mat-button-toggle>
@@ -38,18 +45,22 @@
                     <mat-button-toggle value="numbered"> <mat-icon> format_list_numbered</mat-icon></mat-button-toggle>
                     <mat-button-toggle value="enumerated"><mat-icon> format_list_bulleted</mat-icon></mat-button-toggle>
                   </mat-button-toggle-group>
-            </div>
+                  -->
+            </div> 
+
+
             <div class="content-input">
-                <textarea class="input-field" placeholder="Nachricht an Max Mustermann"></textarea>
+                <div class="input-field" contentEditable></div>
             </div>
             <div class="lower-controls">
                 <div class="lower-left-controls">
-                    <button mat-button> <mat-icon>attach_file</mat-icon> </button>
-                    <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
-                    <button mat-button> <mat-icon>alternate_email</mat-icon> </button>
-                    <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
+                    <label for="attach-file"><mat-icon>attach_file</mat-icon></label>
+                    <input type="file" name="" id="attach-file" (change)="showFilename($event)" #fileUploader>
+                    <div id="uploads" matTooltip="delete file" (click)="resetUpload()"></div>
+                    <button id="alternate-email"><mat-icon>alternate_email</mat-icon> </button>
+                    <button id="add_reaction"> <mat-icon>add_reaction</mat-icon> </button>
                 </div>
-                <button mat-button id="send-btn"> <mat-icon>send</mat-icon> </button>
+                <button id="send-message"> <mat-icon>send</mat-icon> </button>
             </div>
         </div>
     </div>
