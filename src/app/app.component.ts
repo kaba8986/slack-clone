@@ -18,8 +18,6 @@ export class AppComponent {
   allChannels: any = [];
   newarr: any = [];
 
-  loadedThreads$:Observable<any>;
-  loadedThreads: any = [];
   channelId;
 
   constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute) { }

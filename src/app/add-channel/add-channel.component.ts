@@ -20,8 +20,9 @@ export class AddChannelComponent {
   saveChannel() {
     this.channel.createdDate = this.date.getTime();
 
-    this.firestore.collection('channel').add(this.channel.toJSON()).then((result) => {
-    });
+    /*this.firestore.collection('channel').add(this.channel.toJSON()).then((result) => {
+    });*/
+    this.firestore.collection('channel').doc(this.channel.channelName).set(this.channel.toJSON());
 
 
     this.dialogRef.close();
