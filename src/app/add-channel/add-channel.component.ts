@@ -20,8 +20,7 @@ export class AddChannelComponent {
   saveChannel() {
     this.channel.createdDate = this.date.getTime();
 
-    /*this.firestore.collection('channel').add(this.channel.toJSON()).then((result) => {
-    });*/
+    //Abfrage einbauen, ob Channel-ID schon besteht. wenn ja, Anfrage abbrechen, wenn nein, dann Channel erstellen
     this.firestore.collection('channel').doc(this.channel.channelName).set(this.channel.toJSON());
 
 

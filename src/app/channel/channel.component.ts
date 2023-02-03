@@ -28,12 +28,13 @@ export class ChannelComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe( (params): void => {
       this.channelId = params['channelName'];
+      this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges({idField: 'id'}).subscribe( (changes) => {
+        this.allThreads = changes;
+        this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'))
+      })
     })
     
-    this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges({idField: 'id'}).subscribe( (changes) => {
-      this.allThreads = changes;
-      this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'))
-    })
+
   }
 
   sortThreads(originalDate){
