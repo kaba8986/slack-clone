@@ -30,9 +30,10 @@ export class SigninComponent implements OnInit{
   register(){
     //firebase sign in
     this.loadToFirebase();
-    this.CheckRegisterFirebase();
+    this.RegisterFirebase();
   }
 
+  //neue Nutzer erstellt von user.class.ts per Dialog-eingabe dann in Firebase 'user' collection gespeichiert.
   loadToFirebase(){
     this.user.birthDate = this.birthDate.getTime()
     console.log('my user',this.user)
@@ -43,7 +44,8 @@ export class SigninComponent implements OnInit{
     });
   }
 
-  CheckRegisterFirebase(){
+  //login Kriterien geprüft und user zu Firebase Authenication hinzugefügt
+  RegisterFirebase(){
     createUserWithEmailAndPassword(this.auth, this.signUpForm.value.email, this.signUpForm.value.password)
     .then((response: any)=>{
       console.log(response.user);

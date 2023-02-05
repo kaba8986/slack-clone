@@ -20,7 +20,7 @@ export class AppComponent {
 
   channelId;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {

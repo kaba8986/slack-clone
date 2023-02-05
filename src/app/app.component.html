@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar *ngIf="!(router.url === '/signin' || router.url === '/login' )" color="primary">
 
     <mat-icon>menu</mat-icon>
 
@@ -10,7 +10,7 @@
 
 <mat-drawer-container class="example-container">
     
-    <mat-drawer mode="side" opened>
+    <mat-drawer *ngIf="!(router.url === '/signin' || router.url === '/login' )" mode="side" opened>
         <div class="sidenav-container">
             <div class="entry-container">
                 <div (click)="openAddChannel()" class="sidenav-add-channel">+ add channel</div>

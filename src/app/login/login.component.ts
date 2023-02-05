@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
      signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
        .then((response: any)=>{
          console.log(response.user);
-         this.router.navigate(['channel']);
+         this.router.navigate(['']);
 
        })
        .catch((err)=>{
