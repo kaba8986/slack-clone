@@ -20,8 +20,8 @@
 
 .channel-room {
     overflow-y: scroll;
+    height: 88vh;
     padding: 0 16px;
-    padding-bottom: 200px;
 }
 
 mat-card {
@@ -38,6 +38,10 @@ mat-card {
 
 ::ng-deep .mdc-card {
     flex-direction: row !important;
+}
+
+::ng-deep .mat-drawer-content {
+    height: unset !important;
 }
 
 mat-card-content {
@@ -93,7 +97,7 @@ mat-card-content {
 }
 
 .answer-area {
-    width: 50vw;
+    width: 35vw;
     height: 35px !important;
     min-height: unset;
     display: flex;
@@ -117,6 +121,10 @@ mat-card-content {
     }
 }
 
+.thread-sidenav{
+    width: 25vw;
+}
+
 
 ///CSS for Chat-Keyboard
 
@@ -124,12 +132,11 @@ mat-card-content {
 .chat-input-container {
     min-height: 120px;
     background: white;
-    position: fixed;
+    position: sticky;
     bottom: 0px;
     left: 0px;
     right: 0px;
-    padding: 0 16px 16px 16px;
-    padding-left: calc(20% + 16px);
+    padding: 16px 16px 16px 16px;
 }
 
 .chat-keyboard {
@@ -138,6 +145,7 @@ mat-card-content {
     min-height: 120px;
     border: 1px solid lightgray;
     border-radius: 8px;
+    width: 100%;
     // background: rgba($color: #000000, $alpha: 0.2);
     background: #fff;
   }

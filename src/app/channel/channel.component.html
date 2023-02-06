@@ -1,6 +1,6 @@
-<div class="channel-container">
+<mat-drawer-container class="channel-container" autosize>
     <mat-toolbar class="channelhead" onclick="openDialog()">
-        <span># allgemein <!--this.channelName --></span>
+        <span># {{ this.channelId }}</span>
         <mat-icon fontIcon="expand_more"></mat-icon>
     </mat-toolbar>
     
@@ -22,41 +22,54 @@
                 </button>
                 <mat-card class="answer-area">
                     <img src="./assets/img/icons/creator.png">
-                    <span> 3 Antworten</span>
+                    <span (click)="drawer.toggle()"> 3 Antworten</span>
                     <span>Letzte Antwort vor 3 Tagen</span>
                 </mat-card>
             </mat-card-content>
         </mat-card>
+
+        <mat-card class="chat-input-container">
+            <mat-card-content class="chat-keyboard">
+                <div class="upper-controls">
+                    <mat-button-toggle-group name="text-typse" multiple>
+                        <mat-button-toggle value="bold"><mat-icon>format_bold</mat-icon></mat-button-toggle>
+                        <mat-button-toggle value="italic"><mat-icon>format_italic</mat-icon></mat-button-toggle>
+                        <mat-button-toggle value="italic"><mat-icon>text_format</mat-icon></mat-button-toggle>
+                        <mat-button-toggle value="strikethrough"><mat-icon>format_strikethrough</mat-icon></mat-button-toggle>
+                    </mat-button-toggle-group>
+                    <button mat-button (click)="openDialog()"> <mat-icon>link</mat-icon> </button>
+                    <mat-button-toggle-group name="list-style">
+                        <mat-button-toggle value="numbered"> <mat-icon> format_list_numbered</mat-icon></mat-button-toggle>
+                        <mat-button-toggle value="enumerated"><mat-icon> format_list_bulleted</mat-icon></mat-button-toggle>
+                      </mat-button-toggle-group>
+                </div>
+                <div class="content-input">
+                    <textarea class="input-field" placeholder="Nachricht an Max Mustermann" id="inputfield"></textarea>
+                </div>
+                <div class="lower-controls">
+                    <div class="lower-left-controls">
+                        <button mat-button> <mat-icon>attach_file</mat-icon> </button>
+                        <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
+                        <button mat-button> <mat-icon>alternate_email</mat-icon> </button>
+                        <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
+                    </div>
+                    <button mat-button id="send-btn" (click)="sendText()"> <mat-icon>send</mat-icon> </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
     </div>
 
+
+
+    <mat-drawer #drawer class="thread-sidenav" mode="side" position="end">
+        <mat-toolbar class="channelhead">
+            <span># {{this.channelId}}</span>
+        </mat-toolbar>
     
-    <div class="chat-input-container">
-        <div class="chat-keyboard">
-            <div class="upper-controls">
-                <mat-button-toggle-group name="text-typse" multiple>
-                    <mat-button-toggle value="bold"><mat-icon>format_bold</mat-icon></mat-button-toggle>
-                    <mat-button-toggle value="italic"><mat-icon>format_italic</mat-icon></mat-button-toggle>
-                    <mat-button-toggle value="italic"><mat-icon>text_format</mat-icon></mat-button-toggle>
-                    <mat-button-toggle value="strikethrough"><mat-icon>format_strikethrough</mat-icon></mat-button-toggle>
-                </mat-button-toggle-group>
-                <button mat-button (click)="openDialog()"> <mat-icon>link</mat-icon> </button>
-                <mat-button-toggle-group name="list-style">
-                    <mat-button-toggle value="numbered"> <mat-icon> format_list_numbered</mat-icon></mat-button-toggle>
-                    <mat-button-toggle value="enumerated"><mat-icon> format_list_bulleted</mat-icon></mat-button-toggle>
-                  </mat-button-toggle-group>
-            </div>
-            <div class="content-input">
-                <textarea class="input-field" placeholder="Nachricht an Max Mustermann" id="inputfield"></textarea>
-            </div>
-            <div class="lower-controls">
-                <div class="lower-left-controls">
-                    <button mat-button> <mat-icon>attach_file</mat-icon> </button>
-                    <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
-                    <button mat-button> <mat-icon>alternate_email</mat-icon> </button>
-                    <button mat-button> <mat-icon>add_reaction</mat-icon> </button>
-                </div>
-                <button mat-button id="send-btn" (click)="sendText()"> <mat-icon>send</mat-icon> </button>
-            </div>
-        </div>
-    </div>
-</div>
+      </mat-drawer>
+
+
+</mat-drawer-container>
+
