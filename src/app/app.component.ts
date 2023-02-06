@@ -4,6 +4,7 @@ import { AddChannelComponent } from './add-channel/add-channel.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddChatComponent } from './add-chat/add-chat.component';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,11 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
     });
+  }
+
+  openAddChat() {
+    const dialogRef = this.dialog.open(AddChatComponent);
+
   }
 
 

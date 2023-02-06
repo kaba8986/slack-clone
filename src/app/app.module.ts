@@ -23,6 +23,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { ReverseTextPipe } from './pipes/reverse-text.pipe';
+import { AddChatComponent } from './add-chat/add-chat.component';
 
 
 
@@ -35,7 +36,8 @@ import { ReverseTextPipe } from './pipes/reverse-text.pipe';
     ChatComponent,
     TextAreaAutosizeDirective,
     AddChannelComponent,
-    ReverseTextPipe
+    ReverseTextPipe,
+    AddChatComponent
   ],
   imports: [
     BrowserModule,

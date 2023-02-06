@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'signin', component:SigninComponent },
   {path: 'login', component:LoginComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'chat/:id', component: ChatComponent }
+  { path: 'chat/:chatId', component: ChatComponent }
 ];
 
 @NgModule({
