@@ -24,6 +24,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 import { AddChatComponent } from './add-chat/add-chat.component';
+import { ThreadComponent } from './thread/thread.component';
+import { ThreadcontentService } from './services/threadcontent.service';
 
 
 
@@ -37,7 +39,8 @@ import { AddChatComponent } from './add-chat/add-chat.component';
     TextAreaAutosizeDirective,
     AddChannelComponent,
     ReverseTextPipe,
-    AddChatComponent
+    AddChatComponent,
+    ThreadComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,7 @@ import { AddChatComponent } from './add-chat/add-chat.component';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [ThreadcontentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

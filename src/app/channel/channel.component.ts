@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
 import { QuerySnapshot } from 'firebase/firestore';
+import { ThreadcontentService } from '../services/threadcontent.service';
+
 
 @Component({
   selector: 'app-channel',
@@ -19,10 +21,11 @@ export class ChannelComponent implements OnInit{
 
   allThreads:any = [];  
   date = new Date().getTime();
-  channelId;
+  channelId:string;
 
   
-  constructor(private firestore: AngularFirestore, private auth: Auth, private route: ActivatedRoute) {
+  constructor(private firestore: AngularFirestore, private auth: Auth, private route: ActivatedRoute, public threadContent: ThreadcontentService) {
+  
   }
 
   ngOnInit(): void {
@@ -32,8 +35,8 @@ export class ChannelComponent implements OnInit{
         this.allThreads = changes;
         this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'))
       })
-    })
-    
+      this.threadContent.channelId = this.channelId;
+    });
 
   }
 
@@ -49,6 +52,10 @@ export class ChannelComponent implements OnInit{
   }
 
   openDialog() {
+  }
+
+  openThread() {
+
   }
 
   addEmoji($event) {
