@@ -4,6 +4,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { signOut } from 'firebase/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { signOut } from 'firebase/auth';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: Auth, public router: Router, private fb: FormBuilder) { }
+  constructor(public auth: Auth, public router: Router, private fb: FormBuilder, private firestore: AngularFirestore) { }
 
   logInForm: FormGroup;
 
@@ -28,12 +29,11 @@ export class LoginComponent implements OnInit {
 
      signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
        .then((response: any)=>{
-         console.log(response.user);
-         console.log(response.user.uid);
          this.router.navigate(['']);
        })
        .catch((err)=>{
          alert(err.message);
        });   
   }
+  
 }
