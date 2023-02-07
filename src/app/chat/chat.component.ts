@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/models/message.class';
 
 @Component({
@@ -45,13 +46,20 @@ export class ChatComponent {
     },
   ]
 
+  message = new Message();
 
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private route: ActivatedRoute
   ) {}
 
-  message = new Message();
+
+
+ngOnInit(): void {
+
+}
+
 
   formatText(style: string) {
     document.execCommand(style);
@@ -59,10 +67,8 @@ export class ChatComponent {
 
   showFilename(event) {
     let outputField = document.getElementById( 'uploads' );
-
     let input = event.srcElement;
     let fileName = input.files[0].name;
-
     outputField.textContent = fileName;
   }
 
@@ -76,13 +82,13 @@ export class ChatComponent {
     this.message.creationDateAsString = this.message.creationDate.toLocaleDateString();
     // this.message.content = document.getElementById('input-field').textContent;
 
-    console.log(this.message);
+    console.log(this.message.toJSON());
 
-    
+    /*
     this.firestore
     .collection('messages')
     .add(this.message.toJSON)
-    
+    */
   }
 
 

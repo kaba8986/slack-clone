@@ -18,6 +18,7 @@ export class AppComponent {
   treeControl: any;
   allChannels: any = [];
   newarr: any = [];
+  allChatrooms: any = [];
 
   channelId;
 
@@ -27,6 +28,17 @@ export class AppComponent {
     this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {
         this.allChannels = changes;
     });
+
+    this.firestore
+    .collection('chatrooms')
+    .valueChanges({ idField: 'customIdName'})
+    .subscribe((data: any) => {
+      this.allChatrooms = data;
+    })
+
+    setTimeout(() => {
+      console.log(this.allChatrooms);
+    }, 3000)
 
   }
 

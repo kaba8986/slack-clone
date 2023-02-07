@@ -5,15 +5,15 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Select a user</mat-label>
-        <mat-select [(ngModel)]="selectedUserId">
-          <mat-option *ngFor="let user of allUser" [value]="user.customIdName">
+        <mat-select [(ngModel)]="selectedUser">
+          <mat-option *ngFor="let user of allUser" [value]="user">
             {{user.firstName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <div class="button-container">
-          <button mat-raised-button [mat-dialog-close]>Close</button>
+          <button mat-raised-button [mat-dialog-close] (click)="dialogRef.close()">Close</button>
           <button mat-raised-button (click)="saveNewChat()">Save</button>
       </div>
   </mat-card>
