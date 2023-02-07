@@ -50,7 +50,8 @@
 
 
             <div class="content-input">
-                <div class="input-field" contentEditable></div>
+                <textarea class="input-field" [(ngModel)]="message.content"></textarea>
+                <!-- <div class="input-field" contentEditable></div> -->
             </div>
             <div class="lower-controls">
                 <div class="lower-left-controls">
@@ -60,7 +61,7 @@
                     <button id="alternate-email"><mat-icon>alternate_email</mat-icon> </button>
                     <button id="add_reaction"> <mat-icon>add_reaction</mat-icon> </button>
                 </div>
-                <button id="send-message"> <mat-icon>send</mat-icon> </button>
+                <button id="send-message" (click)="saveMessage()"> <mat-icon>send</mat-icon> </button>
             </div>
         </div>
     </div>
