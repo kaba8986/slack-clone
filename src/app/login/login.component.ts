@@ -29,14 +29,11 @@ export class LoginComponent implements OnInit {
      signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
        .then((response: any)=>{
          console.log(response.user);
+         console.log(response.user.uid);
          this.router.navigate(['']);
-
        })
        .catch((err)=>{
          alert(err.message);
-       }); 
+       });   
   }
-
-
-
 }
