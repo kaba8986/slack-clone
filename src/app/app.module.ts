@@ -26,9 +26,10 @@ import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 import { AddChatComponent } from './add-chat/add-chat.component';
 import { ThreadComponent } from './thread/thread.component';
 import { ThreadcontentService } from './services/threadcontent.service';
-import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
+import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+
 
 
 
@@ -45,8 +46,8 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     AddChatComponent,
     ThreadComponent,
     SearchFilterComponent,
-    AlertLoginComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    AlertLoginComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { signOut } from 'firebase/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,15 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: Auth, public router: Router, private fb: FormBuilder, private firestore: AngularFirestore) { }
+  constructor(public auth: Auth, 
+    public router: Router, 
+    private fb: FormBuilder, 
+    private firestore: AngularFirestore, 
+    public as: AuthService) { }
 
   logInForm: FormGroup;
+
+  Uid: string;
 
   ngOnInit(): void {
     this.logInForm = this.fb.group({
@@ -29,6 +36,15 @@ export class LoginComponent implements OnInit {
 
      signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
        .then((response: any)=>{
+        console.log(response.user);
+        console.log(response.user.reloadUserInfo.localId);
+
+        const Uid = response.user.reloadUserInfo.localId
+        console.log('firebase Auth ID',Uid);
+        //firebase signin/login ID in auth.service.ts gespeichert
+        this.as.currentUserID = Uid;
+
+
          this.router.navigate(['']);
        })
        .catch((err)=>{
