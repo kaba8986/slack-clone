@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
 import { Firestore, getDoc, collectionData, docData, updateDoc, collection, doc, DocumentData, onSnapshot} from '@angular/fire/firestore';
 import { addDoc } from 'firebase/firestore';
 import { User } from 'src/models/user.class';
@@ -62,13 +62,14 @@ export class SigninComponent implements OnInit{
 
   //neue Nutzer erstellt von user.class.ts per Dialog-eingabe dann in Firebase 'user' collection gespeichiert.
   loadToFirebase(Uid){
-    this.user.birthDate = this.birthDate.getTime()
+    this.user.birthDate = this.birthDate.getTime();
+    this.user.email = this.signUpForm.value.email;
     //Firebase Auth ID dem Nutzer zugewiesen
-    this.user.userID = Uid
-    console.log('my user',this.user)
+    this.user.userID = Uid;
+    console.log('my user',this.user);
     const coll = collection(this.firestore, 'users');
     const docRef = addDoc(coll, this.user.toJson()).then((result: any)=>{
-      console.log('loaded to firebase', result)
+      console.log('loaded to firebase', result);
     });
   }
 
