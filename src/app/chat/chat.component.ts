@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Chat } from 'src/models/chats.class';
 import { Message } from 'src/models/message.class';
 
 @Component({
@@ -47,6 +48,8 @@ export class ChatComponent {
   ]
 
   message = new Message();
+  chatroomId: string;
+  currChatroom = new Chat();
 
 
   constructor(
@@ -56,10 +59,23 @@ export class ChatComponent {
 
 
 
-ngOnInit(): void {
+  ngOnInit(): void {
+    this.route.paramMap
+    .subscribe( paramMap => {
+      this.chatroomId = paramMap.get('chatId');
+      this.getChatroom();
+    })
+  }
 
-}
-
+  getChatroom() {
+    this.firestore
+    .collection('chatrooms')
+    .doc(this.chatroomId)
+    .valueChanges()
+    .subscribe((data: any) => {
+      this.currChatroom = new Chat(data);
+    })
+  }
 
   formatText(style: string) {
     document.execCommand(style);
@@ -74,7 +90,6 @@ ngOnInit(): void {
 
   resetUpload() {
     this.fileUploader.nativeElement.value = null;
-    console.log(this.fileUploader.nativeElement.value);
     document.getElementById( 'uploads' ).textContent = "";
   }
 

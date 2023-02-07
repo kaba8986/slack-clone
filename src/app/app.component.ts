@@ -35,11 +35,6 @@ export class AppComponent {
     .subscribe((data: any) => {
       this.allChatrooms = data;
     })
-
-    setTimeout(() => {
-      console.log(this.allChatrooms);
-    }, 3000)
-
   }
 
 
