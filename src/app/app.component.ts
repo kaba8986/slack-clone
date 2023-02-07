@@ -20,6 +20,8 @@ export class AppComponent {
   treeControl: any;
   allChannels: any = [];
   newarr: any = [];
+
+  allChatrooms: any = [];
   value = '';
 
   channelId;
@@ -31,6 +33,12 @@ export class AppComponent {
       this.allChannels = changes;
     });
 
+    this.firestore
+    .collection('chatrooms')
+    .valueChanges({ idField: 'customIdName'})
+    .subscribe((data: any) => {
+      this.allChatrooms = data;
+    })
   }
 
 

@@ -30,11 +30,8 @@
                 <div (click)="openAddChat()" class="sidenav-add-chat">+ add chat</div>
             </div>
 
-            <div class="entry-container">
-                <b class="sidenav-entry"># Patrick</b>
-                <b class="sidenav-entry"># Andreas</b>
-                <b class="sidenav-entry"># Brett</b>
-                <b class="sidenav-entry"># Hagen</b>
+            <div class="entry-container" id="chatrooms-container">
+                <b class="sidenav-entry" *ngFor="let chat of allChatrooms" routerLink="/chat/{{chat.customIdName}}"># {{chat.name}}</b>
             </div>
         </div>
     </mat-drawer>

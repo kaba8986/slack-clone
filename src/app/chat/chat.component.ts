@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
+import { Chat } from 'src/models/chats.class';
 import { Message } from 'src/models/message.class';
 
 @Component({
@@ -45,13 +47,35 @@ export class ChatComponent {
     },
   ]
 
+  message = new Message();
+  chatroomId: string;
+  currChatroom = new Chat();
 
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private route: ActivatedRoute
   ) {}
 
-  message = new Message();
+
+
+  ngOnInit(): void {
+    this.route.paramMap
+    .subscribe( paramMap => {
+      this.chatroomId = paramMap.get('chatId');
+      this.getChatroom();
+    })
+  }
+
+  getChatroom() {
+    this.firestore
+    .collection('chatrooms')
+    .doc(this.chatroomId)
+    .valueChanges()
+    .subscribe((data: any) => {
+      this.currChatroom = new Chat(data);
+    })
+  }
 
   formatText(style: string) {
     document.execCommand(style);
@@ -59,16 +83,13 @@ export class ChatComponent {
 
   showFilename(event) {
     let outputField = document.getElementById( 'uploads' );
-
     let input = event.srcElement;
     let fileName = input.files[0].name;
-
     outputField.textContent = fileName;
   }
 
   resetUpload() {
     this.fileUploader.nativeElement.value = null;
-    console.log(this.fileUploader.nativeElement.value);
     document.getElementById( 'uploads' ).textContent = "";
   }
 
@@ -76,13 +97,13 @@ export class ChatComponent {
     this.message.creationDateAsString = this.message.creationDate.toLocaleDateString();
     // this.message.content = document.getElementById('input-field').textContent;
 
-    console.log(this.message);
+    console.log(this.message.toJSON());
 
-    
+    /*
     this.firestore
     .collection('messages')
     .add(this.message.toJSON)
-    
+    */
   }
 
 

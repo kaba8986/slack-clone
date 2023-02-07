@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Chat } from 'src/models/chats.class';
 import { User } from 'src/models/user.class';
 
 @Component({
@@ -11,12 +12,12 @@ import { User } from 'src/models/user.class';
 export class AddChatComponent {
 
   allUser: any = [];
-  selectedUserId;
-  newChat = new User();
+  selectedUser;
+  chat = new Chat();
 
   constructor(
     private firestore: AngularFirestore,
-    private dialogRef: MatDialogRef<AddChatComponent>
+    public dialogRef: MatDialogRef<AddChatComponent>
     ) {
 
   }
@@ -31,7 +32,17 @@ export class AddChatComponent {
   }
 
   saveNewChat() {
-    console.log(this.selectedUserId);
+    this.chat.name = this.selectedUser.firstName + " " + this.selectedUser.lastName;
+    this.chat.nameId = this.selectedUser.customIdName;
+
+    console.log(this.chat);
+
+    this.firestore
+    .collection('chatrooms')
+    .add(this.chat.toJSON())
+    .then(() => {
+      this.dialogRef.close();
+    })
   }
 
 }
