@@ -37,7 +37,6 @@ export class SigninComponent implements OnInit{
   loadToFirebase(){
     this.user.birthDate = this.birthDate.getTime()
     console.log('my user',this.user)
-
     const coll = collection(this.firestore, 'users');
     const docRef = addDoc(coll, this.user.toJson()).then((result: any)=>{
       console.log('loaded to firebase', result)
@@ -48,6 +47,7 @@ export class SigninComponent implements OnInit{
   RegisterFirebase(){
     createUserWithEmailAndPassword(this.auth, this.signUpForm.value.email, this.signUpForm.value.password)
     .then((response: any)=>{
+    // console.log(response.user.uid);
       console.log(response.user);
       this.router.navigate(['login']);
     })
@@ -55,6 +55,4 @@ export class SigninComponent implements OnInit{
       alert(err.message);
     });
   }
-  
-
 }
