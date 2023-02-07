@@ -5,6 +5,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from
 import { Firestore, getDoc, collectionData, docData, updateDoc, collection, doc, DocumentData, onSnapshot} from '@angular/fire/firestore';
 import { addDoc } from 'firebase/firestore';
 import { User } from 'src/models/user.class';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,10 +16,16 @@ export class SigninComponent implements OnInit{
 
   public signUpForm: FormGroup;
 
-  constructor(private firestore: Firestore, public auth: Auth, public router: Router, private fb: FormBuilder) { }
+  constructor(private firestore: Firestore, 
+    public auth: Auth, 
+    public router: Router, 
+    private fb: FormBuilder,
+    public as: AuthService) { }
 
   user = new User();
   birthDate: Date;
+  
+  userID: string;
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -29,19 +36,10 @@ export class SigninComponent implements OnInit{
 
   register(){
     //firebase sign in
-    this.loadToFirebase();
     this.RegisterFirebase();
+    
   }
 
-  //neue Nutzer erstellt von user.class.ts per Dialog-eingabe dann in Firebase 'user' collection gespeichiert.
-  loadToFirebase(){
-    this.user.birthDate = this.birthDate.getTime()
-    console.log('my user',this.user)
-    const coll = collection(this.firestore, 'users');
-    const docRef = addDoc(coll, this.user.toJson()).then((result: any)=>{
-      console.log('loaded to firebase', result)
-    });
-  }
 
   //login Kriterien geprüft und user zu Firebase Authenication hinzugefügt
   RegisterFirebase(){
@@ -49,10 +47,29 @@ export class SigninComponent implements OnInit{
     .then((response: any)=>{
     // console.log(response.user.uid);
       console.log(response.user);
+      //bekommt signin/login ID von Firebase Auth 
+      const Uid = response.user.reloadUserInfo.localId;
+      console.log('Firebase Auth ID', Uid);
+      //firebase signin/login ID in auth.service.ts gespeichert
+      this.as.currentUserID = Uid;
+      this.loadToFirebase(Uid);
       this.router.navigate(['login']);
     })
     .catch((err)=>{
       alert(err.message);
     });
   }
+
+  //neue Nutzer erstellt von user.class.ts per Dialog-eingabe dann in Firebase 'user' collection gespeichiert.
+  loadToFirebase(Uid){
+    this.user.birthDate = this.birthDate.getTime()
+    //Firebase Auth ID dem Nutzer zugewiesen
+    this.user.userID = Uid
+    console.log('my user',this.user)
+    const coll = collection(this.firestore, 'users');
+    const docRef = addDoc(coll, this.user.toJson()).then((result: any)=>{
+      console.log('loaded to firebase', result)
+    });
+  }
+
 }
