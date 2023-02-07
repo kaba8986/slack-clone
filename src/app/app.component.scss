@@ -1,4 +1,4 @@
-::ng-deep mat-toolbar {
+mat-toolbar {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -26,7 +26,7 @@
     }
 }
 
-::ng-deep mat-drawer-container {
+mat-drawer-container {
     height: 100vh;
 
     mat-drawer {
