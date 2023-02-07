@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-header>
+        <form>
+            <input matInput type="search" placeholder="Search">
+            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+              </button>
+        </form>
+    </mat-card-header>
+    <mat-card>
+        <mat-card-content>Simple card</mat-card-content>
+      </mat-card>
+  </mat-card>

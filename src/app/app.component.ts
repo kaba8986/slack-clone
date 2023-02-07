@@ -5,6 +5,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddChatComponent } from './add-chat/add-chat.component';
+import { SearchFilterComponent } from './search-filter/search-filter.component';
+
 
 @Component({
   selector: 'app-root',
@@ -18,14 +20,15 @@ export class AppComponent {
   treeControl: any;
   allChannels: any = [];
   newarr: any = [];
+  value = '';
 
   channelId;
 
   constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
-    this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {
-        this.allChannels = changes;
+    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
+      this.allChannels = changes;
     });
 
   }
@@ -33,7 +36,6 @@ export class AppComponent {
 
   openAddChannel(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
-      // data: { name: this.name, animal: this.animal },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -43,8 +45,10 @@ export class AppComponent {
 
   openAddChat() {
     const dialogRef = this.dialog.open(AddChatComponent);
-
   }
 
+  openSearchFilter(){
+    const dialogRef = this.dialog.open(SearchFilterComponent);
+  }
 
 }

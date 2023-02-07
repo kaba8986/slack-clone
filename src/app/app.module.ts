@@ -26,6 +26,7 @@ import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 import { AddChatComponent } from './add-chat/add-chat.component';
 import { ThreadComponent } from './thread/thread.component';
 import { ThreadcontentService } from './services/threadcontent.service';
+import { SearchFilterComponent } from './search-filter/search-filter.component';
 
 
 
@@ -40,7 +41,8 @@ import { ThreadcontentService } from './services/threadcontent.service';
     AddChannelComponent,
     ReverseTextPipe,
     AddChatComponent,
-    ThreadComponent
+    ThreadComponent,
+    SearchFilterComponent
   ],
   imports: [
     BrowserModule,

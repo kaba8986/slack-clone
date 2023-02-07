@@ -1,4 +1,4 @@
-mat-toolbar {
+::ng-deep mat-toolbar {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -8,30 +8,43 @@ mat-toolbar {
     top: 0;
     left: 0;
     z-index: 3;
+    background-color: rgb(53, 13, 54) !important;
+
+    input{
+        width: 400px;
+        margin-left: 40%;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
 
     mat-icon {
         cursor: pointer;
+        color: white;
     }
 }
 
-mat-drawer-container {
+::ng-deep mat-drawer-container {
     height: 100vh;
 
     mat-drawer {
         width: 20%;
-        height: 100%;
         background-color: #4659c0;
         z-index: 2;
         position: fixed;
         top: 0;
         left: 0;
 
+        background-color: rgb(63, 14, 64) !important;
+
         .sidenav-container {
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: center;
-            height: 100%;
+            margin-top: 20vh;
             color: white;
         }
     }
@@ -43,13 +56,14 @@ mat-drawer-container {
 
 .entry-container {
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .sidenav-add-channel,
 .sidenav-add-chat {
     display: flex;
-    justify-content: center;
-    padding-left: 20px;
+    justify-content: flex-start;
+    padding-left: 40px;
     padding-right: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -57,7 +71,7 @@ mat-drawer-container {
 
     &:hover {
         cursor: pointer;
-        background-color: #5163c7;
+        background-color: rgb(53, 13, 54);
     }
 }
 
@@ -66,13 +80,14 @@ mat-drawer-container {
     padding-right: 40px;
     padding-top: 2px;
     padding-bottom: 2px;
+    display: flex;
 
     &:hover {
         cursor: pointer;
-        background-color: #5163c7;
+        background-color: rgb(53, 13, 54);
     }
 }
 
-.content-body{
+.content-body {
     margin-top: 64px;
 }

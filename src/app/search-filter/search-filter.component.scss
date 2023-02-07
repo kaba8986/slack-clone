@@ -1,0 +1,30 @@
+mat-card {
+    height: 30vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+
+    mat-card-header {
+        height: 30%;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        form {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            input {
+                width: 80%;
+                height: 40px;
+                text-align: center;
+            }
+        }
+    }
+}
