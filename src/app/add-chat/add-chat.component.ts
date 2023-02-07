@@ -32,13 +32,13 @@ export class AddChatComponent {
   }
 
   saveNewChat() {
-    this.chat.name = this.selectedUser.firstName + " " + this.selectedUser.lastName;
-    this.chat.nameId = this.selectedUser.customIdName;
+    // this.chat.name = this.selectedUser.firstName + " " + this.selectedUser.lastName;
+    // this.chat.nameId = this.selectedUser.customIdName;
 
     console.log(this.chat);
 
     this.firestore
-    .collection('chatrooms')
+    .collection('chats')
     .add(this.chat.toJSON())
     .then(() => {
       this.dialogRef.close();
