@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header>
+        <div class="input-container">
+            <input matInput type="search" autofocus placeholder="Search" id="search-text" aria-describedby="search-text"
+                [(ngModel)]="searchText">
+            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-card-header>
+
+    <div class="foud-entries-container">
+        <mat-card class="found-entries" *ngFor="let c of characters | searchFilter: searchText">
+            <mat-card-content>
+                {{c}}
+            </mat-card-content>
+        </mat-card>
+    </div>
+</mat-card>

@@ -5,7 +5,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddChatComponent } from './add-chat/add-chat.component';
+import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { Auth } from '@angular/fire/auth';
+import { AlertLoginComponent } from './alert-login/alert-login.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,9 @@ export class AppComponent {
   treeControl: any;
   allChannels: any = [];
   newarr: any = [];
+
   allChatrooms: any = [];
+  value = '';
 
   channelId;
 
@@ -32,8 +36,8 @@ export class AppComponent {
     ) { }
 
   ngOnInit(): void {
-    this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {
-        this.allChannels = changes;
+    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
+      this.allChannels = changes;
     });
 
     this.firestore
@@ -42,12 +46,22 @@ export class AppComponent {
     .subscribe((data: any) => {
       this.allChatrooms = data;
     })
+
+    /*
+    this.auth.onAuthStateChanged((user) => {
+      if (user) {
+
+        console.log(user.uid);
+      } else {
+
+      }
+    });
+    */
   }
 
 
   openAddChannel(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
-      // data: { name: this.name, animal: this.animal },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -57,8 +71,15 @@ export class AppComponent {
 
   openAddChat() {
     const dialogRef = this.dialog.open(AddChatComponent);
-
+    if(this.auth.currentUser) {
+      const dialogRef = this.dialog.open(AddChatComponent);
+    } else {
+      const dialogRef = this.dialog.open(AlertLoginComponent);
+    }
   }
 
+  openSearchFilter(){
+    const dialogRef = this.dialog.open(SearchFilterComponent);
+  }
 
 }

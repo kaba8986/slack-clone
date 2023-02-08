@@ -94,7 +94,6 @@ export class ChatComponent {
   }
 
   saveMessage() {
-    this.message.creationDateAsString = this.message.creationDate.toLocaleDateString();
     // this.message.content = document.getElementById('input-field').textContent;
 
     console.log(this.message.toJSON());

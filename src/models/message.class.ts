@@ -1,19 +1,19 @@
 export class Message {
+    senderID: string;
     content: string;
-    creationDate: Date;
-    creationDateAsString: string;
+    timestamp: Date;
 
     constructor(obj?: any) {
+        this.senderID = obj ? obj.contsenderIDent : 'mySenderID'
         this.content = obj ? obj.content : ''
-        this.creationDate = new Date();
-        this.creationDateAsString = obj ? obj.creationDateAsString : ''
+        this.timestamp = new Date();
     }
 
     public toJSON() {
         return {
-            content: this.content,
-            creationDate: this.creationDate, 
-            creationDateAsString: this.creationDateAsString, 
+            senderID: this.senderID,
+            content: this.content, 
+            timestamp: this.timestamp
         }
     }
 }

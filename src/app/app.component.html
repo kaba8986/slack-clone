@@ -1,15 +1,18 @@
-<mat-toolbar *ngIf="!(router.url === '/signin' || router.url === '/login' )" color="primary">
+<mat-toolbar *ngIf="!(router.url === '/signin' || router.url === '/login' )">
 
-    <mat-icon>menu</mat-icon>
-
-    <input matInput placeholder="Search">
+    <form>
+        <input (click)="openSearchFilter()" matInput type="search" placeholder="Search">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+          </button>
+    </form>
 
     <mat-icon>account_box</mat-icon>
 </mat-toolbar>
 
 
 <mat-drawer-container class="example-container">
-    
+
     <mat-drawer *ngIf="!(router.url === '/signin' || router.url === '/login' )" mode="side" opened>
         <div class="sidenav-container">
             <div class="entry-container">
@@ -18,7 +21,8 @@
 
             <div class="entry-container">
                 <div class="sidenav-tr" *ngFor="let channel of allChannels">
-                    <div routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry">{{ channel.channelName }}</div>
+                    <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }}
+                    </b>
                 </div>
             </div>
 
@@ -27,7 +31,7 @@
             </div>
 
             <div class="entry-container" id="chatrooms-container">
-                <div class="sidenav-entry" *ngFor="let chat of allChatrooms" routerLink="/chat/{{chat.customIdName}}">{{chat.name}}</div>
+                <b class="sidenav-entry" *ngFor="let chat of allChatrooms" routerLink="/chat/{{chat.customIdName}}"># {{chat.name}}</b>
             </div>
         </div>
     </mat-drawer>

@@ -39,7 +39,7 @@ export class AddChatComponent {
     console.log(this.chat);
 
     this.firestore
-    .collection('chatrooms')
+    .collection('chats')
     .add(this.chat.toJSON())
     .then(() => {
       this.dialogRef.close();
