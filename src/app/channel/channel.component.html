@@ -22,7 +22,7 @@
                 </button>
                 <mat-card class="answer-area">
                     <img src="./assets/img/icons/creator.png">
-                    <span (click)="drawer.toggle()" (click)="openThread()"> 3 Antworten</span>
+                    <span (click)="drawer.toggle()" (click)="openThread( this.allThreads[i].id )"> 3 Antworten</span>
                     <span>Letzte Antwort vor 3 Tagen</span>
                 </mat-card>
             </mat-card-content>
@@ -57,8 +57,6 @@
                 </div>
             </mat-card-content>
         </mat-card>
-
-
     </div>
 
 
@@ -68,9 +66,8 @@
             <span>Thread # {{this.channelId}}</span>
             <mat-icon fontIcon="close"></mat-icon>
         </mat-toolbar>
-        <app-thread></app-thread>
-      </mat-drawer>
-
+        <app-thread [threadId]='this.threadId'></app-thread>
+    </mat-drawer>
 
 </mat-drawer-container>
 

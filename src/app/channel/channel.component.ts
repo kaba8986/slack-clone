@@ -6,7 +6,7 @@ import { Auth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
-import { QuerySnapshot } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, QuerySnapshot } from 'firebase/firestore';
 import { ThreadcontentService } from '../services/threadcontent.service';
 
 
@@ -22,6 +22,9 @@ export class ChannelComponent implements OnInit{
   allThreads:any = [];  
   date = new Date().getTime();
   channelId:string;
+  threadId:string;
+  thread$: any;
+
 
   
   constructor(private firestore: AngularFirestore, private auth: Auth, private route: ActivatedRoute, public threadContent: ThreadcontentService) {
@@ -30,14 +33,25 @@ export class ChannelComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.params.subscribe( (params): void => {
-      this.channelId = params['channelName'];
-      this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges({idField: 'id'}).subscribe( (changes) => {
-        this.allThreads = changes;
-        this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'))
-      })
-      this.threadContent.channelId = this.channelId;
+      this.getChannelId(params);
+      this.getUpdatesFromChannelCollection()
+      this.getDataForThreadService()
     });
+  }
 
+  getChannelId(params) {
+    this.channelId = params['channelName'];
+  }
+
+  getUpdatesFromChannelCollection() {
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges({idField: 'id'}).subscribe( (changes) => {
+      this.allThreads = changes;
+      this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'));
+    })
+  }
+
+  getDataForThreadService() {
+    this.threadContent.channelId = this.channelId;
   }
 
   sortThreads(originalDate){
@@ -54,7 +68,12 @@ export class ChannelComponent implements OnInit{
   openDialog() {
   }
 
-  openThread() {
+  openThread(id) {
+    this.threadId = id;
+    
+
+
+      
 
   }
 
@@ -66,8 +85,6 @@ export class ChannelComponent implements OnInit{
     this.getThreadCreator();
     this.getText();
     this.convertDate(this.date);
-    
-    
     this.firestore.collection('channel').doc(this.channelId).collection('threads').add(this.thread.toJSON()).then( (result) => {
       console.log(result);
     })

@@ -6,8 +6,11 @@ import { Injectable } from '@angular/core';
 export class ThreadcontentService {
 
   channelId:string;
+  threadId: string;
   
   constructor() {
   }
 
+
 }
+
