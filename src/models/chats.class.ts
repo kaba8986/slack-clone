@@ -1,20 +1,17 @@
 export class Chat {
-  name: string;
-  nameId: string;
+  chatPartners: any;
   creationDate: Date;
   messages: any;
 
   constructor(obj?: any) {
-    this.name = obj ? obj.name : "";
-    this.nameId = obj ? obj.name : "";
+    this.chatPartners = obj ? obj.chatPartners : [];
     this.creationDate = new Date();
     this.messages = obj ? obj.messages : [];
   }
 
   public toJSON() {
     return {
-      name: this.name,
-      nameId: this.nameId,
+      chatPartners: this.chatPartners,
       creationDate: this.creationDate,
       messages: this.messages
     }

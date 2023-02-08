@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddChatComponent } from './add-chat/add-chat.component';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,13 @@ export class AppComponent {
 
   channelId;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute, public router: Router) { }
+  constructor(
+    public dialog: MatDialog, 
+    private firestore: AngularFirestore, 
+    private route: ActivatedRoute, 
+    public router: Router,
+    private auth: Auth
+    ) { }
 
   ngOnInit(): void {
     this.firestore.collection('channel').valueChanges({ idField: 'customIdName'}).subscribe((changes: any) => {

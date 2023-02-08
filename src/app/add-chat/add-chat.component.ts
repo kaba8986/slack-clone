@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chats.class';
-import { User } from 'src/models/user.class';
+
 
 @Component({
   selector: 'app-add-chat',
@@ -32,8 +33,8 @@ export class AddChatComponent {
   }
 
   saveNewChat() {
-    this.chat.name = this.selectedUser.firstName + " " + this.selectedUser.lastName;
-    this.chat.nameId = this.selectedUser.customIdName;
+    
+
 
     console.log(this.chat);
 
