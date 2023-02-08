@@ -47,6 +47,7 @@ export class AppComponent {
       this.allChatrooms = data;
     })
 
+
     /*
     this.auth.onAuthStateChanged((user) => {
       if (user) {
