@@ -29,6 +29,7 @@ import { ThreadcontentService } from './services/threadcontent.service';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 
@@ -47,7 +48,8 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     ThreadComponent,
     SearchFilterComponent,
     SearchFilterPipe,
-    AlertLoginComponent
+    AlertLoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

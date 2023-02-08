@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 
 export class SearchFilterComponent {
   value = '';
-
+  
   searchText = '';
   characters = [
     'Ant-Man',
