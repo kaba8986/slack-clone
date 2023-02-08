@@ -3,7 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chats.class';
-import { runTransaction } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 
 @Component({
@@ -37,6 +37,9 @@ export class AddChatComponent {
       })
   }
 
+  // Initialize Firebase
+
+
 
   save() {
     this.createNewChat();
@@ -46,10 +49,11 @@ export class AddChatComponent {
 
   createNewChat() {
     this.personalID = this.auth.currentUser.uid; //read personal Id from auth
-    this.chat.chatPartners.push(this.personalID, this.selectedUserID); //add personal Id and chatPartner Id to new chat
-    this.chatName = this.sortStrings(this.personalID, this.selectedUserID);     //create chatID from two chatPartnerIds
+    this.chat.chatPartners.push(this.personalID, this.selectedUserID.userID); //add personal Id and chatPartner Id to new chat
+    this.chatName = this.sortStrings(this.personalID, this.selectedUserID.userID);     //create chatID from two chatPartnerIds
 
     //add new Chat to firestore-db
+    
     this.firestore
       .collection('chats')
       .add(this.chat.toJSON())
@@ -60,13 +64,15 @@ export class AddChatComponent {
 
 
   addChatToUser() {
+   
     this.firestore
       .collection('users')
       .doc(this.personalID)
       .set(
-        { chats: [this.chatName]},
+        { chats: [{'chatName': this.chatName, 'chatPartner': this.selectedUserID.firstName + " " + this.selectedUserID.lastName}]},
         { merge: true }
       )
+    
   }
 
 

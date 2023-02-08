@@ -58,7 +58,7 @@ export class AppComponent {
     });
 
     setTimeout(() => {
-      console.log(this.currUser);
+      console.log(this.currUser.chats);
     }, 3000);
     
   }

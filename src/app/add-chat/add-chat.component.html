@@ -6,7 +6,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Select a user</mat-label>
         <mat-select [(ngModel)]="selectedUserID">
-          <mat-option *ngFor="let user of allUser" [value]="user.userID">
+          <mat-option *ngFor="let user of allUser" [value]="user">
             {{user.firstName}}
           </mat-option>
         </mat-select>
