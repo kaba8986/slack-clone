@@ -30,6 +30,4 @@ export class SearchFilterPipe implements PipeTransform {
       return it.toLocaleLowerCase().includes(searchText);
     });
   }
-  
-
 }

@@ -11,9 +11,11 @@
 
     <div class="foud-entries-container">
         <mat-card class="found-entries" *ngFor="let c of characters | searchFilter: searchText">
-            <mat-card-content>
+         
+            <div appHighlight [searchedWord]="searchText" [content]="c"  
+            [classToApply]="'font-weight-bold'" [setTitle]='true'>
                 {{c}}
-            </mat-card-content>
+            </div>
         </mat-card>
     </div>
 </mat-card>
