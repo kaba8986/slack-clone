@@ -13,12 +13,14 @@ import { Chat } from 'src/models/chats.class';
 export class AddChatComponent {
 
   allUser: any = [];
-  selectedUser;
+  selectedUserID;
+  personalID;
   chat = new Chat();
 
   constructor(
     private firestore: AngularFirestore,
-    public dialogRef: MatDialogRef<AddChatComponent>
+    public dialogRef: MatDialogRef<AddChatComponent>,
+    private auth: Auth
     ) {
 
   }
@@ -33,17 +35,37 @@ export class AddChatComponent {
   }
 
   saveNewChat() {
+    //read personal Id from auth
+    this.personalID = this.auth.currentUser.uid;
+    //add personal Id and chatPartner Id to new chat
+    this.chat.chatPartners.push(this.personalID, this.selectedUserID);
     
+    //create chatID from two chatPartnerIds
+    let chatName = this.sortStrings(this.personalID, this.selectedUserID);
 
+    console.log('Chatpartners: ', this.chat.chatPartners);
+    console.log('ChatName: ', chatName);
+  
 
-    console.log(this.chat);
-
+    //add new Chat to firestore-db
     this.firestore
     .collection('chats')
     .add(this.chat.toJSON())
     .then(() => {
       this.dialogRef.close();
     })
+
+
+  }
+
+  sortStrings(a: string, b: string) {
+    let stringName = "";
+    if(a >= b) {
+      stringName = a.concat("-", b);
+    } else {
+      stringName = b.concat("-", a);
+    }
+    return stringName;
   }
 
 }

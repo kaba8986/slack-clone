@@ -70,7 +70,6 @@ export class AppComponent {
   }
 
   openAddChat() {
-    const dialogRef = this.dialog.open(AddChatComponent);
     if(this.auth.currentUser) {
       const dialogRef = this.dialog.open(AddChatComponent);
     } else {
