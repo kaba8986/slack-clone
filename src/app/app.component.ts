@@ -7,7 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddChatComponent } from './add-chat/add-chat.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { Auth } from '@angular/fire/auth';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AlertLoginComponent } from './alert-login/alert-login.component';
+import { User } from 'src/models/user.class';
+import { LoggedUserService } from './services/logged-user.service';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +23,11 @@ export class AppComponent {
   dataSource: any;
   treeControl: any;
   allChannels: any = [];
-  newarr: any = [];
-
   allChatrooms: any = [];
+  newarr: any = [];
+  loggedId: string;
+  currUser = new User();
+
   value = '';
 
   channelId;
@@ -32,7 +37,9 @@ export class AppComponent {
     private firestore: AngularFirestore, 
     private route: ActivatedRoute, 
     public router: Router,
-    private auth: Auth
+    private auth: Auth,
+    private logService: LoggedUserService
+    
     ) { }
 
   ngOnInit(): void {
@@ -40,25 +47,35 @@ export class AppComponent {
       this.allChannels = changes;
     });
 
-    this.firestore
-    .collection('chatrooms')
-    .valueChanges({ idField: 'customIdName'})
-    .subscribe((data: any) => {
-      this.allChatrooms = data;
-    })
-
-
-    /*
-    this.auth.onAuthStateChanged((user) => {
+    //check if somebody is logged in - if yes, save user from firestore
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-
-        console.log(user.uid);
+        this.loggedId = user.uid;
+        this.getLoggedUser(user.uid);
       } else {
-
       }
     });
-    */
+
+    setTimeout(() => {
+      console.log(this.currUser);
+    }, 3000);
+    
   }
+
+  
+  getLoggedUser(id: string) {
+    this.firestore
+    .collection('users')
+    .doc(id)
+    .valueChanges()
+    .subscribe((data: any) => {
+      this.currUser = data;
+    })
+  }
+  
+
+
 
 
   openAddChannel(): void {
