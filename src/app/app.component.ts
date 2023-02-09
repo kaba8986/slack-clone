@@ -66,7 +66,7 @@ export class AppComponent {
     .valueChanges()
     .subscribe((data: any) => {
       this.currUser = data;
-      console.log('MainPageLog: ', this.currUser);
+      console.log('MainPageLog: ', this.currUser.chats);
     })
   }
   

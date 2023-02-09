@@ -31,7 +31,7 @@
             </div>
 
             <div class="entry-container" id="chatrooms-container">
-                <b class="sidenav-entry" *ngFor="let chat of allChatrooms" routerLink="/chat/{{chat.customIdName}}"># {{chat.name}}</b>
+                <b class="sidenav-entry" *ngFor="let chat of currUser.chats" routerLink="/chat/{{chat.chatName}}"># {{chat.chatPartner}}</b>
             </div>
         </div>
     </mat-drawer>
