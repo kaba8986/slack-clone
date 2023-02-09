@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { collection, collectionGroup, getDocs, query, where } from 'firebase/firestore';
-import { ThreadcontentService } from '../services/threadcontent.service';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-search-filter',
@@ -35,10 +34,10 @@ export class SearchFilterComponent implements OnInit {
     'Batwoman',
   ];
   allThreads: any = [];
-  channelId: string;
-  db: any;
 
-  constructor(private firestore: AngularFirestore, private route: ActivatedRoute, public threadContent: ThreadcontentService) {
+  // channelId: string;
+
+  constructor(private route: ActivatedRoute, private firestor: Firestore) {
 
   }
 
@@ -55,29 +54,35 @@ export class SearchFilterComponent implements OnInit {
   // }
 
   async getUpdatesFromChannelCollection() {
-    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes) => {
-      this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'));
-      this.allThreads = changes;
-      console.log('json', this.allThreads);
+    // this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes) => {
+    //   this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'));
+    //   this.allThreads = changes;
+    //   console.log('json', this.allThreads);
 
-      var channels = collection(this.firestore, 'channel');
-      const q = query(channels, where("threads", "==", true));
-      console.log('json', q);
-    });
-  }
+    var channels = collection(this.firestor, 'channel');
+    const q = query(channels, where("Allgemein", "==", true));
+    console.log('json', q);
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      console.log('das ist', doc);
+      });
+    }
 
   // getDataForThreadService() {
   //   this.threadContent.channelId = this.channelId;
   // }
 
-  sortThreads(originalDate) {
-    return function (a, b) {
-      if (a[originalDate] > b[originalDate]) {
-        return 1;
-      } else if (a[originalDate] < b[originalDate]) {
-        return -1;
-      }
-      return 0;
-    }
-  }
+  // sortThreads(originalDate) {
+  //   return function (a, b) {
+  //     if (a[originalDate] > b[originalDate]) {
+  //       return 1;
+  //     } else if (a[originalDate] < b[originalDate]) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   }
+  // }
 }
