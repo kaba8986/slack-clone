@@ -63,7 +63,7 @@ export class SearchFilterComponent implements OnInit {
       var channels = collection(this.db, 'channel');
       const q = query(channels, where("threads", "==", true));
       console.log('json', q);
-      */
+      
     });
   }
 
