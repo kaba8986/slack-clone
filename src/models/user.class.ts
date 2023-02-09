@@ -5,7 +5,7 @@ export class User{
     street: string;
     zipCode: number;
     city: string;
-    chats: [];
+    // chats: any;
     userID: string;
     email: string;
 
@@ -16,7 +16,7 @@ export class User{
         this.street = obj ? obj.street : ''
         this.zipCode = obj ? obj.zipCode : ''
         this.city = obj ? obj.city : ''
-        this.chats = obj? obj.chats : []
+        // this.chats = obj? obj.chats : []
         this.userID = obj? obj.userID : ''
         this.email = obj? obj.email : ''
     }
@@ -29,7 +29,7 @@ export class User{
             street: this.street, 
             zipCode: this.zipCode, 
             city: this.city,
-            chats: this.chats,
+            // chats: this.chats,
             userID: this.userID,
             email: this.email
         }

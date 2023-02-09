@@ -56,11 +56,6 @@ export class AppComponent {
       } else {
       }
     });
-
-    setTimeout(() => {
-      console.log(this.currUser.chats);
-    }, 3000);
-    
   }
 
   
@@ -71,12 +66,10 @@ export class AppComponent {
     .valueChanges()
     .subscribe((data: any) => {
       this.currUser = data;
+      console.log('MainPageLog: ', this.currUser);
     })
   }
   
-
-
-
 
   openAddChannel(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
@@ -89,9 +82,10 @@ export class AppComponent {
 
   openAddChat() {
     if(this.auth.currentUser) {
-      const dialogRef = this.dialog.open(AddChatComponent);
+      const dialog = this.dialog.open(AddChatComponent);
+      dialog.componentInstance.currUser = this.currUser;
     } else {
-      const dialogRef = this.dialog.open(AlertLoginComponent);
+      const dialog = this.dialog.open(AlertLoginComponent);
     }
   }
 
