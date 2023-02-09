@@ -52,6 +52,7 @@ export class ThreadComponent implements OnInit, OnChanges{
         this.docRef = doc(this.db,'channel',this.channelId,'threads', this.currentThreadId)
           this.docSnap = await getDoc(this.docRef);
           this.data = this.docSnap.data();
+          this.allAnswers = this.data.answers;
           console.log(this.data)
           this.getDataOfThread();
         });
