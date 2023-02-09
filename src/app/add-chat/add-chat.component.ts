@@ -38,18 +38,17 @@ export class AddChatComponent {
       .subscribe((data: any) => {
         this.allUser = data;
       })
-
-      console.log('Add-Dialog-Log: ', this.currUser);
-
   }
 
 
   save() {
-    this.newChatName = this.sortStrings(this.personalID, this.selectedUser.userID);     //create chatID from two chatPartnerIds
+    this.newChatName = this.sortStrings(this.currUser.userID, this.selectedUser.userID);     //create chatID from two chatPartnerIds
 
-    if(this.checkIfNameExists(this.newChatName))  {
+    if(this.currUser.userID == this.selectedUser.userID) {
+      alert("For talking with yourself you don't need a messenger.")
+    } else if(this.checkIfNameExists(this.newChatName))  {
       alert('Chatroom already exists!');
-    } else  {
+    } else {
       this.createNewChat();
       this.addChatToUser();
     }

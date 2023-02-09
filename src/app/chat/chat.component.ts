@@ -75,11 +75,6 @@ export class ChatComponent {
       this.getChatroom();
       this.getLoggedUser();
     })
-
-    setTimeout(() => {
-      console.log(this.currUser);
-    }, 4000)
-
   }
 
   getChatroom() {
@@ -128,8 +123,6 @@ export class ChatComponent {
     this.message.senderID = this.currUser.firstName  + " " + this.currUser.lastName;
     this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
     // this.message.content = document.getElementById('input-field').textContent;
-
-    console.log(this.message.toJSON());
 
     const messageRef = doc(this.db, 'chats', this.chatroomId);
     await updateDoc(messageRef , {
