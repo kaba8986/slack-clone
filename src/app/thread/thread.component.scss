@@ -1,0 +1,148 @@
+.thread-room{
+    overflow-y: scroll;
+    height: 88vh;
+    padding: 0 16px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+}
+
+mat-card {
+    display: flex;
+    margin: 8px 0;
+    margin-bottom: 5px;
+    padding-top: 15px;
+    padding-left: 15px;
+    min-height: 150px;
+    &:hover{
+        background-color: rgba(0,0,0,0.1);
+    }
+}
+
+::ng-deep .mdc-card {
+    flex-direction: row !important;
+}
+
+::ng-deep .mat-drawer-content {
+    height: unset !important;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.thread-creator {
+    padding-bottom: 10px;
+}
+
+.emoji-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 26px;
+    margin-top: 5px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    cursor: pointer;
+
+    img {
+        width: 20px;
+    }
+
+    .image-main {
+        position: absolute;
+
+        object-fit: contain;
+        opacity: 1;
+        transition: opacity .2s;
+        &:hover {
+            opacity: 0;
+        }
+    }
+
+    .image-hover {
+    position: absolute;
+
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity .2s;
+    
+    &:hover {
+        opacity: 1;
+        color: #e9be6f;
+        filter: invert(97%) sepia(10%) saturate(7451%) hue-rotate(312deg) brightness(110%) contrast(83%);
+    }
+    }
+
+}
+
+
+
+
+
+///CSS for Chat-Keyboard
+
+
+.chat-input-container {
+    min-height: 120px;
+    background: white;
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 16px 16px 16px 16px;
+}
+
+.chat-keyboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 120px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    width: 100%;
+    // background: rgba($color: #000000, $alpha: 0.2);
+    background: #fff;
+  }
+
+
+
+  .upper-controls,
+  .lower-controls {
+    background: #ececec;
+    padding: 4px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    mat-icon {
+        font-size: 20px;
+    }
+  }
+
+  .lower-controls {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #send-btn {
+    background: green;
+    color: white;
+  }
+
+  .input-field {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 36px;
+    padding: 16px;
+    border: none;
+    outline: none;
+    resize: none;
+  }

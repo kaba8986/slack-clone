@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Thread } from 'src/models/thread.class';
 import { Auth } from '@angular/fire/auth';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CloseScrollStrategy } from '@angular/cdk/overlay';
-import { Observable } from 'rxjs';
-import { doc, getDoc, getFirestore, QuerySnapshot } from 'firebase/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { ThreadcontentService } from '../services/threadcontent.service';
 
 
@@ -70,11 +66,6 @@ export class ChannelComponent implements OnInit{
 
   openThread(id) {
     this.threadId = id;
-    
-
-
-      
-
   }
 
   addEmoji($event) {
