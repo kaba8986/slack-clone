@@ -1,3 +1,5 @@
+import { Message } from "./message.class";
+
 export class Chat {
   chatPartners: any;
   creationDate: Date;

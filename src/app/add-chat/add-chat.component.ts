@@ -19,9 +19,7 @@ export class AddChatComponent {
   personalID;
   chatName: string;
   chat = new Chat();
-
-   db = getFirestore();
-
+  db = getFirestore();
   currUser: User;
 
   constructor(
@@ -60,20 +58,34 @@ export class AddChatComponent {
     //add new Chat to firestore-db
     
     this.firestore
+    .collection('chats')
+    .doc(this.chatName)
+    .set(this.chat.toJSON())
+    .then(() => {
+      this.dialogRef.close();
+    })
+    
+    /*
+    this.firestore
       .collection('chats')
       .add(this.chat.toJSON())
       .then(() => {
         this.dialogRef.close();
       })
+    */
   }
 
 
   async addChatToUser() {
     let newChat = {'chatName': this.chatName, 'chatPartner': this.selectedUser.firstName + " " + this.selectedUser.lastName};
+
+
+    
     const userRef = doc(this.db, 'users', this.personalID);
     await updateDoc(userRef , {
       chats: arrayUnion(newChat)
     })
+    
   }
 
 
