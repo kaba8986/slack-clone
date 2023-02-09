@@ -63,13 +63,13 @@ export class SearchFilterComponent implements OnInit {
   // }
 
   async getThreadFromServer() {
-    const querySnapshot = await getDocs(collection(this.db, "channel"));
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log('TESTE', doc.id, " => ", doc.data());
-    });
+    // const querySnapshot = await getDocs(collection(this.db, "channel"));
+    // querySnapshot.forEach((doc) => {
+    //   // doc.data() is never undefined for query doc snapshots
+    //   console.log('TESTE', doc.id, " => ", doc.data());
+    // });
 
-      this.firestore.collection('channel').doc(this.value).collection('threads').valueChanges().subscribe((changes) => {
+      this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges().subscribe((changes) => {
         // this.docRef = doc(this.db, 'channel', this.channelId, 'threads', this.currentThreadId)
         // this.docSnap = await getDoc(this.docRef);
         // this.data = this.docSnap.data();
