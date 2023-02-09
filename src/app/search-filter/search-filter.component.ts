@@ -60,9 +60,11 @@ export class SearchFilterComponent implements OnInit {
       this.allThreads = changes;
       console.log('json', this.allThreads);
 
+      /*  ----> Auskommentiert von Andreas <-----
       var channels = collection(this.firestore, 'channel');
       const q = query(channels, where("threads", "==", true));
       console.log('json', q);
+      */
     });
   }
 
