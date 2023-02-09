@@ -21,10 +21,10 @@
         {{this.thread.answers.length}} Antworten
     </div>
 
-    <mat-card class="answer-area" *ngFor="let answer of this.thread.answers; let i = index">
+    <mat-card class="answer-area" *ngFor="let answer of allAnswers; let i = index">
         <img class="profile-pic" src="./assets/img/profile/male.png">
         <mat-card-content>
-            {{ this.thread.answers[0] }}
+            {{ this.allAnswers[i].answerText }}
         </mat-card-content>
     </mat-card>
 
