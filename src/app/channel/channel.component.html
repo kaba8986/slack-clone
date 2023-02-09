@@ -66,7 +66,7 @@
             <span>Thread # {{this.channelId}}</span>
             <mat-icon fontIcon="close"></mat-icon>
         </mat-toolbar>
-        <app-thread [threadId]='this.threadId'></app-thread>
+        <app-thread [threadId]='this.threadId' [channelId]="this.channelId"></app-thread>
     </mat-drawer>
 
 </mat-drawer-container>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { collection, collectionGroup, getDocs, query, where } from 'firebase/firestore';
+import { collection, collectionGroup, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { ThreadcontentService } from '../services/threadcontent.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class SearchFilterComponent implements OnInit {
   ];
   allThreads: any = [];
   channelId: string;
-  db: any;
+  db = getFirestore()
 
   constructor(private firestore: AngularFirestore, private route: ActivatedRoute, public threadContent: ThreadcontentService) {
 
@@ -60,7 +60,7 @@ export class SearchFilterComponent implements OnInit {
       this.allThreads = changes;
       console.log('json', this.allThreads);
 
-      var channels = collection(this.firestore, 'channel');
+      var channels = collection(this.db, 'channel');
       const q = query(channels, where("threads", "==", true));
       console.log('json', q);
     });
