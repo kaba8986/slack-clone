@@ -17,7 +17,7 @@ export class Thread {
         this.threadText  = obj ? obj.threadText : '';
         this.emojiReaction = obj ? obj.emojiReaction : '';
         this.emojiCounter = obj ? obj.emojiCounter : '';
-        this.answers = obj ? obj.answers : '';
+        this.answers = obj ? obj.answers : [];
     }
 
     public toJSON() {
