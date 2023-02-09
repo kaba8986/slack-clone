@@ -39,11 +39,6 @@ export class HighlightDirective implements OnChanges {
 
   getFormattedText() {
     const re = new RegExp(`(${this.searchedWord})`, 'gi');
-    return this.content.replace(re, `<span class="${this.classToApply}">$1</span>`);
+    return this.content.replace(re, `<b class="${this.classToApply}">$1</b>`);
   }
-
-  // getFormattedText() {
-  //   const re = new RegExp(`(${this.searchedWord})`, 'gi');
-  //   return this.content.replace(re, `<span class="${this.classToApply}">$1</span>`);
-  // }
 }

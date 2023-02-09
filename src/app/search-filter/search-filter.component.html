@@ -10,12 +10,54 @@
     </mat-card-header>
 
     <div class="foud-entries-container">
-        <mat-card class="found-entries" *ngFor="let c of characters | searchFilter: searchText">
-         
-            <div appHighlight [searchedWord]="searchText" [content]="c"  
+        <mat-card class="found-entries" *ngFor="let thread of allThreads | searchFilter: searchText">
+
+            <!-- <div class="thread-creator">
+                <b>{{ this.allThreads.creatorName }}</b> {{ this.allThreads.createdTime }} Uhr
+            </div>
+        
+            <div>
+                {{ this.allThreads.threadText }}
+            </div> -->
+
+            <div appHighlight [searchedWord]="searchText" [content]="thread"  
             [classToApply]="'font-weight-bold'" [setTitle]='true'>
-                {{c}}
+                {{thread}}
+                
+
+                <!-- <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index" >
+                    <img class="profile-pic" src="./assets/img/profile/male.png"> 
+                    <mat-card-content>
+                         -->
+
+
+                <!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
+                <!-- </b> -->  
             </div>
         </mat-card>
     </div>
 </mat-card>
+
+
+
+<!-- <div class="foud-entries-container">                     BACKUP
+    <mat-card class="found-entries" *ngFor="let c of characters | searchFilter: searchText">
+     
+        <div appHighlight [searchedWord]="searchText" [content]="c"  
+        [classToApply]="'font-weight-bold'" [setTitle]='true'>
+            {{c}}
+
+        <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index" >
+                <img class="profile-pic" src="./assets/img/profile/male.png"> 
+                <mat-card-content>
+                    <div class="thread-creator">
+                        <b>{{ this.allThreads[i].creatorName }}</b> {{ this.allThreads[i].createdTime }} Uhr
+                    </div>
+                
+                    <div>
+                        {{ this.allThreads[i].threadText }}
+                    </div> -->
+
+
+            <!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
+            <!-- </b>  -->
