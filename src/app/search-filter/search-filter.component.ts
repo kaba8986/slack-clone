@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { collectionGroup, getDocs, query, where } from 'firebase/firestore';
+import { collection, collectionGroup, getDocs, query, where } from 'firebase/firestore';
 import { ThreadcontentService } from '../services/threadcontent.service';
 
 @Component({
@@ -55,10 +55,14 @@ export class SearchFilterComponent implements OnInit {
   // }
 
   async getUpdatesFromChannelCollection() {
-    this.firestore.collection('channel').valueChanges().subscribe((changes) => {
+    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes) => {
       this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'));
       this.allThreads = changes;
       console.log('json', this.allThreads);
+
+      var channels = collection(this.firestore, 'channel');
+      const q = query(channels, where("threads", "==", true));
+      console.log('json', q);
     });
   }
 
