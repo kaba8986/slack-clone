@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
+import { collectionGroup, getDocs, query, where } from 'firebase/firestore';
+import { ThreadcontentService } from '../services/threadcontent.service';
 
 @Component({
   selector: 'app-search-filter',
@@ -6,10 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-filter.component.scss']
 })
 
-export class SearchFilterComponent {
+export class SearchFilterComponent implements OnInit {
+
   value = '';
-  
+  title = 'angular-text-search-highlight';
   searchText = '';
+
   characters = [
     'Ant-Man',
     'Aquaman',
@@ -28,4 +34,46 @@ export class SearchFilterComponent {
     'Batman',
     'Batwoman',
   ];
+  allThreads: any = [];
+  channelId: string;
+  db: any;
+
+  constructor(private firestore: AngularFirestore, private route: ActivatedRoute, public threadContent: ThreadcontentService) {
+
+  }
+
+  ngOnInit(): void {
+    // this.route.params.subscribe( (params): void => {
+    // this.getChannelId(params);
+    this.getUpdatesFromChannelCollection();
+    // this.getDataForThreadService()
+    // });
+  }
+
+  // getChannelId(params) {
+  //   this.channelId = params['channelName'];
+  // }
+
+  async getUpdatesFromChannelCollection() {
+    this.firestore.collection('channel').valueChanges().subscribe((changes) => {
+      this.allThreads = this.allThreads.sort(this.sortThreads('originalDate'));
+      this.allThreads = changes;
+      console.log('json', this.allThreads);
+    });
+  }
+
+  // getDataForThreadService() {
+  //   this.threadContent.channelId = this.channelId;
+  // }
+
+  sortThreads(originalDate) {
+    return function (a, b) {
+      if (a[originalDate] > b[originalDate]) {
+        return 1;
+      } else if (a[originalDate] < b[originalDate]) {
+        return -1;
+      }
+      return 0;
+    }
+  }
 }
