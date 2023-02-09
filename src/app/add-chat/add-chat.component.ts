@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chats.class';
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, getFirestore } from "firebase/firestore";
+import { User } from 'src/models/user.class';
 
 
 @Component({
@@ -14,10 +15,12 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 export class AddChatComponent {
 
   allUser: any = [];
-  selectedUserID;
+  selectedUser;
   personalID;
-  chatName: string;
+  newChatName: string;
   chat = new Chat();
+  db = getFirestore();
+  currUser: User;
 
   constructor(
     private firestore: AngularFirestore,
@@ -35,44 +38,69 @@ export class AddChatComponent {
       .subscribe((data: any) => {
         this.allUser = data;
       })
+
+      console.log('Add-Dialog-Log: ', this.currUser);
+
   }
-
-  // Initialize Firebase
-
 
 
   save() {
-    this.createNewChat();
-    this.addChatToUser();
+    this.newChatName = this.sortStrings(this.personalID, this.selectedUser.userID);     //create chatID from two chatPartnerIds
+
+    if(this.checkIfNameExists(this.newChatName))  {
+      alert('Chatroom already exists!');
+    } else  {
+      this.createNewChat();
+      this.addChatToUser();
+    }
+  }
+
+  checkIfNameExists(name: string) {
+    let nameExists = false;
+    this.currUser.chats.forEach((chat: any) => {
+      if(chat.chatName == name) {
+        nameExists = true;
+      }
+    })
+    return nameExists;
   }
 
 
   createNewChat() {
     this.personalID = this.auth.currentUser.uid; //read personal Id from auth
-    this.chat.chatPartners.push(this.personalID, this.selectedUserID.userID); //add personal Id and chatPartner Id to new chat
-    this.chatName = this.sortStrings(this.personalID, this.selectedUserID.userID);     //create chatID from two chatPartnerIds
+    this.chat.chatMembers.push(this.personalID, this.selectedUser.userID); //add personal Id and chatPartner Id to new chat
 
     //add new Chat to firestore-db
-    
     this.firestore
-      .collection('chats')
-      .add(this.chat.toJSON())
-      .then(() => {
-        this.dialogRef.close();
-      })
+    .collection('chats')
+    .doc(this.newChatName)
+    .set(this.chat.toJSON())
+    .then(() => {
+      this.dialogRef.close();
+    })
   }
 
 
-  addChatToUser() {
-   
-    this.firestore
-      .collection('users')
-      .doc(this.personalID)
-      .set(
-        { chats: [{'chatName': this.chatName, 'chatPartner': this.selectedUserID.firstName + " " + this.selectedUserID.lastName}]},
-        { merge: true }
-      )
-    
+  async addChatToUser() {
+    let newChat = {
+      'chatName': this.newChatName, 
+      'chatMembers': [{ 
+        'id': this.personalID, 
+        'name': this.currUser.firstName + " " + this.currUser.lastName
+      }, 
+      { 
+        'id': this.selectedUser.userID, 
+        'name': this.selectedUser.firstName+ " " + this.selectedUser.lastName
+      }]};
+    const userRef = doc(this.db, 'users', this.personalID);
+    const partnerRef = doc(this.db, 'users', this.selectedUser.userID);
+
+    await updateDoc(userRef , {
+      chats: arrayUnion(newChat)
+    })
+    await updateDoc(partnerRef , {
+      chats: arrayUnion(newChat)
+    })
   }
 
 

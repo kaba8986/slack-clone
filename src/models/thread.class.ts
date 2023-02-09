@@ -10,7 +10,7 @@ export class Thread {
 
 
     constructor(obj?:any) {
-        this.creatorName = obj ? obj.channelName : '';
+        this.creatorName = obj ? obj.creatorName : '';
         this.originalDate = obj ? obj.originalDate : '';
         this.createdDate = obj ? obj.createdDate : '';
         this.createdTime = obj ? obj.createdTime : '';

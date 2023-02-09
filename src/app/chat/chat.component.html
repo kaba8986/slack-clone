@@ -1,17 +1,16 @@
 <div class="chatroom-container">
-    <mat-toolbar class="chatroom-head" onclick="openDialog()">
+    <mat-toolbar class="chatroom-head">
         <span># Chatpartner <!--this.chatpartnerName --></span>
-        <mat-icon fontIcon="expand_more"></mat-icon>
     </mat-toolbar>
 
     <div class="chat-room">
 
         
-        <mat-card class="thread-area" *ngFor="let chat of chatHis">
+        <mat-card class="message-card" *ngFor="let chat of currChatroom.messages">
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
                 <div class="thread-creator">
-                    <b>{{ chat.userName }}</b> {{ chat.timeStamp }} Uhr
+                    <b>{{ chat.senderID }}</b> {{ chat.timeString}} Uhr
                 </div>
             
                 <div>
@@ -61,7 +60,7 @@
                     <button id="alternate-email"><mat-icon>alternate_email</mat-icon> </button>
                     <button id="add_reaction"> <mat-icon>add_reaction</mat-icon> </button>
                 </div>
-                <button id="send-message" (click)="saveMessage()"> <mat-icon>send</mat-icon> </button>
+                <button id="send-message" (click)="send()"> <mat-icon>send</mat-icon> </button>
             </div>
         </div>
     </div>

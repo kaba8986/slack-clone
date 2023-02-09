@@ -8,28 +8,30 @@ import { User } from 'src/models/user.class';
 })
 export class LoggedUserService {
 
-
+  loggedUser: any;
+  auth = getAuth();
 
   constructor(
     private firestore: AngularFirestore
   ) { }
 
-/*
-  getLoggedUser()  {
-    let loggedUser: any;
-    let auth = getAuth();
 
-    onAuthStateChanged(auth, (user) => {
+  getLoggedUser()  {
+    onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.firestore
         .collection('users')
         .doc(user.uid)
         .valueChanges()
         .subscribe((data: any) => {
-          loggedUser  = data;
+          this.loggedUser  = data;
+          return new User(data);
         })
       } 
+
     });
   }
-  */
+
+
+  
 }

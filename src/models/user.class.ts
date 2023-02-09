@@ -5,7 +5,7 @@ export class User{
     street: string;
     zipCode: number;
     city: string;
-    chats: [];
+    chats: any;
     userID: string;
     email: string;
 

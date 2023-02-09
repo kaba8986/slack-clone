@@ -81,6 +81,7 @@ mat-drawer-container {
     padding-top: 2px;
     padding-bottom: 2px;
     display: flex;
+    flex-direction: column;
 
     &:hover {
         cursor: pointer;
@@ -90,4 +91,8 @@ mat-drawer-container {
 
 .content-body {
     margin-top: 64px;
+}
+
+.d-none {
+    display: none;
 }
