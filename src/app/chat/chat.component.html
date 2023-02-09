@@ -6,11 +6,11 @@
     <div class="chat-room">
 
         
-        <mat-card class="thread-area" *ngFor="let chat of currChatroom.messages">
+        <mat-card class="message-card" *ngFor="let chat of currChatroom.messages">
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
                 <div class="thread-creator">
-                    <b>{{ chat.senderId }}</b> {{ chat.timeStamp }} Uhr
+                    <b>{{ chat.senderID }}</b> {{ chat.timeString}} Uhr
                 </div>
             
                 <div>

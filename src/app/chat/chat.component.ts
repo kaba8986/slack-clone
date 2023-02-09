@@ -126,6 +126,7 @@ export class ChatComponent {
 
   async send() {
     this.message.senderID = this.currUser.firstName  + " " + this.currUser.lastName;
+    this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
     // this.message.content = document.getElementById('input-field').textContent;
 
     console.log(this.message.toJSON());
