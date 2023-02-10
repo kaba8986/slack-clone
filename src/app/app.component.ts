@@ -56,6 +56,10 @@ export class AppComponent {
       } else {
       }
     });
+
+    setTimeout(() => {
+
+    }, 4000)
   }
 
   
