@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-search-filter',
@@ -35,6 +35,7 @@ export class SearchFilterComponent implements OnInit {
   ];
   allThreads: any = [];
   allChannels: any = [];
+  allChannelNames: any = [];
   currentThreadId: string;
   docRef;
   docSnap;
@@ -58,12 +59,27 @@ export class SearchFilterComponent implements OnInit {
 
     this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
       this.allChannels = changes;
-      console.log('json', this.allChannels);
-      // this.firestore.collection('channel').doc(this.allChannels.channelName).collection('threads').valueChanges().subscribe((changes) => {
 
-      //   this.allThreads = changes;
-      //   console.log('json', this.allThreads);
-      // });
+      for (let i = 0; i < this.allChannels.length; i++) {
+        this.allChannelNames = this.allChannels[i].channelName;
+        console.log('Channel name', this.allChannelNames);
+      }
+      this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe( (thread: any) => {
+
+        this.allThreads = thread;
+      });
+        for (let i = 0; i < this.allThreads.length; i++) {
+          let TestThread = this.allThreads[i];
+          console.log('TestThread', TestThread);
+        }
+        console.log('all Threads', this.allThreads);
+
+      //   this.docRef = doc(this.db, 'channel', this.allChannelNames, 'threads')
+      //   this.docSnap = await getDoc(this.docRef);
+      //   this.data = this.docSnap.data();
+      //   this.allAnswers = this.data.answers;
+      //   console.log('HIER', this.data)
+   
     });
 
     // this.getThreadsFromServer();
