@@ -31,6 +31,7 @@ import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { DeleteChatWarningComponent } from './delete-chat-warning/delete-chat-warning.component';
+import { ChatInterfaceComponent } from './chat-interface/chat-interface.component';
 
 
 
@@ -51,7 +52,8 @@ import { DeleteChatWarningComponent } from './delete-chat-warning/delete-chat-wa
     SearchFilterPipe,
     AlertLoginComponent,
     HighlightDirective,
-    DeleteChatWarningComponent
+    DeleteChatWarningComponent,
+    ChatInterfaceComponent
   ],
   imports: [
     BrowserModule,

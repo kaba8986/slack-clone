@@ -6,7 +6,7 @@ import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { LoggedUserService } from '../services/logged-user.service';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { arrayUnion, doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { arrayUnion, collection, doc, getDoc, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteChatWarningComponent } from '../delete-chat-warning/delete-chat-warning.component';
 
@@ -24,6 +24,7 @@ export class ChatComponent {
   chatroomId: string;
   currUser = new User();
   currChatroom = new Chat();
+  chatPartner = [];
   auth = getAuth();
   db = getFirestore();
 
@@ -42,9 +43,13 @@ export class ChatComponent {
     this.route.paramMap
     .subscribe( paramMap => {
       this.chatroomId = paramMap.get('chatId');
-      this.getChatroom(); 
       this.getLoggedUser(); 
+      this.getChatroom(); 
     })
+
+    setTimeout(() => {
+
+    }, 4000);
   }
 
   
@@ -58,6 +63,7 @@ export class ChatComponent {
     .valueChanges()
     .subscribe((data: any) => {
       this.currChatroom = new Chat(data);
+      this.getChatroomName(data);
     })
   }
 
@@ -65,8 +71,8 @@ export class ChatComponent {
   /**
    * Check if a User is logged in - if yes, load currUser from Firestore with authID
    */
-  getLoggedUser()  {
-    onAuthStateChanged(this.auth, (user) => {
+ getLoggedUser()  {
+     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.firestore
         .collection('users')
@@ -77,6 +83,15 @@ export class ChatComponent {
         })
       } 
     });
+  }
+
+  async getChatroomName(data: any) {
+    data.chatMembers.forEach((member: any) => {
+      if(member.id != this.currUser.userID) {
+        this.chatPartner.push(member.name);
+      }
+    })
+    console.log(this.chatPartner);
   }
 
 

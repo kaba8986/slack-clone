@@ -67,8 +67,15 @@ export class AddChatComponent {
 
   createNewChat() {
     this.personalID = this.auth.currentUser.uid; //read personal Id from auth
-    this.chat.chatMembers.push(this.personalID, this.selectedUser.userID); //add personal Id and chatPartner Id to new chat
-
+    //this.chat.chatMembers.push(this.personalID, this.selectedUser.userID); //add personal Id and chatPartner Id to new chat
+    this.chat.chatMembers.push(
+      {
+      'id': this.personalID, 'name': this.currUser.firstName + " " + this.currUser.lastName
+    }, 
+    {
+      'id': this.selectedUser.userID, 'name': this.selectedUser.firstName + " " + this.selectedUser.lastName
+    })
+    
     //add new Chat to firestore-db
     this.firestore
     .collection('chats')
