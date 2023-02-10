@@ -7,6 +7,8 @@ import { User } from 'src/models/user.class';
 import { LoggedUserService } from '../services/logged-user.service';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { arrayUnion, doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteChatWarningComponent } from '../delete-chat-warning/delete-chat-warning.component';
 
 
 @Component({
@@ -29,7 +31,8 @@ export class ChatComponent {
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
-    private log: LoggedUserService
+    private log: LoggedUserService,
+    private dialog: MatDialog
   ) {}
 
 
@@ -120,8 +123,10 @@ export class ChatComponent {
   /**
    * Open delete chat warning dialog
    */
-  openDeleteDialog() {
-
+  openDeleteDialog(index: number) {
+    const dialog = this.dialog.open(DeleteChatWarningComponent);
+    dialog.componentInstance.messageIndex = index;
+    dialog.componentInstance.chatroomId = this.chatroomId;
   }
 
 }
