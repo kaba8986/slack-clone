@@ -34,6 +34,7 @@ export class SearchFilterComponent implements OnInit {
     'Batwoman',
   ];
   allThreads: any = [];
+  allChannels: any = [];
   currentThreadId: string;
   docRef;
   docSnap;
@@ -45,40 +46,49 @@ export class SearchFilterComponent implements OnInit {
 
   // channelId: string;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore ) {
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
 
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe( (params): void => {
-    // this.getChannelId(params);
-    // this.getUpdatesFromChannelCollection();
-    this.getThreadFromServer();
-    // this.getDataForThreadService()
-    // });
+    this.getchannelsFromServer();
   }
 
-  // getChannelId(params) {
-  //   this.channelId = params['channelName'];
+  async getchannelsFromServer() {
+
+    this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
+      this.allChannels = changes;
+      console.log('json', this.allChannels);
+      // this.firestore.collection('channel').doc(this.allChannels.channelName).collection('threads').valueChanges().subscribe((changes) => {
+
+      //   this.allThreads = changes;
+      //   console.log('json', this.allThreads);
+      // });
+    });
+
+    // this.getThreadsFromServer();
+  }
+
+  // getThreadsFromServer() {
+  //   this.firestore.collection('channel').doc(this.allChannels.channelName).collection('threads').valueChanges().subscribe((changes) => {
+
+  //     this.allThreads = changes;
+  //     console.log('json', this.allThreads);
+  //   });
   // }
 
-  async getThreadFromServer() {
-    // const querySnapshot = await getDocs(collection(this.db, "channel"));
-    // querySnapshot.forEach((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   console.log('TESTE', doc.id, " => ", doc.data());
-    // });
-
-      this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges().subscribe((changes) => {
-        // this.docRef = doc(this.db, 'channel', this.channelId, 'threads', this.currentThreadId)
-        // this.docSnap = await getDoc(this.docRef);
-        // this.data = this.docSnap.data();
-        // this.allAnswers = this.data.answers;
-        // console.log('WAS', this.docRef);
-        this.allThreads = changes;
-      console.log('json', this.allThreads);
-      });
-  }
+  //   getThreadFromServer() {
+  //     if (this.currentThreadId) {
+  //      this.firestore.collection('channel').doc(this.channelId).collection('threads').valueChanges().subscribe(async () => {
+  //        this.docRef = doc(this.db,'channel',this.channelId,'threads', this.currentThreadId)
+  //          this.docSnap = await getDoc(this.docRef);
+  //          this.data = this.docSnap.data();
+  //          this.allAnswers = this.data.answers;
+  //          console.log(this.data)
+  //          this.getDataOfThread();
+  //        });
+  //    };
+  //  }
 
   // async getUpdatesFromChannelCollection() {
   //   this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes) => {
@@ -86,24 +96,24 @@ export class SearchFilterComponent implements OnInit {
   //     console.log('json', this.allThreads);
   //   });
 
-    // let channels = collection(this.firestor, 'channel');
-    // let q = query(channels, where("Allgemein", "==", true));
-    // console.log('json', q);
+  // let channels = collection(this.firestor, 'channel');
+  // let q = query(channels, where("Allgemein", "==", true));
+  // console.log('json', q);
 
-    // let querySnapshot = await getDocs(q);
-    // querySnapshot.forEach((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   console.log(doc.id, " => ", doc.data());
-    //   console.log('das ist', doc);
-    // });
+  // let querySnapshot = await getDocs(q);
+  // querySnapshot.forEach((doc) => {
+  //   // doc.data() is never undefined for query doc snapshots
+  //   console.log(doc.id, " => ", doc.data());
+  //   console.log('das ist', doc);
+  // });
 
-    // const channels = query(collectionGroup(this.firestor, 'channel'), where('type', '==', 'museum'));
-    // const querySnapshot = await getDocs(channels);
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.id, ' => ', doc.data());
-    // });
+  // const channels = query(collectionGroup(this.firestor, 'channel'), where('type', '==', 'museum'));
+  // const querySnapshot = await getDocs(channels);
+  // querySnapshot.forEach((doc) => {
+  //   console.log(doc.id, ' => ', doc.data());
+  // });
 
-    // getDataForThreadService() {
-    //   this.threadContent.channelId = this.channelId;
-    // }
-  }
+  // getDataForThreadService() {
+  //   this.threadContent.channelId = this.channelId;
+  // }
+}

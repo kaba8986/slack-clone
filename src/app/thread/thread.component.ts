@@ -39,15 +39,12 @@ export class ThreadComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentThreadId = changes['threadId'].currentValue;
-    console.log(this.currentThreadId)
-    //this.getCurrentThreadId(changes);
+    this.getCurrentThreadId(changes);
     this.getThreadFromServer();
   }
 
   getCurrentThreadId(changes: SimpleChanges) {
     this.currentThreadId = changes['threadId'].currentValue;
-    console.log(this.currentThreadId)
   }
 
   getThreadFromServer() {
@@ -57,7 +54,7 @@ export class ThreadComponent implements OnInit, OnChanges{
           this.docSnap = await getDoc(this.docRef);
           this.data = this.docSnap.data();
           this.allAnswers = this.data.answers;
-          console.log('allAnswers',this.data)
+          console.log(this.data)
           this.getDataOfThread();
         });
     };
