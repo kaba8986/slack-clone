@@ -7,6 +7,7 @@
 
         
         <mat-card class="message-card" *ngFor="let chat of currChatroom.messages">
+            <mat-icon id="menu-btn" (click)="openDeleteDialog()">more_vert</mat-icon>
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
                 <div class="thread-creator">

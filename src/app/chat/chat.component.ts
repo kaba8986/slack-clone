@@ -17,40 +17,6 @@ import { arrayUnion, doc, getFirestore, updateDoc } from 'firebase/firestore';
 export class ChatComponent {
 
   @ViewChild('fileUploader') fileUploader:ElementRef;
- 
-
-  chatHis: any = [
-    {
-      senderId: 'Max Mustermann',
-      timeStamp: '09:31',
-      content: 'Hallo Andreas. Na, wie kommst du voran?'
-    },
-    {
-      senderId: 'Andreas Burghardt',
-      timeStamp: '10:04',
-      content: 'Hi Max. Ganz gut gerade. Bin jetzt aktuell beim Slack-Clone, also schon beim letzten Coding-Project. Sieht kompliziert aus, aber bekommt man bestimmt auch irgendwie hin. Bei dir?'
-    },
-    {
-      senderId: 'Max Mustermann',
-      timeStamp: '10:12',
-      content: 'Okay cool. Ja auch ganz gut. Hab jetzt das Portfolio gerade zum zweiten mal eingereicht. Irgendwas finden die halt immer :D'
-    },
-    {
-      senderId: 'Andreas Burghardt',
-      timeStamp: '10:22',
-      content: 'Haha ja :D War bei mir aber auch so. Ist ja aber auch richtig. Junus und Manuel sagen ja immer wieder in den Videos, dass das Portfolio perfekt sein muss.'
-    },
-    {
-      senderId: 'Max Mustermann',
-      timeStamp: '10:36',
-      content: 'Stimmt. Slack-Clone ist wieder so ein Gruppen-Projekt wie Join oder? Nur auf Angular-Basis halt?'
-    },
-    {
-      senderId: 'Andreas Burghardt',
-      timeStamp: '10:49',
-      content: 'Genau, Gruppenarbeit. Wir sind gerade am Anfang. Jeder kümmert sich gerade um das HTML und Basis-CSS eines bestimmten Teils, danach überlegen wir uns, wie es weitergeht.'
-    },
-  ]
 
   message = new Message();
   chatroomId: string;
@@ -69,14 +35,19 @@ export class ChatComponent {
 
 
   ngOnInit(): void {
+    //Get params or chatroomID from URL
     this.route.paramMap
     .subscribe( paramMap => {
       this.chatroomId = paramMap.get('chatId');
-      this.getChatroom();
-      this.getLoggedUser();
+      this.getChatroom(); 
+      this.getLoggedUser(); 
     })
   }
 
+  
+  /**
+   * Load current Chatroom with chatroomId from URL params
+   */
   getChatroom() {
     this.firestore
     .collection('chats')
@@ -88,6 +59,9 @@ export class ChatComponent {
   }
 
 
+  /**
+   * Check if a User is logged in - if yes, load currUser from Firestore with authID
+   */
   getLoggedUser()  {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
@@ -107,6 +81,10 @@ export class ChatComponent {
     document.execCommand(style);
   }
 
+  /**
+   * Show Filename from uploaded File
+   * @param event 
+   */
   showFilename(event) {
     let outputField = document.getElementById( 'uploads' );
     let input = event.srcElement;
@@ -114,11 +92,19 @@ export class ChatComponent {
     outputField.textContent = fileName;
   }
 
+  /**
+   * Delete uploaded file 
+   */
   resetUpload() {
     this.fileUploader.nativeElement.value = null;
     document.getElementById( 'uploads' ).textContent = "";
   }
 
+
+  /**
+   * Creates a Message - Create senderID, transform timeStamp to timeString 
+   * and push new Message to currChatroom
+   */
   async send() {
     this.message.senderID = this.currUser.firstName  + " " + this.currUser.lastName;
     this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
@@ -128,6 +114,14 @@ export class ChatComponent {
     await updateDoc(messageRef , {
       messages: arrayUnion(this.message.toJSON())
     })
+  }
+
+
+  /**
+   * Open delete chat warning dialog
+   */
+  openDeleteDialog() {
+
   }
 
 }

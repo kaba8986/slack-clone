@@ -33,7 +33,7 @@ export class AddChatComponent {
   ngOnInit(): void {
     //Load all User from Users-collection
     this.firestore
-      .collection('users')
+      .collection('users',  ref => ref.orderBy('lastName'))
       .valueChanges({ idField: 'customIdName' })
       .subscribe((data: any) => {
         this.allUser = data;
