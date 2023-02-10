@@ -10,15 +10,15 @@ export class User{
     email: string;
 
     constructor(obj?: any){
-        this.firstName = obj ? obj.firstName : ''
-        this.lastName = obj ? obj.lastName : 'Lastname'
-        this.birthDate = obj ? obj.birthDate : ''
-        this.street = obj ? obj.street : ''
-        this.zipCode = obj ? obj.zipCode : ''
-        this.city = obj ? obj.city : ''
-        this.chats = obj? obj.chats : []
-        this.userID = obj? obj.userID : ''
-        this.email = obj? obj.email : ''
+        this.firstName = obj ? obj.firstName : '';
+        this.lastName = obj ? obj.lastName : 'Lastname';
+        this.birthDate = obj ? obj.birthDate : '';
+        this.street = obj ? obj.street : '';
+        this.zipCode = obj ? obj.zipCode : '';
+        this.city = obj ? obj.city : '';
+        this.chats = obj? obj.chats : [];
+        this.userID = obj? obj.userID : '';
+        this.email = obj? obj.email : '';
     }
 
     public toJson(){

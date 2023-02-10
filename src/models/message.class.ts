@@ -5,10 +5,10 @@ export class Message {
     timeString: string;
 
     constructor(obj?: any) {
-        this.senderID = obj ? obj.contsenderIDent : 'mySenderID'
-        this.content = obj ? obj.content : ''
+        this.senderID = obj ? obj.contsenderIDent : 'mySenderID';
+        this.content = obj ? obj.content : '';
         this.timestamp = new Date();
-        this.timeString = obj ? obj.content : ''
+        this.timeString = obj ? obj.content : '';
     }
 
     public toJSON() {

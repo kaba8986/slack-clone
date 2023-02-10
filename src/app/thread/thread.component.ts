@@ -34,10 +34,14 @@ export class ThreadComponent implements OnInit, OnChanges{
 
 
   constructor(public threadContent: ThreadcontentService, public as: AuthService, private route: ActivatedRoute, private firestore: AngularFirestore, public auth: Auth) {
-    //Alle Klassen müssen anstatt '' wenn sie leer sind ein [] enthalten, damit direkt ein leeres Array erstellt wird in das gepushed werden kann
     //Wenn CurrentValue von changes am Anfang nicht vorhanden ist, muss die fehlermeldung abgefangen werden
   }
 
+  /**
+   * 
+   * @param changes Angular variable to represent the change in the DOM
+   * When clicking on "Antworten" to see the Thread, Angular recognise the change in the thread ID and loads the content of the Thread from Server
+   */
   ngOnChanges(changes: SimpleChanges): void {
     this.getCurrentThreadId(changes);
     this.getThreadFromServer();
@@ -54,7 +58,6 @@ export class ThreadComponent implements OnInit, OnChanges{
           this.docSnap = await getDoc(this.docRef);
           this.data = this.docSnap.data();
           this.allAnswers = this.data.answers;
-          console.log(this.data)
           this.getDataOfThread();
         });
     };
@@ -62,15 +65,12 @@ export class ThreadComponent implements OnInit, OnChanges{
 
   getDataOfThread() {
     this.thread = new Thread(this.data);
-    console.log('alle Antworten im Array',this.thread)
   }
 
 
   ngOnInit(): void {
-
     this.route.params.subscribe( (): void => {
       this.userId = this.as.currentUserID;
-      
     });
   }
 
@@ -79,10 +79,7 @@ export class ThreadComponent implements OnInit, OnChanges{
     this.getText();
     this.convertDate(this.date);
     this.allAnswers.push(this.answer.toJSON());
-    console.log('new answer', this.allAnswers)
-    this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({'answers': this.allAnswers}).then( (result) => {
-     console.log(result);
-    })
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({'answers': this.allAnswers});
   }
 
   getAnswerCreator() {

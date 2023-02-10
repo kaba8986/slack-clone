@@ -14,8 +14,8 @@ export class Answer {
         this.createdDate = obj ? obj.createdDate : '';
         this.createdTime = obj ? obj.createdTime : '';
         this.answerText  = obj ? obj.threadText : '';
-        this.emojiReaction = obj ? obj.emojiReaction : '';
-        this.emojiCounter = obj ? obj.emojiCounter : '';
+        this.emojiReaction = obj ? obj.emojiReaction : [];
+        this.emojiCounter = obj ? obj.emojiCounter : [];
     }
 
     public toJSON() {
