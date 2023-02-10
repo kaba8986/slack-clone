@@ -34,7 +34,8 @@ export class ThreadComponent implements OnInit, OnChanges{
 
 
   constructor(public threadContent: ThreadcontentService, public as: AuthService, private route: ActivatedRoute, private firestore: AngularFirestore, public auth: Auth) {
-
+    //Alle Klassen müssen anstatt '' wenn sie leer sind ein [] enthalten, damit direkt ein leeres Array erstellt wird in das gepushed werden kann
+    //Wenn CurrentValue von changes am Anfang nicht vorhanden ist, muss die fehlermeldung abgefangen werden
   }
 
   ngOnChanges(changes: SimpleChanges): void {
