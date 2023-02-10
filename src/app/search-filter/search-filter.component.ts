@@ -36,6 +36,7 @@ export class SearchFilterComponent implements OnInit {
   allThreads: any = [];
   allChannels: any = [];
   allChannelNames: any = [];
+  Test: any = [];
   currentThreadId: string;
   docRef;
   docSnap;
@@ -64,34 +65,22 @@ export class SearchFilterComponent implements OnInit {
         this.allChannelNames = this.allChannels[i].channelName;
         console.log('Channel name', this.allChannelNames);
       }
-      this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe( (thread: any) => {
-
-        this.allThreads = thread;
-      });
-        for (let i = 0; i < this.allThreads.length; i++) {
-          let TestThread = this.allThreads[i];
-          console.log('TestThread', TestThread);
-        }
-        console.log('all Threads', this.allThreads);
-
-      //   this.docRef = doc(this.db, 'channel', this.allChannelNames, 'threads')
-      //   this.docSnap = await getDoc(this.docRef);
-      //   this.data = this.docSnap.data();
-      //   this.allAnswers = this.data.answers;
-      //   console.log('HIER', this.data)
-   
+      this.getThreadsFromServer();
     });
-
-    // this.getThreadsFromServer();
   }
 
-  // getThreadsFromServer() {
-  //   this.firestore.collection('channel').doc(this.allChannels.channelName).collection('threads').valueChanges().subscribe((changes) => {
+  getThreadsFromServer() {
+    this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
+      this.allThreads = thread;
 
-  //     this.allThreads = changes;
-  //     console.log('json', this.allThreads);
-  //   });
-  // }
+      for (let i = 0; i < this.allThreads.length; i++) {
+        let TestThread = this.allThreads[i];
+        console.log('TestThread', TestThread);
+      }
+      console.log('all Threads', this.allThreads);
+    });
+  }
+}
 
   //   getThreadFromServer() {
   //     if (this.currentThreadId) {
@@ -131,5 +120,3 @@ export class SearchFilterComponent implements OnInit {
 
   // getDataForThreadService() {
   //   this.threadContent.channelId = this.channelId;
-  // }
-}
