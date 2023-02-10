@@ -10,7 +10,7 @@
     </mat-card-header>
 
     <div class="foud-entries-container">
-        <mat-card class="found-entries" *ngFor="let thread of allThreads | searchFilter: searchText">
+        <mat-card class="found-entries" *ngFor="let thread of characters | searchFilter: searchText; let i = index">
 
             <!-- <div class="thread-creator">
                 <b>{{ this.allThreads.creatorName }}</b> {{ this.allThreads.createdTime }} Uhr
@@ -20,19 +20,18 @@
                 {{ this.allThreads.threadText }}
             </div> -->
 
-            <div appHighlight [searchedWord]="searchText" [content]="thread"  
-            [classToApply]="'font-weight-bold'" [setTitle]='true'>
+            <div appHighlight [searchedWord]="searchText" [content]="thread" [classToApply]="'font-weight-bold'"
+                [setTitle]='true'>
                 {{thread}}
-                
 
-                <!-- <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index" >
-                    <img class="profile-pic" src="./assets/img/profile/male.png"> 
+
+                <!-- <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index">
+                    <img class="profile-pic" src="./assets/img/profile/male.png">
                     <mat-card-content>
-                         -->
 
 
-                <!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
-                <!-- </b> -->  
+                  <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
+                        <!-- </b> -->
             </div>
         </mat-card>
     </div>
@@ -59,5 +58,5 @@
                     </div> -->
 
 
-            <!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
-            <!-- </b>  -->
+<!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
+<!-- </b>  -->
