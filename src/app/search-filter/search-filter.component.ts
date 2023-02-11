@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { doc, getDocs, getFirestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-search-filter',
@@ -48,7 +49,7 @@ export class SearchFilterComponent implements OnInit {
 
   // channelId: string;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private firebase: Firestore) {
 
   }
 
@@ -65,20 +66,24 @@ export class SearchFilterComponent implements OnInit {
         this.allChannelNames = this.allChannels[i].channelName;
         console.log('Channel name', this.allChannelNames);
       }
+
       this.getThreadsFromServer();
     });
   }
 
   getThreadsFromServer() {
-    this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
-      this.allThreads = thread;
+    for (let i = 0; i < this.allChannelNames.length; i++) {
+      this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdName' }).subscribe((thread: any) => {
+        this.allThreads = thread;
+        console.log('gucken', this.allThreads);
+      });
+    }
+    for (let i = 0; i < this.allThreads.length; i++) {
+      let TestThread = this.allThreads[i];
+      console.log('TestThread', TestThread);
+    }
+    console.log('all Threads', this.allThreads);
 
-      for (let i = 0; i < this.allThreads.length; i++) {
-        let TestThread = this.allThreads[i];
-        console.log('TestThread', TestThread);
-      }
-      console.log('all Threads', this.allThreads);
-    });
   }
 }
 
