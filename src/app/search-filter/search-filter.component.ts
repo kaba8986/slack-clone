@@ -64,26 +64,39 @@ export class SearchFilterComponent implements OnInit {
 
       for (let i = 0; i < this.allChannels.length; i++) {
         this.allChannelNames = this.allChannels[i].channelName;
+        this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
+          this.allThreads = thread;
+        console.log('gucken', this.allThreads);
+      });
         console.log('Channel name', this.allChannelNames);
       }
 
-      this.getThreadsFromServer();
+      
+
+
+      // this.getThreadsFromServer();
     });
-  }
+  
 
-  getThreadsFromServer() {
-    for (let i = 0; i < this.allChannelNames.length; i++) {
-      this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdName' }).subscribe((thread: any) => {
-        this.allThreads = thread;
-        console.log('gucken', this.allThreads);
-      });
-    }
-    for (let i = 0; i < this.allThreads.length; i++) {
-      let TestThread = this.allThreads[i];
-      console.log('TestThread', TestThread);
-    }
-    console.log('all Threads', this.allThreads);
+  // getThreadsFromServer() {
+  //   console.log('Channel name TEST', this.allChannelNames);
+  //   for (let i = 0; i < this.allChannelNames.length; i++) {
+  //     this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
+  //       this.allThreads = thread;
+  //     console.log('gucken', this.allThreads);
+  //   });
+  //   }
 
+    // let allThreadsList = channelList.collection('threads').valueChanges({ idField: 'customIdName' }).subscribe((thread: any) => {;
+    //   this.allThreads = allThreadsList;
+    // console.log('gucken', this.allThreads);
+  // });
+
+  //   for (let i = 0; i < this.allThreads.length; i++) {
+  //     let TestThread = this.allThreads[i];
+  //     console.log('TestThread', TestThread);
+  //   }
+  //   console.log('all Threads', this.allThreads);
   }
 }
 

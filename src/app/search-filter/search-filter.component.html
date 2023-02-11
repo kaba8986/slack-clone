@@ -10,36 +10,28 @@
     </mat-card-header>
 
     <div class="foud-entries-container">
-        <mat-card class="found-entries" *ngFor="let thread of characters | searchFilter: searchText; let i = index">
-
-            <!-- <div class="thread-creator">
-                <b>{{ this.allThreads.creatorName }}</b> {{ this.allThreads.createdTime }} Uhr
-            </div>
-        
-            <div>
-                {{ this.allThreads.threadText }}
-            </div> -->
+        <mat-card class="found-entries" *ngFor="let thread of allThreads | searchFilter: searchText; let i = index">
 
             <div appHighlight [searchedWord]="searchText" [content]="thread" [classToApply]="'font-weight-bold'"
                 [setTitle]='true'>
-                {{thread}}
+                {{ this.allThreads[0].creatorName }}
 
 
                 <!-- <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index">
                     <img class="profile-pic" src="./assets/img/profile/male.png">
-                    <mat-card-content>
 
 
-                  <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
-                        <!-- </b> -->
+
+                    <b routerLink="/channel/{{ thread }}" class="sidenav-entry"># {{thread }}
+                    </b>
+
+                </mat-card> -->
             </div>
         </mat-card>
     </div>
-</mat-card>
 
 
-
-<!-- <div class="foud-entries-container">                     BACKUP
+    <!-- <div class="foud-entries-container">                     BACKUP
     <mat-card class="found-entries" *ngFor="let c of characters | searchFilter: searchText">
      
         <div appHighlight [searchedWord]="searchText" [content]="c"  
@@ -58,5 +50,5 @@
                     </div> -->
 
 
-<!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
-<!-- </b>  -->
+    <!-- <b routerLink="/channel/{{ channel.channelName }}" class="sidenav-entry"># {{ channel.channelName }} -->
+    <!-- </b>  -->
