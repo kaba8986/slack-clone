@@ -10,22 +10,11 @@
     </mat-card-header>
 
     <div class="foud-entries-container">
-        <mat-card class="found-entries" *ngFor="let thread of allThreads | searchFilter: searchText; let i = index">
+        <mat-card class="found-entries" *ngFor="let thread of allThreadsArr | searchFilter: searchText; let i = index">
 
             <div appHighlight [searchedWord]="searchText" [content]="thread" [classToApply]="'font-weight-bold'"
                 [setTitle]='true'>
-                {{ this.allThreads[0].creatorName }}
-
-
-                <!-- <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index">
-                    <img class="profile-pic" src="./assets/img/profile/male.png">
-
-
-
-                    <b routerLink="/channel/{{ thread }}" class="sidenav-entry"># {{thread }}
-                    </b>
-
-                </mat-card> -->
+                {{ thread }}
             </div>
         </mat-card>
     </div>

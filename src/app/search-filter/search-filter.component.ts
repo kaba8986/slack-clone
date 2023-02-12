@@ -37,7 +37,12 @@ export class SearchFilterComponent implements OnInit {
   allThreads: any = [];
   allChannels: any = [];
   allChannelNames: any = [];
-  Test: any = [];
+  allThreadsArr: any = [];
+  name: any = [];
+  time: any = [];
+  date: any = [];
+  text: any = [];
+  allThreadsValue: any;
   currentThreadId: string;
   docRef;
   docSnap;
@@ -57,7 +62,7 @@ export class SearchFilterComponent implements OnInit {
     this.getchannelsFromServer();
   }
 
-  async getchannelsFromServer() {
+  getchannelsFromServer() {
 
     this.firestore.collection('channel').valueChanges({ idField: 'customIdName' }).subscribe((changes: any) => {
       this.allChannels = changes;
@@ -65,40 +70,52 @@ export class SearchFilterComponent implements OnInit {
       for (let i = 0; i < this.allChannels.length; i++) {
         this.allChannelNames = this.allChannels[i].channelName;
         this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
-          this.allThreads = thread;
-        console.log('gucken', this.allThreads);
-      });
-        console.log('Channel name', this.allChannelNames);
+          this.allThreads.push(thread);
+          this.allThreadsArr.push(this.allThreads[i][0].creatorName);
+          this.allThreadsArr.push(this.allThreads[i][0].createdTime);
+          this.allThreadsArr.push(this.allThreads[i][0].createdDate);
+          this.allThreadsArr.push(this.allThreads[i][0].threadText);
+        });
+        
       }
-
-      
-
-
-      // this.getThreadsFromServer();
-    });
+      console.log('allThreads', this.allThreads);
+      console.log('allThreadsarr', this.allThreadsArr);
+    }); 
+  }
+}
+    
   
 
-  // getThreadsFromServer() {
-  //   console.log('Channel name TEST', this.allChannelNames);
-  //   for (let i = 0; i < this.allChannelNames.length; i++) {
-  //     this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
-  //       this.allThreads = thread;
-  //     console.log('gucken', this.allThreads);
-  //   });
-  //   }
+//   getThreadsFromServer() {
+//     console.log('hm', this.allThreadsArr);
+//     for (let j = 0; j < this.allThreadsArr.length; j++) {
+//       let TEST = this.allThreadsArr[j];
+//       console.log('TEST', TEST);
+//     }
+//   }
+// }
+
+//
+    
+    //   console.log('Channel name TEST', this.allChannelNames);
+    //   for (let i = 0; i < this.allChannelNames.length; i++) {
+    //     this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
+    //       this.allThreads = thread;
+    //     console.log('gucken', this.allThreads);
+    //   });
+    //   }
 
     // let allThreadsList = channelList.collection('threads').valueChanges({ idField: 'customIdName' }).subscribe((thread: any) => {;
     //   this.allThreads = allThreadsList;
     // console.log('gucken', this.allThreads);
-  // });
+    // });
 
-  //   for (let i = 0; i < this.allThreads.length; i++) {
-  //     let TestThread = this.allThreads[i];
-  //     console.log('TestThread', TestThread);
-  //   }
-  //   console.log('all Threads', this.allThreads);
-  }
-}
+    //   for (let i = 0; i < this.allThreads.length; i++) {
+    //     let TestThread = this.allThreads[i];
+    //     console.log('TestThread', TestThread);
+    //   }
+    //   console.log('all Threads', this.allThreads);
+
 
   //   getThreadFromServer() {
   //     if (this.currentThreadId) {
