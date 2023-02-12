@@ -15,6 +15,7 @@ export class SearchFilterComponent implements OnInit {
   value = '';
   title = 'angular-text-search-highlight';
   searchText = '';
+  
 
   characters = [
     'Ant-Man',
@@ -42,6 +43,7 @@ export class SearchFilterComponent implements OnInit {
   time: any = [];
   date: any = [];
   text: any = [];
+  threaddatas: any[] = [];
   allThreadsValue: any;
   currentThreadId: string;
   docRef;
@@ -71,17 +73,40 @@ export class SearchFilterComponent implements OnInit {
         this.allChannelNames = this.allChannels[i].channelName;
         this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
           this.allThreads.push(thread);
-          this.allThreadsArr.push(this.allThreads[i][0].creatorName);
-          this.allThreadsArr.push(this.allThreads[i][0].createdTime);
-          this.allThreadsArr.push(this.allThreads[i][0].createdDate);
-          this.allThreadsArr.push(this.allThreads[i][0].threadText);
+          this.allThreadsArr.push(this.allThreads[i][0]);
+          
+          // this.name.push(this.allThreads[i][0].creatorName),
+          // this.time.push(this.allThreads[i][0].createdTime),
+          // this.date.push(this.allThreads[i][0].createdDate),
+          // this.text.push(this.allThreads[i][0].threadText)
+         
+        //   let threaddatas = JSON.stringify(this.allThreads[i][0]);
+        //   this.threaddatas = JSON.parse(threaddatas);
+        // console.log('threaddatas', this.threaddatas);
         });
         
+        
       }
+
+      this.threaddatas.push(Object.values(this.allThreadsArr));
+      });
+
       console.log('allThreads', this.allThreads);
-      console.log('allThreadsarr', this.allThreadsArr);
-    }); 
+      console.log('allThreadsArr', this.allThreadsArr);
+      console.log('threaddatas', this.threaddatas); 
+    // this.getThreaddatas();
   }
+
+
+  // getThreaddatas(){
+  //   for (let i = 0; i < this.allThreadsArr.length; i++) {
+  //     this.text = this.allThreadsArr[i].creatorName;
+  //   }
+  //   console.log('threadTexts',  this.text);
+
+  // }
+
+
 }
     
   
