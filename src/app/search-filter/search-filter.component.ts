@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { doc, getDocs, getFirestore } from 'firebase/firestore';
+import { ThreadDatas } from '../interface/thread-datas';
 
 @Component({
   selector: 'app-search-filter',
@@ -15,6 +16,7 @@ export class SearchFilterComponent implements OnInit {
   value = '';
   title = 'angular-text-search-highlight';
   searchText = '';
+   
   
 
   characters = [
@@ -38,12 +40,12 @@ export class SearchFilterComponent implements OnInit {
   allThreads: any = [];
   allChannels: any = [];
   allChannelNames: any = [];
-  allThreadsArr: any = [];
+  allThreadsArr: ThreadDatas[] = [];
   name: any = [];
   time: any = [];
   date: any = [];
   text: any = [];
-  threaddatas: any[] = [];
+  threaddatas: ThreadDatas[] = [];
   allThreadsValue: any;
   currentThreadId: string;
   docRef;
@@ -87,8 +89,6 @@ export class SearchFilterComponent implements OnInit {
         
         
       }
-
-      this.threaddatas.push(Object.values(this.allThreadsArr));
       });
 
       console.log('allThreads', this.allThreads);
