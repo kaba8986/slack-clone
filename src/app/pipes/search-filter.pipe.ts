@@ -9,7 +9,8 @@ export class SearchFilterPipe implements PipeTransform {
   //   return null;
   // }
 
-  
+  itemLog: any[] = [];
+
   /**
    * Pipe filters the list of elements based on the search text provided
    *
@@ -18,6 +19,11 @@ export class SearchFilterPipe implements PipeTransform {
    * @returns list of elements filtered by search text or []
    */
   transform(items: any[], searchText: string): any[] {
+    for (let i = 0; i < items.length; i++) {
+      this.itemLog = items[i].threadText;
+      console.log('itemLog', this.itemLog)
+    }
+    console.log('item', items)
     if (!items) {
       return [];
     }
@@ -25,8 +31,8 @@ export class SearchFilterPipe implements PipeTransform {
       return items;
     }
     searchText = searchText.toLocaleLowerCase();
-
-    return items.filter(it => {
+    items = this.itemLog;
+    return items.filter((it) => {
       return it.toLocaleLowerCase().includes(searchText);
     });
   }

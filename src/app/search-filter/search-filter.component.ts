@@ -63,6 +63,7 @@ export class SearchFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.allThreadsArr = [];
     this.getchannelsFromServer();
   }
 
@@ -75,7 +76,7 @@ export class SearchFilterComponent implements OnInit {
         this.allChannelNames = this.allChannels[i].channelName;
         this.firestore.collection('channel').doc(this.allChannelNames).collection('threads').valueChanges({ idField: 'customIdThread' }).subscribe((thread: any) => {
           this.allThreads.push(thread);
-          this.allThreadsArr.push(this.allThreads[i][0]);
+          this.allThreadsArr.push(this.allThreads[i]);
           
           this.name.push(this.allThreads[i][0].creatorName)
           // this.time.push(this.allThreads[i][0].createdTime),

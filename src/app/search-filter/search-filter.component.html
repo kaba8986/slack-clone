@@ -9,14 +9,13 @@
         </div>
     </mat-card-header>
 
-    <div class="foud-entries-container">
+    <div class="foud-entries-container" *ngFor="let threadArr of allThreadsArr let i = index">
 
-        <mat-card class="found-entries"
-            *ngFor="let thread of allThreadsArr | searchFilter: searchText; let i = index">
+        <mat-card class="found-entries"  *ngFor="let thread of threadArr | searchFilter: searchText">
 
-            <div appHighlight [searchedWord]="searchText" [content]="thread" [classToApply]="'font-weight-bold'"
+            <div appHighlight [searchedWord]="searchText" [content]="thread[i]"  [classToApply]="'font-weight-bold'"
                 [setTitle]='true'>
-                {{ thread.threadText }}
+                {{ thread.creatorName }} {{ thread.createdDate }} {{ thread.createdTime }} <br>{{ thread.threadText }}
             </div>
         </mat-card>
     </div>
