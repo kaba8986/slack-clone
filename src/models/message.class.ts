@@ -1,11 +1,13 @@
 export class Message {
     senderID: string;
+    senderName: string;
     content: string;
     timestamp: Date;
     timeString: string;
 
     constructor(obj?: any) {
-        this.senderID = obj ? obj.contsenderIDent : 'mySenderID';
+        this.senderID = obj ? obj.senderID : 'mySenderID';
+        this.senderName = obj ? obj.senderName : 'mySenderName';
         this.content = obj ? obj.content : '';
         this.timestamp = new Date();
         this.timeString = obj ? obj.content : '';
@@ -14,6 +16,7 @@ export class Message {
     public toJSON() {
         return {
             senderID: this.senderID,
+            senderName: this.senderName,
             content: this.content, 
             timestamp: this.timestamp,
             timeString: this.timeString

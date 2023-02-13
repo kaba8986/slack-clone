@@ -7,14 +7,14 @@
 
         
         <mat-card class="message-card" *ngFor="let msg of currChatroom.messages; let i = index">
-            <mat-icon id="menu-btn" [matMenuTriggerFor]="menu" >more_vert</mat-icon>
+            <mat-icon id="menu-btn" [class.d-none]="currUser.userID != msg.senderID" [matMenuTriggerFor]="menu" >more_vert</mat-icon>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openDeleteDialog(i)">Delete</button>
               </mat-menu>
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
                 <div class="thread-creator">
-                    <b>{{ msg.senderID }}</b> {{ msg.timeString}} Uhr
+                    <b>{{ msg.senderName }}</b> {{ msg.timeString}} Uhr
                 </div>
             
                 <div>

@@ -59,7 +59,8 @@ export class ChatInterfaceComponent {
    * and push new Message to currChatroom
    */
   async send() {
-    this.message.senderID = this.currUser.firstName  + " " + this.currUser.lastName;
+    this.message.senderID = this.currUser.userID;
+    this.message.senderName = this.currUser.firstName  + " " + this.currUser.lastName;
     this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
     // this.message.content = document.getElementById('input-field').textContent;
 
