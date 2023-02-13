@@ -46,10 +46,6 @@ export class ChatComponent {
       this.getLoggedUser(); 
       this.getChatroom(); 
     })
-
-    setTimeout(() => {
-
-    }, 4000);
   }
 
   
@@ -91,48 +87,8 @@ export class ChatComponent {
         this.chatPartner.push(member.name);
       }
     })
-    console.log(this.chatPartner);
   }
 
-
-  formatText(style: string) {
-    document.execCommand(style);
-  }
-
-  /**
-   * Show Filename from uploaded File
-   * @param event 
-   */
-  showFilename(event) {
-    let outputField = document.getElementById( 'uploads' );
-    let input = event.srcElement;
-    let fileName = input.files[0].name;
-    outputField.textContent = fileName;
-  }
-
-  /**
-   * Delete uploaded file 
-   */
-  resetUpload() {
-    this.fileUploader.nativeElement.value = null;
-    document.getElementById( 'uploads' ).textContent = "";
-  }
-
-
-  /**
-   * Creates a Message - Create senderID, transform timeStamp to timeString 
-   * and push new Message to currChatroom
-   */
-  async send() {
-    this.message.senderID = this.currUser.firstName  + " " + this.currUser.lastName;
-    this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
-    // this.message.content = document.getElementById('input-field').textContent;
-
-    const messageRef = doc(this.db, 'chats', this.chatroomId);
-    await updateDoc(messageRef , {
-      messages: arrayUnion(this.message.toJSON())
-    })
-  }
 
 
   /**
