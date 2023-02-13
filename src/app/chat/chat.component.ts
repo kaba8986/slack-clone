@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/models/chats.class';
@@ -24,7 +24,8 @@ export class ChatComponent {
   chatroomId: string;
   currUser = new User();
   currChatroom = new Chat();
-  chatPartner = [];
+  @Input () chatPartner: string;
+  // chatPartner = [];
   auth = getAuth();
   db = getFirestore();
 
@@ -63,7 +64,7 @@ export class ChatComponent {
     .valueChanges()
     .subscribe((data: any) => {
       this.currChatroom = new Chat(data);
-      this.getChatroomName(data);
+      // this.getChatroomName(data);
     })
   }
 
@@ -85,6 +86,7 @@ export class ChatComponent {
     });
   }
 
+  /*
   async getChatroomName(data: any) {
     data.chatMembers.forEach((member: any) => {
       if(member.id != this.currUser.userID) {
@@ -92,6 +94,7 @@ export class ChatComponent {
       }
     })
   }
+  */
 
 
 

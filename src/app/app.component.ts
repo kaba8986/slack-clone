@@ -27,6 +27,7 @@ export class AppComponent {
   newarr: any = [];
   loggedId: string;
   currUser = new User();
+  
 
   value = '';
 
