@@ -12,6 +12,7 @@ export class ChatInterfaceComponent {
 
   @ViewChild('fileUploader') fileUploader:ElementRef;
 
+  toggled: boolean = false;
   message = new Message();
   @Input () chatroomId: string;
   @Input () currUser: User;
@@ -40,6 +41,16 @@ export class ChatInterfaceComponent {
     this.fileUploader.nativeElement.value = null;
     document.getElementById( 'uploads' ).textContent = "";
   }
+
+
+  /**
+   * Emoji-Picker
+   * @param event 
+   */
+  handleSelection(event) {
+    console.log(event.char);
+  }
+
 
 
   /**

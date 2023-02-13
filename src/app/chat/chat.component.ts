@@ -46,6 +46,10 @@ export class ChatComponent {
       this.getLoggedUser(); 
       this.getChatroom(); 
     })
+
+    setTimeout(() => {
+        console.log(this.chatPartner);
+    }, 4000);
   }
 
   

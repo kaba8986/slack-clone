@@ -7,6 +7,7 @@ import { MaterialModule } from './material/material/material.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgxEmojiPickerModule }  from  'ngx-emoji-picker';
 
 import { AppComponent } from './app.component';
 import { ChannelComponent } from './channel/channel.component';
@@ -62,6 +63,7 @@ import { ChatInterfaceComponent } from './chat-interface/chat-interface.componen
     RouterModule,
     FormsModule,
     PickerModule,
+    NgxEmojiPickerModule.forRoot(),
     ReactiveFormsModule,
     MaterialModule,
     AngularFireModule,
