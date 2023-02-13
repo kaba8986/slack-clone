@@ -12,11 +12,11 @@
     <div class="foud-entries-container">
 
         <mat-card class="found-entries"
-            *ngFor="let thread of allThreadsArr | keyvalue | searchFilter: searchText; let i = index">
+            *ngFor="let thread of allThreadsArr | searchFilter: searchText; let i = index">
 
             <div appHighlight [searchedWord]="searchText" [content]="thread" [classToApply]="'font-weight-bold'"
                 [setTitle]='true'>
-                {{ thread }}
+                {{ thread.threadText }}
             </div>
         </mat-card>
     </div>

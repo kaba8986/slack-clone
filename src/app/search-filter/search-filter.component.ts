@@ -37,15 +37,15 @@ export class SearchFilterComponent implements OnInit {
     'Batman',
     'Batwoman',
   ];
-  allThreads: any = [];
+  allThreads: any[] = [];
   allChannels: any = [];
   allChannelNames: any = [];
-  allThreadsArr: ThreadDatas[] = [];
+  allThreadsArr: any[] = [];
   name: any = [];
   time: any = [];
   date: any = [];
   text: any = [];
-  threaddatas: ThreadDatas[] = [];
+  threaddatas: any[] = [];
   allThreadsValue: any;
   currentThreadId: string;
   docRef;
@@ -77,7 +77,7 @@ export class SearchFilterComponent implements OnInit {
           this.allThreads.push(thread);
           this.allThreadsArr.push(this.allThreads[i][0]);
           
-          // this.name.push(this.allThreads[i][0].creatorName),
+          this.name.push(this.allThreads[i][0].creatorName)
           // this.time.push(this.allThreads[i][0].createdTime),
           // this.date.push(this.allThreads[i][0].createdDate),
           // this.text.push(this.allThreads[i][0].threadText)
@@ -93,7 +93,7 @@ export class SearchFilterComponent implements OnInit {
 
       console.log('allThreads', this.allThreads);
       console.log('allThreadsArr', this.allThreadsArr);
-      console.log('threaddatas', this.threaddatas); 
+      console.log('threaddatas', this.name); 
     // this.getThreaddatas();
   }
 
