@@ -48,7 +48,7 @@ export class ChatInterfaceComponent {
    * @param event 
    */
   handleSelection(event) {
-    console.log(event.char);
+    this.message.content += event.char;
   }
 
 
