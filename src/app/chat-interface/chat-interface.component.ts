@@ -49,6 +49,7 @@ export class ChatInterfaceComponent {
    */
   handleSelection(event) {
     this.message.content += event.char;
+    this.toggled = !this.toggled;
   }
 
 
