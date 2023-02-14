@@ -93,7 +93,7 @@ export class EditChatMessageComponent {
     const docSnap = await getDoc(messageRef);
     this.allMessages = docSnap.data();
     this.allMessages.messages.splice(index, 1);
-    this.allMessages.messages.splice(index, 0, this.message);
+    this.allMessages.messages.splice(index, 0, this.message.toJSON());
 
     console.log(this.allMessages.messages);
 
@@ -106,6 +106,7 @@ export class EditChatMessageComponent {
     await updateDoc(messageRef, {
       messages: this.allMessages.messages
     });
+    
 
   }
 
