@@ -70,3 +70,12 @@ mat-card-content {
 
 ///CSS for Chat-Keyboard
 
+.interface-container {
+    min-height: 120px;
+    background: white;
+    position: fixed;
+    bottom: 0px;
+    left: calc(20%);
+    right: 16px;
+    padding: 0 16px 16px 16px;
+}

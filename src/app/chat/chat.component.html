@@ -10,6 +10,7 @@
             <mat-icon id="menu-btn" [class.d-none]="currUser.userID != msg.senderID" [matMenuTriggerFor]="menu" >more_vert</mat-icon>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openDeleteDialog(i)">Delete</button>
+                <button mat-menu-item (click)="openEditDialog(i)">Edit</button>
               </mat-menu>
             <img class="profile-pic" src="./assets/img/profile/male.png"> 
             <mat-card-content>
@@ -26,6 +27,8 @@
         
     </div>
 
-    <app-chat-interface [chatroomId]="chatroomId" [currUser]="currUser"></app-chat-interface>
+    <div class="interface-container">
+        <app-chat-interface [chatroomId]="chatroomId" [currUser]="currUser"></app-chat-interface>
+    </div>
 
 </div>
