@@ -24,6 +24,21 @@
             <!-- <mat-hint>Please enter birth date</mat-hint> -->
           </mat-form-field> 
 
+          <mat-form-field >
+            <mat-label>Select Gender</mat-label>
+            <mat-select [(ngModel)]="user.gender">
+              <mat-option [value]="'male'">
+                male
+              </mat-option>
+              <mat-option [value]="'female'">
+                female
+              </mat-option>
+              <mat-option [value]="'diverse'">
+                diverse
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <div class="address-container">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Street & House No.</mat-label>
