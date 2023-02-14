@@ -37,12 +37,13 @@ export class LoginComponent implements OnInit {
      signInWithEmailAndPassword(this.auth, this.logInForm.value.email, this.logInForm.value.password)
        .then((response: any)=>{
         console.log(response.user);
-        console.log(response.user.reloadUserInfo.localId);
+        console.log('all login data',response.user.uid);
 
-        const Uid = response.user.reloadUserInfo.localId
+        const Uid = response.user.uid
         console.log('firebase Auth ID',Uid);
         //firebase signin/login ID in auth.service.ts gespeichert
         this.as.currentUserID = Uid;
+        this.as.loggedIn = true;
 
 
          this.router.navigate(['']);

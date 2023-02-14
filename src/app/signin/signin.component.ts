@@ -30,7 +30,9 @@ export class SigninComponent implements OnInit{
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      birthDate: ['', Validators.required]
+      
     });
   }
 
@@ -48,7 +50,7 @@ export class SigninComponent implements OnInit{
     // console.log(response.user.uid);
       console.log(response.user);
       //bekommt signin/login ID von Firebase Auth 
-      const Uid = response.user.reloadUserInfo.localId;
+      const Uid = response.user.uid;
       console.log('Firebase Auth ID', Uid);
       //firebase signin/login ID in auth.service.ts gespeichert
       this.as.currentUserID = Uid;

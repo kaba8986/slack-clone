@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddChatComponent } from './add-chat/add-chat.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { Auth } from '@angular/fire/auth';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { User } from 'src/models/user.class';
 import { LoggedUserService } from './services/logged-user.service';
@@ -55,6 +55,7 @@ export class AppComponent {
         this.loggedId = user.uid;
         this.getLoggedUser(user.uid);
       } else {
+        console.log('currently no user logged in')
       }
     });
 
@@ -95,6 +96,13 @@ export class AppComponent {
 
   openSearchFilter(){
     const dialogRef = this.dialog.open(SearchFilterComponent);
+  }
+
+  logout(){
+      signOut(this.auth).then((signOutData: any)=>{
+        //console.log(signOutData);
+        this.router.navigate(['login'])
+      })
   }
 
 }
