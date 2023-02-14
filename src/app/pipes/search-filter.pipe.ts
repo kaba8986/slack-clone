@@ -19,11 +19,11 @@ export class SearchFilterPipe implements PipeTransform {
    * @returns list of elements filtered by search text or []
    */
   transform(items: any[], searchText: string): any[] {
-    for (let i = 0; i < items.length; i++) {
-      this.itemLog = items[i].threadText;
-      
-    }
-    console.log('item', items)
+    // for (let i = 0; i < items.length; i++) {
+    //   this.itemLog = items[i].threadText;
+
+    // }
+   
     if (!items) {
       return [];
     }
@@ -31,11 +31,9 @@ export class SearchFilterPipe implements PipeTransform {
       return items;
     }
     searchText = searchText.toLocaleLowerCase();
-    let itemArr = Object.entries(items);
-    
-    return itemArr.filter((it) => {
-      console.log('it', it)
-      return it.toString().toLocaleLowerCase().includes(searchText);
-    });
+    console.log('items', items)
+    return items.filter((it) => {
+      // return it.toString().toLocaleLowerCase().includes(searchText);
+      return it.threadText.indexOf(searchText) !== -1});
   }
 }
