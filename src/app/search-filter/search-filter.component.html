@@ -13,7 +13,7 @@
 
         <mat-card class="found-entries"  *ngFor="let thread of threadArr | searchFilter: searchText">
 
-            <div appHighlight [searchedWord]="searchText" [content]="thread[i]"  [classToApply]="'font-weight-bold'"
+            <div  appHighlight [searchedWord]="searchText" [content]="thread[i]"  [classToApply]="'font-weight-bold'"
                 [setTitle]='true'>
                 {{ thread.creatorName }} {{ thread.createdDate }} {{ thread.createdTime }} <br>{{ thread.threadText }}
             </div>

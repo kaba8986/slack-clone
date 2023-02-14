@@ -21,7 +21,7 @@ export class SearchFilterPipe implements PipeTransform {
   transform(items: any[], searchText: string): any[] {
     for (let i = 0; i < items.length; i++) {
       this.itemLog = items[i].threadText;
-      console.log('itemLog', this.itemLog)
+      
     }
     console.log('item', items)
     if (!items) {
@@ -31,9 +31,11 @@ export class SearchFilterPipe implements PipeTransform {
       return items;
     }
     searchText = searchText.toLocaleLowerCase();
-    items = this.itemLog;
-    return items.filter((it) => {
-      return it.toLocaleLowerCase().includes(searchText);
+    let itemArr = Object.entries(items);
+    
+    return itemArr.filter((it) => {
+      console.log('it', it)
+      return it.toString().toLocaleLowerCase().includes(searchText);
     });
   }
 }
