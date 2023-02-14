@@ -34,6 +34,6 @@ export class SearchFilterPipe implements PipeTransform {
     console.log('items', items)
     return items.filter((it) => {
       // return it.toString().toLocaleLowerCase().includes(searchText);
-      return it.threadText.indexOf(searchText) !== -1});
+      return it.threadText.toLocaleLowerCase().indexOf(searchText) !== -1});
   }
 }
