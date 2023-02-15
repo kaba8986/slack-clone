@@ -8,6 +8,7 @@ export class AuthService {
   constructor() { }
 
   currentUserID: string;
-  loggedIn: boolean = false;
+  currentUser: JSON;
+  displayName: string;
 
 }

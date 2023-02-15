@@ -24,6 +24,10 @@ export class LoginComponent implements OnInit {
 
   Uid: string;
 
+  firstName: string;
+  lastName: string;
+  fullName: string;
+
   ngOnInit(): void {
     this.logInForm = this.fb.group({
       email: ['', Validators.required],
@@ -43,14 +47,40 @@ export class LoginComponent implements OnInit {
         console.log('firebase Auth ID',Uid);
         //firebase signin/login ID in auth.service.ts gespeichert
         this.as.currentUserID = Uid;
-        this.as.loggedIn = true;
-
+        this.as.currentUser = response.user;
+        console.log('user from as service', this.as.currentUser);
 
          this.router.navigate(['']);
+         this.getLoggedUser(Uid);
        })
        .catch((err)=>{
          alert(err.message);
        });   
   }
+
+  getLoggedUser(id: string) {
+    this.firestore
+    .collection('users')
+    .doc(id)
+    .valueChanges()
+    .subscribe((data: any) => {
+      this.as.currentUser = data;
+      console.log('sub user', this.as.currentUser);
+
+      this.displayName(this.as.currentUser);
+
+    });
+  }
+
+  displayName(currentUser: any){
+    this.firstName = currentUser.firstName;
+    this.lastName = currentUser.lastName;
+    this.fullName = this.firstName + ' ' + this.lastName;
+    this.as.displayName = this.fullName;
+    //console.log('full name', this.fullName);
+    console.log('full name ser', this.as.displayName);
+
+  }
+
   
 }

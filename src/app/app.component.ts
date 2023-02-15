@@ -11,6 +11,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { User } from 'src/models/user.class';
 import { LoggedUserService } from './services/logged-user.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,6 @@ export class AppComponent {
   newarr: any = [];
   loggedId: string;
   currUser = new User();
-  
 
   value = '';
 
@@ -39,7 +39,8 @@ export class AppComponent {
     private route: ActivatedRoute, 
     public router: Router,
     private auth: Auth,
-    private logService: LoggedUserService
+    private logService: LoggedUserService,
+    public as: AuthService
     
     ) { }
 
@@ -72,8 +73,11 @@ export class AppComponent {
     .valueChanges()
     .subscribe((data: any) => {
       this.currUser = data;
-    })
+      
+    });
   }
+
+  
   
 
   openAddChannel(): void {
