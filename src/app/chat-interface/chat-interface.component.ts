@@ -1,7 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { arrayUnion, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
+import { Thread } from 'src/models/thread.class';
 
 @Component({
   selector: 'app-chat-interface',
@@ -10,12 +13,20 @@ import { User } from 'src/models/user.class';
 })
 export class ChatInterfaceComponent {
 
+  constructor(
+    private firestore: AngularFirestore, 
+    private auth:Auth
+  ) {}
+
   @ViewChild('fileUploader') fileUploader:ElementRef;
 
   toggled: boolean = false;
   message = new Message();
+  thread = new Thread();
+  date = new Date().getTime();
   @Input () chatroomId: string;
   @Input () currUser: User;
+  @Input () channelId: string;
   db = getFirestore();
 
 
@@ -58,7 +69,17 @@ export class ChatInterfaceComponent {
    * Creates a Message - Create senderID, transform timeStamp to timeString 
    * and push new Message to currChatroom
    */
-  async send() {
+  send() {
+    if (this.chatroomId) {
+      this.chatmassage();
+    } else if(this.channelId) {
+      this.channelmassage();
+    }
+
+
+  }
+
+  async chatmassage() {
     this.message.senderID = this.currUser.userID;
     this.message.senderName = this.currUser.firstName  + " " + this.currUser.lastName;
     this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
@@ -68,6 +89,34 @@ export class ChatInterfaceComponent {
     await updateDoc(messageRef , {
       messages: arrayUnion(this.message.toJSON())
     })
+  }
+
+  channelmassage() {
+    this.getThreadCreator();
+    this.getText();
+    this.convertDate(this.date);
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').add(this.thread.toJSON()).then( (result) => {
+      console.log(result);
+    })
+  }
+
+  getThreadCreator() {
+    this.thread.creatorName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
+  }
+
+  getText() {
+    //let inputValue = (document.getElementById('inputfield') as HTMLInputElement).value;
+    console.log(this.message.content)
+    this.thread.threadText = this.message.content;
+    console.log(this.thread.threadText)
+    //inputValue = '';
+  }
+
+  convertDate(timestamp:number) {
+    let date = new Date(timestamp);
+    this.thread.originalDate = new Date().getTime();
+    this.thread.createdDate = date.toLocaleDateString();
+    this.thread.createdTime = date.toLocaleTimeString();
   }
 
 }

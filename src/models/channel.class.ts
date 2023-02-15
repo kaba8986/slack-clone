@@ -3,10 +3,10 @@ export class Channel {
     description: string;
     createdDate: number;
 
-    constructor(obj?:any) {
-        this.channelName = obj ? obj.channelName : '';
-        this.description = obj ? obj.description : '';
-        this.createdDate = obj ? obj.createdDate : '';
+    constructor(obj?) {
+        this.channelName = obj?.channelName || '';
+        this.description = obj?.description || '';
+        this.createdDate = obj.createdDate || '';
     }
 
     public toJSON() {
