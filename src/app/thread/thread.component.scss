@@ -87,7 +87,6 @@ mat-card-content {
 
 ///CSS for Chat-Keyboard
 
-
 .chat-input-container {
     min-height: 120px;
     background: white;
@@ -102,47 +101,6 @@ mat-card-content {
     display: flex;
     flex-direction: column;
     min-height: 120px;
-    border: 1px solid lightgray;
-    border-radius: 8px;
     width: 100%;
-    // background: rgba($color: #000000, $alpha: 0.2);
     background: #fff;
-  }
-
-
-
-  .upper-controls,
-  .lower-controls {
-    background: #ececec;
-    padding: 4px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-
-    mat-icon {
-        font-size: 20px;
-    }
-  }
-
-  .lower-controls {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #send-btn {
-    background: green;
-    color: white;
-  }
-
-  .input-field {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 36px;
-    padding: 16px;
-    border: none;
-    outline: none;
-    resize: none;
-  }
+}

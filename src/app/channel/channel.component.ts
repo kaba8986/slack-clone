@@ -67,9 +67,4 @@ export class ChannelComponent implements OnInit{
     this.threadId = id;
   }
 
-  addEmoji($event) {
-    
-  }
-
-
 }

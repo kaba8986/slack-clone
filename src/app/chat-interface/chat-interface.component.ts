@@ -5,6 +5,7 @@ import { arrayUnion, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { Thread } from 'src/models/thread.class';
+import { Answer } from 'src/models/answer.class';
 
 @Component({
   selector: 'app-chat-interface',
@@ -23,10 +24,13 @@ export class ChatInterfaceComponent {
   toggled: boolean = false;
   message = new Message();
   thread = new Thread();
+  answer = new Answer();
   date = new Date().getTime();
+  allAnswers:any = [];
   @Input () chatroomId: string;
   @Input () currUser: User;
   @Input () channelId: string;
+  @Input () threadId: string;
   db = getFirestore();
 
 
@@ -72,11 +76,11 @@ export class ChatInterfaceComponent {
   send() {
     if (this.chatroomId) {
       this.chatmassage();
-    } else if(this.channelId) {
+    } else if(this.channelId && !this.threadId) {
       this.channelmassage();
+    } else {
+      this.threadmassage();
     }
-
-
   }
 
   async chatmassage() {
@@ -105,11 +109,11 @@ export class ChatInterfaceComponent {
   }
 
   getText() {
-    //let inputValue = (document.getElementById('inputfield') as HTMLInputElement).value;
-    console.log(this.message.content)
-    this.thread.threadText = this.message.content;
-    console.log(this.thread.threadText)
-    //inputValue = '';
+    if (!this.threadId) {
+      this.thread.threadText = this.message.content;
+    } else {
+      this.answer.answerText = this.message.content;
+    }
   }
 
   convertDate(timestamp:number) {
@@ -117,6 +121,18 @@ export class ChatInterfaceComponent {
     this.thread.originalDate = new Date().getTime();
     this.thread.createdDate = date.toLocaleDateString();
     this.thread.createdTime = date.toLocaleTimeString();
+  }
+
+  threadmassage() {
+    this.getAnswerCreator();
+    this.getText();
+    this.convertDate(this.date);
+    this.allAnswers.push(this.answer.toJSON());
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({'answers': this.allAnswers});
+  }
+
+  getAnswerCreator() {
+    this.answer.answerName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
   }
 
 }

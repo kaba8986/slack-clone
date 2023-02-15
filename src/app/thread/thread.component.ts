@@ -74,33 +74,4 @@ export class ThreadComponent implements OnInit, OnChanges{
     });
   }
 
-  sendText() {
-    this.getAnswerCreator();
-    this.getText();
-    this.convertDate(this.date);
-    this.allAnswers.push(this.answer.toJSON());
-    this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({'answers': this.allAnswers});
-  }
-
-  getAnswerCreator() {
-    this.answer.answerName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
-  }
-
-  getText() {
-    let inputValue = (document.getElementById('answerfield') as HTMLInputElement).value;
-    this.answer.answerText = inputValue;
-    inputValue = '';
-  }
-
-  convertDate(timestamp:number) {
-    let date = new Date(timestamp);
-    this.answer.originalDate = new Date().getTime();
-    this.answer.createdDate = date.toLocaleDateString();
-    this.answer.createdTime = date.toLocaleTimeString();
-  }
-
-
-  openDialog() {
-
-  }
 }

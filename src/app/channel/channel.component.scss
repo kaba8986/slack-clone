@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     height: 50px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-left: 16px;
     font-weight: bold;
     font-size: 18px;
@@ -31,8 +31,9 @@ mat-card {
     padding-top: 15px;
     padding-left: 15px;
     min-height: 150px;
-    &:hover{
-        background-color: rgba(0,0,0,0.1);
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -62,7 +63,7 @@ mat-card-content {
     height: 26px;
     margin-top: 5px;
     border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
 
     img {
@@ -75,23 +76,24 @@ mat-card-content {
         object-fit: contain;
         opacity: 1;
         transition: opacity .2s;
+
         &:hover {
             opacity: 0;
         }
     }
 
     .image-hover {
-    position: absolute;
+        position: absolute;
 
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity .2s;
-    
-    &:hover {
-        opacity: 1;
-        color: #e9be6f;
-        filter: invert(97%) sepia(10%) saturate(7451%) hue-rotate(312deg) brightness(110%) contrast(83%);
-    }
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity .2s;
+
+        &:hover {
+            opacity: 1;
+            color: #e9be6f;
+            filter: invert(97%) sepia(10%) saturate(7451%) hue-rotate(312deg) brightness(110%) contrast(83%);
+        }
     }
 
 }
@@ -103,11 +105,11 @@ mat-card-content {
     display: flex;
     align-items: center;
     padding-top: unset !important;
-    
+
 
     img {
         width: 30px;
-        
+
     }
 
     span {
@@ -121,7 +123,7 @@ mat-card-content {
     }
 }
 
-.thread-sidenav{
+.thread-sidenav {
     width: 25vw;
 }
 
@@ -145,4 +147,4 @@ mat-card-content {
     min-height: 120px;
     width: 100%;
     background: #fff;
-  }
+}
