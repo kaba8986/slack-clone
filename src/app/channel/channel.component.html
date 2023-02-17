@@ -12,8 +12,13 @@
                     <b>{{ this.allThreads[i].creatorName }}</b> {{ this.allThreads[i].createdTime }} Uhr
                 </div>
             
+
                 <div>
-                    {{ this.allThreads[i].threadText }}
+                    <quill-view-html 
+                    [content]="this.allThreads[i].threadText" 
+                    format="text" theme="snow">
+                    </quill-view-html>
+                   <!-- {{msg.content}} -->
                 </div>
 
                 <button class="emoji-btn">
@@ -22,7 +27,7 @@
                 </button>
                 <mat-card class="answer-area">
                     <img src="./assets/img/icons/creator.png">
-                    <span (click)="drawer.toggle()" (click)="openThread( this.allThreads[i].id )"> 3 Antworten</span>
+                    <span (click)="drawer.toggle()" (click)="openThread( this.allThreads[i].id )"> {{ this.allThreads[i].answers.length }} Antworten</span>
                     <span>Letzte Antwort vor 3 Tagen</span>
                 </mat-card>
             </mat-card-content>
