@@ -4,13 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/models/chats.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
-import { LoggedUserService } from '../services/logged-user.service';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { arrayUnion, collection, doc, getDoc, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteChatWarningComponent } from '../delete-chat-warning/delete-chat-warning.component';
 import { EditChatMessageComponent } from '../edit-chat-message/edit-chat-message.component';
-import { GetNameService } from '../services/get-name.service';
 
 
 @Component({
@@ -26,6 +24,7 @@ export class ChatComponent {
   chatroomId: string;
   currUser = new User();
   currChatroom = new Chat();
+  chatPartner: any;
   auth = getAuth();
   db = getFirestore();
 
@@ -33,14 +32,12 @@ export class ChatComponent {
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
-    private log: LoggedUserService,
-    private dialog: MatDialog,
-    private nameService: GetNameService
+    private dialog: MatDialog
   ) {}
 
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     //Get params or chatroomID from URL
     this.route.paramMap
     .subscribe( paramMap => {
@@ -48,14 +45,8 @@ export class ChatComponent {
       this.getLoggedUser(); 
       this.getChatroom(); 
     })
-
-    
-    this.nameService.getName('ChTXYDQorbMYIAf3vRa2N7mpfzg2');
   }
 
-
-
-  
   /**
    * Load current Chatroom with chatroomId from URL params
    */

@@ -10,7 +10,6 @@ import { Auth } from '@angular/fire/auth';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { AlertLoginComponent } from './alert-login/alert-login.component';
 import { User } from 'src/models/user.class';
-import { LoggedUserService } from './services/logged-user.service';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -39,7 +38,6 @@ export class AppComponent {
     private route: ActivatedRoute, 
     public router: Router,
     private auth: Auth,
-    private logService: LoggedUserService,
     public as: AuthService
     
     ) { }
