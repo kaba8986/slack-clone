@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialogRef } from '@angular/material/dialog';
 import { arrayUnion, deleteField, doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { Message } from 'src/models/message.class';
 
@@ -20,23 +21,34 @@ export class EditChatMessageComponent {
   db = getFirestore();
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    public dialogRef: MatDialogRef<EditChatMessageComponent>
   ) { }
 
   ngOnInit(): void {
     this.getData();
   }
 
+    //////////////// new editor - start /////////////////////
+
+    quillConfig = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+  
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+  
+        [{ 'color': [] }],          // dropdown with defaults from theme
+        [{ 'align': [] }],
+  
+        ['link', 'image', 'video']                         // link and image, video
+      ]
+    };
+  
+    //////////////// new editor - end/////////////////////
+
   async getData() {
-    /*
-    this.firestore
-      .collection('chats')
-      .doc(this.chatroomId)
-      .valueChanges()
-      .subscribe((data: any) => {
-        this.setMessage(data)
-      })
-      */
     const chatRef = doc(this.db, 'chats', this.chatroomId);
     const docSnap = await getDoc(chatRef);
     this.setMessage(docSnap.data());

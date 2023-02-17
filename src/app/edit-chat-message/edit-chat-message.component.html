@@ -1,33 +1,7 @@
-<div class="chat-keyboard">
-  <div class="upper-controls">
-      <button id="format-bold" (click)="formatText('bold')"><mat-icon>format_bold</mat-icon></button>
-      <button id="format-italic" (click)="formatText('italic')"><mat-icon>format_italic</mat-icon></button>
-      <button id="format-strikethrough"
-          (click)="formatText('strikeThrough')"><mat-icon>format_strikethrough</mat-icon></button>
-      <button id="format-link"><mat-icon>link</mat-icon></button>
-      <button id="format-list-numbered"
-          (click)="formatText('InsertOrderedList')"><mat-icon>format_list_numbered</mat-icon></button>
-      <button id="format-list-enumerated"
-          (click)="formatText('InsertUnorderedList')"><mat-icon>format_list_bulleted</mat-icon></button>
-  </div>
-
-
-  <div class="content-input">
-      <textarea class="input-field" [(ngModel)]="message.content"></textarea>
-      <!-- <div class="input-field" contentEditable></div> -->
-  </div>
-  <div class="lower-controls">
-      <div class="lower-left-controls">
-          <label for="attach-file"><mat-icon>attach_file</mat-icon></label>
-          <input type="file" name="" id="attach-file" (change)="showFilename($event)" #fileUploader>
-          <div id="uploads" matTooltip="delete file" (click)="resetUpload()"></div>
-          <button id="alternate-email"><mat-icon>alternate_email</mat-icon> </button>
-          <i class="attachment emoji-picker" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled"
-              [emojiPickerDirection]="'top'" (emojiPickerSelect)="handleSelection($event)">😄</i>
-      </div>
-      <div mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button mat-dialog-close cdkFocusInitial (click)="saveMessage(messageIndex)">Save</button>
-      </div>
-  </div>
+<div class="chat-input-container">
+    <quill-editor class="editor" [(ngModel)]="message.content" placeholder="Enter Message" [modules]="quillConfig"></quill-editor>
+    <div class="button-container">
+        <button mat-raised-button [mat-dialog-close] (click)="dialogRef.close()">Close</button>
+        <button mat-raised-button color="warn" (click)="saveMessage(messageIndex); dialogRef.close()">Save</button>
+    </div>
 </div>

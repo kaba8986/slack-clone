@@ -1,16 +1,5 @@
 ///CSS for Chat-Keyboard
 
-/*
-.chat-input-container {
-  min-height: 120px;
-  background: white;
-  position: fixed;
-  bottom: 0px;
-  left: calc(20%);
-  right: 16px;
-  padding: 0 16px 16px 16px;
-}
-*/
 
 .chat-keyboard {
   display: flex;
@@ -122,4 +111,23 @@ input[type="file"] {
   outline: none;
   resize: none;
   color: grey;
+}
+
+
+/************ quill editor ************/
+
+.editor {
+  width: 100%;
+  height: 140px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
+
+  button {
+    margin-left: 8px;
+  }
 }

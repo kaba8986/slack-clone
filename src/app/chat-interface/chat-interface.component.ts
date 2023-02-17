@@ -15,45 +15,42 @@ import { Answer } from 'src/models/answer.class';
 export class ChatInterfaceComponent {
 
   constructor(
-    private firestore: AngularFirestore, 
-    private auth:Auth
-  ) {}
+    private firestore: AngularFirestore,
+    private auth: Auth
+  ) { }
 
-  @ViewChild('fileUploader') fileUploader:ElementRef;
+  @ViewChild('fileUploader') fileUploader: ElementRef;
 
   toggled: boolean = false;
   message = new Message();
   thread = new Thread();
   answer = new Answer();
   date = new Date().getTime();
-  allAnswers:any = [];
-  @Input () chatroomId: string;
-  @Input () currUser: User;
-  @Input () channelId: string;
-  @Input () threadId: string;
+  allAnswers: any = [];
+  @Input() chatroomId: string;
+  @Input() currUser: User;
+  @Input() channelId: string;
+  @Input() threadId: string;
   db = getFirestore();
 
-    //////////////// new editor - start /////////////////////
+  //////////////// new editor - start /////////////////////
 
   quillConfig = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
-  
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  
+
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+
       [{ 'color': [] }],          // dropdown with defaults from theme
       [{ 'align': [] }],
-  
+
       ['link', 'image', 'video']                         // link and image, video
     ]
   };
 
-
-
-
-    //////////////// new editor - end/////////////////////
+  //////////////// new editor - end/////////////////////
 
   formatText(style: string) {
     document.execCommand(style);
@@ -64,7 +61,7 @@ export class ChatInterfaceComponent {
    * @param event 
    */
   showFilename(event) {
-    let outputField = document.getElementById( 'uploads' );
+    let outputField = document.getElementById('uploads');
     let input = event.srcElement;
     let fileName = input.files[0].name;
     outputField.textContent = fileName;
@@ -75,7 +72,7 @@ export class ChatInterfaceComponent {
    */
   resetUpload() {
     this.fileUploader.nativeElement.value = null;
-    document.getElementById( 'uploads' ).textContent = "";
+    document.getElementById('uploads').textContent = "";
   }
 
 
@@ -97,7 +94,7 @@ export class ChatInterfaceComponent {
   send() {
     if (this.chatroomId) {
       this.chatmassage();
-    } else if(this.channelId && !this.threadId) {
+    } else if (this.channelId && !this.threadId) {
       this.channelmassage();
     } else {
       this.threadmassage();
@@ -106,12 +103,12 @@ export class ChatInterfaceComponent {
 
   async chatmassage() {
     this.message.senderID = this.currUser.userID;
-    this.message.senderName = this.currUser.firstName  + " " + this.currUser.lastName;
+    this.message.senderName = this.currUser.firstName + " " + this.currUser.lastName;
     this.message.timeString = this.message.timestamp.toLocaleTimeString("en-GB");
     // this.message.content = document.getElementById('input-field').textContent;
 
     const messageRef = doc(this.db, 'chats', this.chatroomId);
-    await updateDoc(messageRef , {
+    await updateDoc(messageRef, {
       messages: arrayUnion(this.message.toJSON())
     })
     this.message.content = "";
@@ -121,7 +118,7 @@ export class ChatInterfaceComponent {
     this.getThreadCreator();
     this.getText();
     this.convertDate(this.date);
-    this.firestore.collection('channel').doc(this.channelId).collection('threads').add(this.thread.toJSON()).then( (result) => {
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').add(this.thread.toJSON()).then((result) => {
       console.log(result);
     })
   }
@@ -138,7 +135,7 @@ export class ChatInterfaceComponent {
     }
   }
 
-  convertDate(timestamp:number) {
+  convertDate(timestamp: number) {
     let date = new Date(timestamp);
     this.thread.originalDate = new Date().getTime();
     this.thread.createdDate = date.toLocaleDateString();
@@ -150,7 +147,7 @@ export class ChatInterfaceComponent {
     this.getText();
     this.convertDate(this.date);
     this.allAnswers.push(this.answer.toJSON());
-    this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({'answers': this.allAnswers});
+    this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({ 'answers': this.allAnswers });
   }
 
   getAnswerCreator() {
