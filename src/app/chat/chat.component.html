@@ -19,7 +19,11 @@
                 </div>
             
                 <div>
-                   {{msg.content}}
+                    <quill-view-html 
+                    [content]="msg.content" 
+                    format="text" theme="snow">
+                    </quill-view-html>
+                   <!-- {{msg.content}} -->
                 </div>
             </mat-card-content>
         

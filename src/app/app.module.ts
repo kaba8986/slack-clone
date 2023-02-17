@@ -8,6 +8,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxEmojiPickerModule }  from  'ngx-emoji-picker';
+import { QuillModule } from 'ngx-quill'
 
 
 import { AppComponent } from './app.component';
@@ -67,6 +68,7 @@ import { EditChatMessageComponent } from './edit-chat-message/edit-chat-message.
     FormsModule,
     PickerModule,
     NgxEmojiPickerModule.forRoot(),
+    QuillModule.forRoot(),
     ReactiveFormsModule,
     MaterialModule,
     AngularFireModule,

@@ -33,6 +33,27 @@ export class ChatInterfaceComponent {
   @Input () threadId: string;
   db = getFirestore();
 
+    //////////////// new editor - start /////////////////////
+
+  quillConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+  
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  
+      [{ 'color': [] }],          // dropdown with defaults from theme
+      [{ 'align': [] }],
+  
+      ['link', 'image', 'video']                         // link and image, video
+    ]
+  };
+
+
+
+
+    //////////////// new editor - end/////////////////////
 
   formatText(style: string) {
     document.execCommand(style);
@@ -93,6 +114,7 @@ export class ChatInterfaceComponent {
     await updateDoc(messageRef , {
       messages: arrayUnion(this.message.toJSON())
     })
+    this.message.content = "";
   }
 
   channelmassage() {
