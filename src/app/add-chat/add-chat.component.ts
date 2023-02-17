@@ -88,8 +88,9 @@ export class AddChatComponent {
 
 
   async addChatToUser() {
-    let newChat = {
+    let personalChat = {
       'chatName': this.newChatName, 
+      'chatPartnerName': this.selectedUser.firstName + " " + this.selectedUser.lastName,
       'chatMembers': [{ 
         'id': this.personalID, 
         'name': this.currUser.firstName + " " + this.currUser.lastName
@@ -98,14 +99,26 @@ export class AddChatComponent {
         'id': this.selectedUser.userID, 
         'name': this.selectedUser.firstName+ " " + this.selectedUser.lastName
       }]};
+
+      let otherChat = {
+        'chatName': this.newChatName, 
+        'chatPartnerName': this.currUser.firstName + " " + this.currUser.lastName,
+        'chatMembers': [{ 
+          'id': this.personalID, 
+          'name': this.currUser.firstName + " " + this.currUser.lastName
+        }, 
+        { 
+          'id': this.selectedUser.userID, 
+          'name': this.selectedUser.firstName+ " " + this.selectedUser.lastName
+        }]};
     const userRef = doc(this.db, 'users', this.personalID);
     const partnerRef = doc(this.db, 'users', this.selectedUser.userID);
 
     await updateDoc(userRef , {
-      chats: arrayUnion(newChat)
+      chats: arrayUnion(personalChat)
     })
     await updateDoc(partnerRef , {
-      chats: arrayUnion(newChat)
+      chats: arrayUnion(otherChat)
     })
   }
 
