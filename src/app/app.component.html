@@ -35,7 +35,8 @@
             <div class="entry-container" id="chatrooms-container">
                 <div class="sidenav-entry" *ngFor="let chat of currUser.chats" routerLink="/chat/{{chat.chatName}}">
                      <!-- only show name when not equal to user  -->
-                    <div [class.d-none]="member.id == currUser.userID" *ngFor="let member of chat.chatMembers"># {{member.name}}</div>
+                    <!-- <div [class.d-none]="member.id == currUser.userID" *ngFor="let member of chat.chatMembers"># {{member.name}}</div> -->
+                   # {{chat.chatPartnerName}}
                 </div>
             </div>
         </div>

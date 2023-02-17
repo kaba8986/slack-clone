@@ -10,6 +10,7 @@ import { arrayUnion, collection, doc, getDoc, getFirestore, query, updateDoc, wh
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteChatWarningComponent } from '../delete-chat-warning/delete-chat-warning.component';
 import { EditChatMessageComponent } from '../edit-chat-message/edit-chat-message.component';
+import { GetNameService } from '../services/get-name.service';
 
 
 @Component({
@@ -25,8 +26,6 @@ export class ChatComponent {
   chatroomId: string;
   currUser = new User();
   currChatroom = new Chat();
-  @Input () chatPartner: string;
-  // chatPartner = [];
   auth = getAuth();
   db = getFirestore();
 
@@ -35,7 +34,8 @@ export class ChatComponent {
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
     private log: LoggedUserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private nameService: GetNameService
   ) {}
 
 
@@ -49,10 +49,11 @@ export class ChatComponent {
       this.getChatroom(); 
     })
 
-    setTimeout(() => {
-        console.log(this.chatPartner);
-    }, 4000);
+    
+    this.nameService.getName('ChTXYDQorbMYIAf3vRa2N7mpfzg2');
   }
+
+
 
   
   /**
