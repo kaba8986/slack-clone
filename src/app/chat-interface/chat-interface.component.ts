@@ -111,6 +111,8 @@ export class ChatInterfaceComponent {
     await updateDoc(messageRef, {
       messages: arrayUnion(this.message.toJSON())
     })
+    console.log(typeof this.message.timestamp);
+    console.log(typeof this.message.timeString);
     this.message.content = "";
   }
 

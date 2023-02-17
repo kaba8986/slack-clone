@@ -17,6 +17,8 @@ export class EditChatMessageComponent {
   chatroomId: string;
   toggled: boolean = false;
   message = new Message();
+  oldTimeString: string;
+  oldTimeStamp: any;
   allMessages: any;
   db = getFirestore();
 
@@ -51,12 +53,20 @@ export class EditChatMessageComponent {
   async getData() {
     const chatRef = doc(this.db, 'chats', this.chatroomId);
     const docSnap = await getDoc(chatRef);
+    let puffer = docSnap.data();
+
+    /****** cache old time values befor setting in new Message ****/
+    this.oldTimeStamp = puffer['messages'][this.messageIndex]['timestamp'];
+    this.oldTimeString = puffer['messages'][this.messageIndex]['timeString'];
+    
     this.setMessage(docSnap.data());
   }
 
   setMessage(data: any) {
     this.message = new Message(data.messages[this.messageIndex]);
-    console.log(this.message);
+    /****** load old time-values ******/
+    this.message.timestamp = this.oldTimeStamp;
+    this.message.timeString = this.oldTimeString;
   };
 
 
