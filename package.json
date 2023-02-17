@@ -26,6 +26,7 @@
     "ngx-emoji-picker": "^0.1.6",
     "ngx-quill": "^20.0.1",
     "quill": "^1.3.6",
+    "quill-emoji": "^0.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "twemoji": "^13.1.1",

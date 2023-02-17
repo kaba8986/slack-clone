@@ -46,8 +46,12 @@ export class ChatInterfaceComponent {
       [{ 'color': [] }],          // dropdown with defaults from theme
       [{ 'align': [] }],
 
-      ['link', 'image', 'video']                         // link and image, video
-    ]
+      ['link', 'image', 'video'],                         // link and image, video
+      ['emoji']
+    ],
+    "emoji-toolbar": true,
+    "emoji-textarea": false,
+    "emoji-shortname": true,
   };
 
   //////////////// new editor - end/////////////////////

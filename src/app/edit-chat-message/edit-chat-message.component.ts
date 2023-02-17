@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { arrayUnion, deleteField, doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { Message } from 'src/models/message.class';
+import 'quill-emoji';
 
 @Component({
   selector: 'app-edit-chat-message',
@@ -44,8 +45,12 @@ export class EditChatMessageComponent {
         [{ 'color': [] }],          // dropdown with defaults from theme
         [{ 'align': [] }],
   
-        ['link', 'image', 'video']                         // link and image, video
-      ]
+        ['link', 'image', 'video'],                         // link and image, video
+        ['emoji']
+      ],
+      "emoji-toolbar": true,
+      "emoji-textarea": false,
+      "emoji-shortname": true,
     };
   
     //////////////// new editor - end/////////////////////
