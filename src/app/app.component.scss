@@ -1,6 +1,6 @@
 mat-toolbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(0, 0, 0, 0.08);
     color: white;
@@ -26,9 +26,18 @@ mat-toolbar {
     }
 }
 
+.logged-user{
+    display: flex;
+}
+
 .logout{
     cursor: pointer;
+    font-size: 15px;
 }
+
+.avatarLogin{
+    height: 40px;
+  }
 
 mat-drawer-container {
     height: 100vh;

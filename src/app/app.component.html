@@ -7,9 +7,14 @@
           </button>
     </form>
 
-    <div class="logout" (click)="logout()">Logout</div>
-    <div><b>{{this.as.displayName}}</b></div>
-    <mat-icon>account_box</mat-icon>
+    
+    <div class="logged-user">
+        <div class="logout" (click)="logout()">Logout</div>
+        <div class="ml-16"><b>{{this.as.displayName}}</b></div>
+        <img class="avatarLogin ml-16" src="./assets/img/profile/{{this.as.userGender}}.png">
+    </div>
+    
+    
 </mat-toolbar>
 
 

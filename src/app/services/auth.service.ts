@@ -10,5 +10,6 @@ export class AuthService {
   currentUserID: string;
   currentUser: JSON;
   displayName: string;
+  userGender: any;
 
 }

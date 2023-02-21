@@ -6,6 +6,7 @@ import { Route, Router } from '@angular/router';
 import { signOut } from 'firebase/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from '../services/auth.service';
+import { User } from 'src/models/user.class';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
   lastName: string;
   fullName: string;
 
+  userGender: any;
+
   ngOnInit(): void {
     this.logInForm = this.fb.group({
       email: ['', Validators.required],
@@ -49,6 +52,7 @@ export class LoginComponent implements OnInit {
         this.as.currentUserID = Uid;
         this.as.currentUser = response.user;
         console.log('user from as service', this.as.currentUser);
+        
 
          this.router.navigate(['']);
          this.getLoggedUser(Uid);
@@ -66,8 +70,9 @@ export class LoginComponent implements OnInit {
     .subscribe((data: any) => {
       this.as.currentUser = data;
       console.log('sub user', this.as.currentUser);
-
       this.displayName(this.as.currentUser);
+      
+      
 
     });
   }
@@ -79,7 +84,8 @@ export class LoginComponent implements OnInit {
     this.as.displayName = this.fullName;
     //console.log('full name', this.fullName);
     console.log('full name ser', this.as.displayName);
-
+    this.as.userGender = currentUser.gender;
+    console.log('gender', this.as.userGender);
   }
 
   

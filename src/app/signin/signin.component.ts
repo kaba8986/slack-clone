@@ -54,6 +54,8 @@ export class SigninComponent implements OnInit{
       console.log('Firebase Auth ID', Uid);
       //firebase signin/login ID in auth.service.ts gespeichert
       this.as.currentUserID = Uid;
+      this.as.userGender = this.user.gender
+      console.log('gender', this.as.userGender)
       this.loadToFirebase(Uid);
       this.router.navigate(['login']);
     })
