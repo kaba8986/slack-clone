@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Thread } from 'src/models/thread.class';
 import { ActivatedRoute } from '@angular/router';
 import { ThreadcontentService } from '../services/threadcontent.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ChannelComponent implements OnInit{
 
 
   
-  constructor(private firestore: AngularFirestore, private route: ActivatedRoute, public threadContent: ThreadcontentService) {
+  constructor(private firestore: AngularFirestore, private route: ActivatedRoute, public threadContent: ThreadcontentService, public as: AuthService) {
   
   }
 

@@ -6,6 +6,7 @@ import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { Thread } from 'src/models/thread.class';
 import { Answer } from 'src/models/answer.class';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-chat-interface',
@@ -16,7 +17,8 @@ export class ChatInterfaceComponent {
 
   constructor(
     private firestore: AngularFirestore,
-    private auth: Auth
+    private auth: Auth,
+    public as: AuthService,
   ) { }
 
   @ViewChild('fileUploader') fileUploader: ElementRef;
@@ -26,11 +28,11 @@ export class ChatInterfaceComponent {
   thread = new Thread();
   answer = new Answer();
   date = new Date().getTime();
-  allAnswers: any = [];
   @Input() chatroomId: string;
   @Input() currUser: User;
   @Input() channelId: string;
   @Input() threadId: string;
+  @Input() allAnswers:any;
   db = getFirestore();
 
   //////////////// new editor - start /////////////////////
@@ -123,7 +125,7 @@ export class ChatInterfaceComponent {
   channelmassage() {
     this.getThreadCreator();
     this.getText();
-    this.convertDate(this.date);
+    this.convertThreadDate(this.date);
     this.firestore.collection('channel').doc(this.channelId).collection('threads').add(this.thread.toJSON()).then((result) => {
       console.log(result);
     })
@@ -131,6 +133,7 @@ export class ChatInterfaceComponent {
 
   getThreadCreator() {
     this.thread.creatorName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
+    this.thread.creatorGender = this.as.userGender;
   }
 
   getText() {
@@ -141,7 +144,7 @@ export class ChatInterfaceComponent {
     }
   }
 
-  convertDate(timestamp: number) {
+  convertThreadDate(timestamp: number) {
     let date = new Date(timestamp);
     this.thread.originalDate = new Date().getTime();
     this.thread.createdDate = date.toLocaleDateString();
@@ -151,13 +154,23 @@ export class ChatInterfaceComponent {
   threadmassage() {
     this.getAnswerCreator();
     this.getText();
-    this.convertDate(this.date);
+    this.convertAnswerDate(this.date);
+    console.log(this.allAnswers);
     this.allAnswers.push(this.answer.toJSON());
+    console.log(this.allAnswers);
     this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({ 'answers': this.allAnswers });
   }
 
   getAnswerCreator() {
     this.answer.answerName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
+    this.answer.answerGender = this.as.userGender;
+  }
+
+  convertAnswerDate(timestamp: number) {
+    let date = new Date(timestamp);
+    this.answer.originalDate = new Date().getTime();
+    this.answer.createdDate = date.toLocaleDateString();
+    this.answer.createdTime = date.toLocaleTimeString();
   }
 
 }

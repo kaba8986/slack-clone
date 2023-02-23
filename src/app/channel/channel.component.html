@@ -6,7 +6,7 @@
     
     <div class="channel-room">
         <mat-card class="thread-area" *ngFor="let thread of allThreads | reverseText; let i = index" >
-            <img class="profile-pic" src="./assets/img/profile/male.png"> 
+            <img class="profile-pic" src="./assets/img/profile/{{this.allThreads[i].creatorGender}}.png"> 
             <mat-card-content>
                 <div class="thread-creator">
                     <b>{{ this.allThreads[i].creatorName }}</b> {{ this.allThreads[i].createdTime }} Uhr

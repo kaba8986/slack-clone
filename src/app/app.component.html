@@ -11,7 +11,7 @@
     <div class="logged-user">
         <div class="logout" (click)="logout()">Logout</div>
         <div class="ml-16"><b>{{this.as.displayName}}</b></div>
-        <img class="avatarLogin ml-16" src="./assets/img/profile/{{this.as.userGender}}.png">
+        <img [class.d-none]="!this.as.displayName" class="avatarLogin ml-16" src="./assets/img/profile/{{this.as.userGender}}.png">
     </div>
     
     

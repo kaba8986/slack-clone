@@ -4,9 +4,9 @@ export class Channel {
     createdDate: number;
 
     constructor(obj?) {
-        this.channelName = obj?.channelName || '';
-        this.description = obj?.description || '';
-        this.createdDate = obj.createdDate || '';
+        this.channelName = obj ? obj.channelName : '';
+        this.description = obj ? obj.description : '';
+        this.createdDate = obj ? obj.createdDate : '';
     }
 
     public toJSON() {

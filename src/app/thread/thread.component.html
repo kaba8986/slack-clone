@@ -1,6 +1,6 @@
 <div class="thread-room">
     <mat-card class="thread-head">
-        <img class="profile-pic" src="./assets/img/profile/male.png">
+        <img class="profile-pic" src="./assets/img/profile/{{  this.thread.creatorGender }}.png" >
         <mat-card-content>
             <div class="thread-creator">
                 <b>{{ this.thread.creatorName }}</b> {{ this.thread.createdTime }} Uhr
@@ -25,7 +25,7 @@
     </div>
 
     <mat-card class="answer-area" *ngFor="let answer of allAnswers; let i = index">
-        <img class="profile-pic" src="./assets/img/profile/male.png">
+        <img class="profile-pic" src="./assets/img/profile/{{this.allAnswers[i].answerGender}}.png">
         <mat-card-content>
 
             <div>
@@ -42,7 +42,7 @@
 
     <mat-card class="chat-input-container">
         <mat-card-content class="chat-keyboard">
-            <app-chat-interface [threadId]="threadId" [channelId]="channelId"></app-chat-interface>
+            <app-chat-interface [threadId]="threadId" [channelId]="channelId" [allAnswers]="allAnswers"></app-chat-interface>
         </mat-card-content>
     </mat-card>
 </div>

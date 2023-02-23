@@ -1,5 +1,6 @@
 export class Answer {
     answerName: string;
+    answerGender: string;
     originalDate:number;
     createdDate: any;
     createdTime: string;
@@ -10,6 +11,7 @@ export class Answer {
 
     constructor(obj?:any) {
         this.answerName = obj ? obj.channelName : '';
+        this.answerGender = obj ? obj.answerGender: '';
         this.originalDate = obj ? obj.originalDate : '';
         this.createdDate = obj ? obj.createdDate : '';
         this.createdTime = obj ? obj.createdTime : '';
@@ -21,6 +23,7 @@ export class Answer {
     public toJSON() {
         return {
             answerName: this.answerName,
+            answerGender: this.answerGender,
             originalDate: this.originalDate,
             createdDate: this.createdDate,
             createdTime: this.createdTime,

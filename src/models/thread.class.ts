@@ -1,5 +1,6 @@
 export class Thread {
     creatorName: string;
+    creatorGender: string;
     originalDate:number;
     createdDate: any;
     createdTime: string;
@@ -11,6 +12,7 @@ export class Thread {
 
     constructor(obj?:any) {
         this.creatorName = obj ? obj.creatorName : '';
+        this.creatorGender = obj ? obj.creatorGender: '';
         this.originalDate = obj ? obj.originalDate : '';
         this.createdDate = obj ? obj.createdDate : '';
         this.createdTime = obj ? obj.createdTime : '';
@@ -23,6 +25,7 @@ export class Thread {
     public toJSON() {
         return {
             creatorName: this.creatorName,
+            creatorGender: this.creatorGender,
             originalDate: this.originalDate,
             createdDate: this.createdDate,
             createdTime: this.createdTime,
