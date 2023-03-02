@@ -132,7 +132,7 @@ export class ChatInterfaceComponent {
   }
 
   getThreadCreator() {
-    this.thread.creatorName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
+    this.thread.creatorName = this.as.displayName;
     this.thread.creatorGender = this.as.userGender;
   }
 
@@ -155,14 +155,12 @@ export class ChatInterfaceComponent {
     this.getAnswerCreator();
     this.getText();
     this.convertAnswerDate(this.date);
-    console.log(this.allAnswers);
     this.allAnswers.push(this.answer.toJSON());
-    console.log(this.allAnswers);
     this.firestore.collection('channel').doc(this.channelId).collection('threads').doc(this.threadId).update({ 'answers': this.allAnswers });
   }
 
   getAnswerCreator() {
-    this.answer.answerName = this.auth.currentUser.email; //email muss gegen DisplayName ausgetauscht werden
+    this.answer.answerName = this.as.displayName;
     this.answer.answerGender = this.as.userGender;
   }
 

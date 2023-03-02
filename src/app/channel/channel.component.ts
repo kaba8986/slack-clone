@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Thread } from 'src/models/thread.class';
 import { ActivatedRoute } from '@angular/router';
 import { ThreadcontentService } from '../services/threadcontent.service';
 import { AuthService } from '../services/auth.service';
-
+import { EmojipickerService } from '../services/emojipicker.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-channel',
@@ -14,24 +15,31 @@ import { AuthService } from '../services/auth.service';
 export class ChannelComponent implements OnInit{
 
   thread = new Thread();
-
+  toggled: boolean = false;
   allThreads:any = [];  
   date = new Date().getTime();
   channelId:string;
   threadId:string;
+  currentThreadId:string;
   thread$: any;
 
-
+  @Input() threadContent;
   
-  constructor(private firestore: AngularFirestore, private route: ActivatedRoute, public threadContent: ThreadcontentService, public as: AuthService) {
-  
+  constructor(private firestore: AngularFirestore, 
+              private route: ActivatedRoute, 
+              public threadContentService: ThreadcontentService, 
+              public as: AuthService, 
+              public emojipicker: EmojipickerService,
+              public dialog: MatDialog) {
   }
+
+ 
 
   ngOnInit(): void {
     this.route.params.subscribe( (params): void => {
       this.getChannelId(params);
       this.getUpdatesFromChannelCollection()
-      this.getDataForThreadService()
+      //this.getDataForThreadService()
     });
   }
 
@@ -46,9 +54,9 @@ export class ChannelComponent implements OnInit{
     })
   }
 
-  getDataForThreadService() {
-    this.threadContent.channelId = this.channelId;
-  }
+  // getDataForThreadService() {
+  //   this.threadContent.channelId = this.channelId;
+  // }
 
   sortThreads(originalDate){
     return function (a, b) {
@@ -61,11 +69,11 @@ export class ChannelComponent implements OnInit{
     }
   }
 
-  openDialog() {
+
+  setThreadId(threadId) {
+    this.currentThreadId = threadId;
   }
 
-  openThread(id) {
-    this.threadId = id;
-  }
+
 
 }

@@ -27,7 +27,9 @@
     <mat-card class="answer-area" *ngFor="let answer of allAnswers; let i = index">
         <img class="profile-pic" src="./assets/img/profile/{{this.allAnswers[i].answerGender}}.png">
         <mat-card-content>
-
+            <div class="thread-creator">
+                <b>{{ this.answer.answerName }}</b> {{ this.answer.createdTime }} Uhr
+            </div>
             <div>
                 <quill-view-html 
                 [content]="this.allAnswers[i].answerText" 

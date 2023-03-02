@@ -7,8 +7,7 @@ import { MaterialModule } from './material/material/material.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgxEmojiPickerModule }  from  'ngx-emoji-picker';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
 
 
 import { AppComponent } from './app.component';
@@ -36,7 +35,9 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { DeleteChatWarningComponent } from './delete-chat-warning/delete-chat-warning.component';
 import { ChatInterfaceComponent } from './chat-interface/chat-interface.component';
 import { EditChatMessageComponent } from './edit-chat-message/edit-chat-message.component';
-
+import { EmojipickerComponent } from './emojipicker/emojipicker.component';
+import { MatDialogRef } from '@angular/material/dialog';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 
 
@@ -58,7 +59,8 @@ import { EditChatMessageComponent } from './edit-chat-message/edit-chat-message.
     HighlightDirective,
     DeleteChatWarningComponent,
     ChatInterfaceComponent,
-    EditChatMessageComponent
+    EditChatMessageComponent,
+    EmojipickerComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,6 @@ import { EditChatMessageComponent } from './edit-chat-message/edit-chat-message.
     RouterModule,
     FormsModule,
     PickerModule,
-    NgxEmojiPickerModule.forRoot(),
     QuillModule.forRoot(),
     ReactiveFormsModule,
     MaterialModule,
@@ -76,9 +77,14 @@ import { EditChatMessageComponent } from './edit-chat-message/edit-chat-message.
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    EmojiModule,
   ],
-  providers: [ThreadcontentService],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {}
+  },
+  ThreadcontentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
